@@ -1,43 +1,68 @@
 import csv
 
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
+import requests
 
-# 검색창 url https://www.coupang.com/np/search?component=&q={검색}
-# 검색 결과에 있는 하나의 상품 정보 search-product 
-# 검색 결과에 있는 상품 정보 이미지 search-product-wrap-img
-# 상품 설명 란 descriptions
-# 상품 이름 name
-# 상품 가격 price-value
-# 상품 별점 rating
-# https://www.coupang.com/np/search?q=여자+티셔츠&page=2
-# 검색 요령, 띄어쓰기는 공백이 아닌 +로 대체표기
-# 페이지네이션 search-pagination
-# 페이지네이션 안에 쓰이는 맥스 페이지btn-last disabled
+search = input("검색어 입력 : ")
 
-search = input("상품 검색어 : ")
-url = f"https://www.coupang.com/np/search?component=&q={search}&channel=user"
-req = Request(f'https://www.coupang.com/np/search?component=&q={search}&channel=user', headers={'User-Agent': 'Mozilla/5.0'})
-html = urlopen(req).read()
-soup = BeautifulSoup(html, 'html.parser')
+# https://www.coupang.com/np/search?component=&q={quote_plus(search)}
+base_url = 'https://www.coupang.com/np/search?component=&q='
 
-maxpage = soup.select_one('.btn-last.disabled')
+# https://www.coupang.com/vp/products/2305593030?itemId=3973939593&vendorItemId=71958279700&sourceType=srp_product_ads&q=여자니트&itemsCount=36&searchId=ce1f5586ad5d46fe972ee3674a801f77&rank=0&isAddedCart=
+# url = Request(base_url + quote_plus(search), headers={'User-Agent': 'Mozilla/5.0'})
 
-maxpage = int(maxPage)
+req = requests.get(base_url + quote_plus(search), headers={'User-Agent': 'Mozilla/5.0'})
 
-searchlist = []
+# html = urlopen(base_url + quote_plus(search)).read()
+soup = BeautifulSoup(req.content, 'html.parser')
 
-search_product = soup.select_one('.search-pagination')
-print(search_product)
+maxpage = int(soup.select_one('.btn-last.disabled').text)
 
-# for page_number in range (1, maxpage+1) :
-#     url = Request(f"https://www.coupang.com/np/search?component=&q={search}&page={page_number}&channel=user", headers={'User-Agent': 'Mozilla/5.0'})
-    
-#     html = urlopen(url).read()
-#     soup = BeautifulSoup(html, 'html.parser')
+soup = BeautifulSoup(req.content, 'html.parser')
+products = soup.select('.search-product-wrap')
 
-#     total = soup.select('.search-product')
-    
-#     for i in total :
-#         print(i)
+csvlist = []
+
+for product in products :
+    temp = []
+    try :
+        img = product.img.attrs['src']
+        name = product.select_one('.name').text
+        price = product.select_one('.price-value').text
+    except :
+        pass
+    temp.append(img)
+    temp.append(name)
+    temp.append(price)
+    csvlist.append(temp)
+
+
+for page_number in range(2, maxpage+1) :
+    req = requests.get(base_url + quote_plus(search)+quote_plus(f'&page={page_number}'), headers={'User-Agent': 'Mozilla/5.0'})
+    soup = BeautifulSoup(req.content, 'html.parser')
+    products = soup.select('.search-product-wrap')
+
+    for product in products :
+        temp = []
+        try :
+            img = product.img.attrs['src']
+            name = product.select_one('.name').text
+            price = product.select_one('.price-value').text
+        except :
+            pass
+        temp.append(img)
+        temp.append(name)
+        temp.append(price)
+        csvlist.append(temp)
+
+f = open(f'{search}.csv', 'w', encoding='UTF-8', newline='')
+csvWriter = csv.writer(f)
+
+for i in csvlist :
+    csvWriter.writerow(i)
+
+f.close()
+
+print('완료')
