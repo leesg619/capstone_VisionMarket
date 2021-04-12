@@ -35,7 +35,29 @@ const userSchema = mongoose.Schema({
     },
     tokenExp : {
         type : String
-    }
+    },
+    sex : {
+        type : String, // 남자 , 여자
+        default: undefined
+    },
+    age : {
+        type : Number
+    },
+    address : {
+        type : String
+    },
+    point : {
+        type : Number
+    },
+    impaired : { //시각장애 여부
+        type : Boolean,
+    },
+    creditCardNum : {
+        type : String
+    },
+    CVC : {
+        type : Number
+    },
 })
 
 userSchema.pre("save", function( next ) {
