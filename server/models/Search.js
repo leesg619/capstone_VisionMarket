@@ -9,24 +9,26 @@ const searchSchema = mongoose.Schema({
     keyword : {
         type : String
     },
+    InputTime : {
+        type : Date,
+        default : moment.now()
+    },
     UpperKey : {
         type : String
     },
     LowerKey : {
         type : String
-    },
+    }
+    /*
     Purpose : {
         type : Number,
         default : 0
     },
-    InputTime : {
-        type : Date,
-        default : moment.now()
-    },
     role : {
         type : Number,
         default : 0
-    }
+    },
+    */
 })
 
 searchSchema.pre("save", function( next ) {

@@ -56,7 +56,7 @@ const userSchema = mongoose.Schema({
         type : String
     },
     CVC : {
-        type : Number
+        type : String
     },
 })
 
