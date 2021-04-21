@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "shopbot-yaic",
+  "private_key_id": "c4515a17a3f243d7e7a5b6a72dbba2c3dca467fd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC8bhR6qtBIl7nj\nplhAaRCyNE+Qgm8qGoWLp6yZZkoNItBLg14N6YtBUpyqWk60cpeJS5LN6nXJFHhj\n1IiYg8PV4Ku5BgZz++RYCV+6UDkyOIC7wKs4bOD/TKrqDlcwHRmA/nRE+4J7Ucdk\nqhf16lBBy04CimUte295ZXI4SKNe5QTCl+wsDMDuWyUJ5yWJi5h8/7feg0jqGibS\nvEq1+ml4b20sWMgHwUia5niCtAfnoP8I+uHoNCb1c49rMjtM5wqw0Vq8Ion2HCeZ\n6xw6zSa6UQDEXB3PXmb46vozuldl3yNLJA5FHSKl4pi/nDft+pyney3/xrqZ0fiW\nbUmDuYtzAgMBAAECggEAIFEg4gj5v/mFwC1/ZUyfuHCQVNCKEEaMMO+JAqYwfSBD\naTAWqXwsjf+FLxJd/UTKCJoVi4tyuBHys+x3oPC4Xa4yxYDrCmlhOFgjOukXZi2a\nppjcxMinriGQDqR2/6F+Bkmd11brggr8j588jMirCx27O2RRBgPtknx7onuSyWth\n831vLqw4UEwAhkh7iKoNHUkwmeXx3piAiNvKwLcuF5bDXLewBux4/rkffIF2SZ5U\nImTSJCRQLE/2sipCGtWk9qCoDf9nljVGEp6LziB/ZJ/7vgwRSGkMCJABo7EiCEK8\nmIhPjPj86x5zaG5QPSkPFCYFXodJ/ig9tM0eBeV0wQKBgQD6LKZ74NYWdqPuDUKz\nIEivw45xweNYTnQBAqA1jI0bF5OZF7vb6+WJjNHjmRmn2hkFXTsZeGFPVr65yMMp\n8obEFQFopZ+xPH35TVxzltwQ99Ma5mGRic34d5mLjwnXrvRZaBxAwOQtje3Ui2qN\n2DWu8Zg+me56++qhgIig5ufHpwKBgQDA0Vs9XVtP/YoCRvWramjbzYYX8XmXOTQb\nNsaLrO+cZAcgWIGqXSsCCL+INkpSrn8ZLRgMvgZ9mIIc1CeLrgO4NUjHTNIpUI5p\n4gskQIqPLLt5rm1abWoRLcaKb8lUrpv2/+O5WnwmA3jmTUydnappfgPhQ6qAuQBl\njBSyYhHXVQKBgQCO1fNwAxz40mAiSHvund4iTDsGBDdzcceV1BP4vvjJoRpqbDyc\nAgGaGUa09fLJ/SIQB/z4O90DWXmnxVJ4nroHNh8JypZ0sR8TufGxJU8ceQKU9zh5\nyf5JgK+wGMj71i445dJLvlYJFGHX2onJ1so/yjyscWLR4QdDkolvpKZtPQKBgCx4\nXI2zmVrCg/DwgrqNKTAAn7un8r4g8FaSdIpEUWMFYutf3k/3evLWJ653rv6Qxjl9\nP/24WfDfmqqhd5lsgekbSPTGT/Y9YQskmiM7S3mn/Hkc9JWVhI//ubm1/H4uY0Q9\nUj0ulFGEHX8oNtJnSaVY7fYnUAyuHlxNSXy2x5ydAoGBAOTOA6EMHJ2woAnpk+eP\nEuR4gmhD2I1wLxYtFDIuSnKGP279SCgEi+L4jJBV59lwpyAfZ3Ti0tP5o7EIoBm5\nPeJIIpMvGY+RUK/rK8VlA3HU+yxWgkpnezOkYp1zxOdzr7M8rHIwaQ9gtSJRoFMj\nSoZVonOwaoOiaSTyyM1EdIVK\n-----END PRIVATE KEY-----\n",
+  "client_email": "shopbot-yaic@appspot.gserviceaccount.com",
+  "client_id": "103596321853128399138",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/shopbot-yaic%40appspot.gserviceaccount.com"
+}
