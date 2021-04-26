@@ -1,4 +1,4 @@
-import { Avatar, Container, CssBaseline, Grid, makeStyles, Typography, Button, Box, Link } from '@material-ui/core'
+import { Avatar, Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import React, { useState } from 'react'
 import { LockOutlined } from '@material-ui/icons'
@@ -10,12 +10,13 @@ import { registerUser } from '../../../_action/user_actions'
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import StarIcon from '@material-ui/icons/Star';
 
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import stussy from './stussy.jpg';
+import loopi from './loopi.png'
+import ex1 from './1.jpg'
+import ex2 from './2.jpg'
+import ex3 from './3.jpg'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -28,88 +29,126 @@ const useStyles = makeStyles((theme) => ({
         marginTop : theme.spacing(1),
         backgroundColor : theme.palette.primary.dark
     },
-    form : {
-        marginTop : theme.spacing(1),
-        width : "100%"
-    },
     onSubmit : {
         margin : theme.spacing(3, 0, 2)
     },
     root: {
         flexGrow: 1,
     },
-    media: {
-        height: 140,
-    },
     container: {
         padding: theme.spacing(9),
-    }
+    },
+    img: {
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100vh',
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
 }))
 
 export default function PostDetailPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
+
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    const [size, setSize] = React.useState('');
+    const handleSizeChange = (event) => {
+        setSize(event.target.value);
+    };
+
     return (
     <Container component='main' maxWidth="lg" className={classes.container}>
         <CssBaseline />
-        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }}>
+        <Typography component="div" style={{height: '100vh' }}>
+
+        <Grid container spacing={2}>
+            <Grid item xs={6} md={6}>
+              <ButtonBase className={classes.image}>
+                <img className={classes.img} alt="complex" src={stussy} />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={6} md={6}>
+                <Typography component="h1" variant ="h4" >postTitle</Typography>
+                <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />  900개의 상품평
+                <Divider />
+                <List component="nav" >
+                <ListItem><ListItemText primary="10000원" /></ListItem>
+                <ListItem><ListItemText primary="판매자이름" /></ListItem>
+                <ListItem><ListItemText primary="색상화이트" /></ListItem>
+                </List>
+
+                <FormControl required className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-required-label">Size</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-required-label"
+                    id="demo-simple-select-required"
+                    value= {size}
+                    onChange={handleSizeChange}
+                    className={classes.selectEmpty}
+                    >
+                    <MenuItem value="">
+                        <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={"S"}>S</MenuItem>
+                    <MenuItem value={"M"}>M</MenuItem>
+                    <MenuItem value={"L"}>L</MenuItem>
+                    </Select>
+                    <FormHelperText>Required</FormHelperText>
+                    <Box component="span" m={1}><Button /></Box>
+                    <TextField
+                        id="standard-number"
+                        label="Number*"
+                        type="number"
+                        InputLabelProps={{
+                            shrink: true,
+                    }}
+                    />
+                    <Box component="span" m={1}><Button /></Box>
+                    <Button variant="outlined" color="primary">장바구니</Button>
+                    <Box component="span" m={1}><Button /></Box>
+                    <Button variant="outlined" color="secondary">구매하기</Button>
+            </FormControl>
+  
+            </Grid>
+
+        </Grid>
+        
+            
         <Paper className={classes.root} >
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                >
-                    <Tab label="Item One" />
-                    <Tab label="Item Twoff" />
-                    <Tab label="Item Three" />
-                </Tabs>
-                <Card className={classes.root}>
-                    <CardActionArea>
-                        <CardMedia
-                        className={classes.media}
-                        image="/static/images/cards/contemplative-reptile.jpg"
-                        title="Contemplative Reptile"
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
-                        </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                        Share
-                        </Button>
-                        <Button size="small" color="primary">
-                        Learn More
-                        </Button>
-                    </CardActions>
-            </Card>
-            </Paper>
+          <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+          >
+          <Tab label="상품 상세" />
+          <Tab label="상품 리뷰" />
+          <Tab label="배송/교환/반품안내" />
+          </Tabs>
+        </Paper>
+        <Box component="span" m={1}><Button /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={ex1} /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={ex2} /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={ex3} /></Box>
+        
+
         </Typography>
         
-        <Grid container spacing={12}>
-        <Grid item sm={12}>
-
-        </Grid>
-          <Grid item sm={12}>
-            <Paper className={classes.paper}>Content 1</Paper>
-          </Grid>
-
-        </Grid>
-
+        
 
     </Container>
+
     )
 }
 
