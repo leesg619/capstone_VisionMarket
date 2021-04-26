@@ -12,6 +12,8 @@ import Navbar from './views/Navbar/Navbar';
 import Sidebar from './views/Navbar/Sidebar/Sidebar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 
+import PostDetailPage from './views/PostDetailPage/PostDetailPage';
+
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
         <Route exact path="/" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
+        <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
       </Switch>
     </Suspense>
   );
