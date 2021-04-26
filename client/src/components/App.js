@@ -11,6 +11,8 @@ import LoginPage from './views/LoginPage/LoginPage';
 import Navbar from './views/Navbar/Navbar';
 import Sidebar from './views/Navbar/Sidebar/Sidebar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
+import EnrollmentCreditPage from './views/Paymovement/EnrollmentCreditPage';
+import PayPage from './views/Paymovement/PayPage';
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
         <Route exact path="/" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
+        <Route exact path="/asdf" component={EnrollmentCreditPage} />
       </Switch>
     </Suspense>
   );
