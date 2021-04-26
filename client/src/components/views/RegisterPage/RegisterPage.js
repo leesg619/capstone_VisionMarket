@@ -513,8 +513,42 @@ export default function RegisterPage(props) {
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                     />40대 이상
                     <br />
-                    성별<br />
-                    키<br />
+                    성별
+                    <Checkbox 
+                    color="primary" alt="남자"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />남자
+                    <Checkbox 
+                    color="primary" alt="여자"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />여자
+                    <br />
+                    키                    
+                    <Checkbox 
+                    color="primary" alt="140센치"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />140cm
+                    <Checkbox 
+                    color="primary" alt="150센치"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />150cm
+                    <Checkbox 
+                    color="primary" alt="160센치"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />160cm
+                    <Checkbox 
+                    color="primary" alt="170센치"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />170cm
+                    <Checkbox 
+                    color="primary" alt="180센치"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />180cm
+                    <Checkbox 
+                    color="primary" alt="190센치이상"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />190cm이상
+                    <br />
                     스타일<br />
                     </fieldset>
                     </Grid>
