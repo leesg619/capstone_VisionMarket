@@ -1,0 +1,11 @@
+
+import { combineReducers } from 'redux'
+import user from './user_reducer'
+import adminPost from './adminPost_reducer'
+
+const rootReducer = combineReducers({
+    user,
+    adminPost
+})
+
+export default rootReducer;
