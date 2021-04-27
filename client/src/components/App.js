@@ -12,7 +12,8 @@ import Navbar from './views/Navbar/Navbar';
 import Sidebar from './views/Navbar/Sidebar/Sidebar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 
-import PostDetailPage from './views/PostDetailPage/PostDetailPage';
+import PostDetailPage from './views/PostPage/PostDetailPage';
+import PostSearchListPage from './views/PostPage/PostSearchListPage';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
+        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
       </Switch>
     </Suspense>
   );
