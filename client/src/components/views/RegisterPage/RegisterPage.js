@@ -8,6 +8,11 @@ import { useFormik } from 'formik'
 import { registerUser } from '../../../_action/user_actions'
 import HearingIcon from '@material-ui/icons/Hearing';
 import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -27,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     onSubmit : {
         margin : theme.spacing(3, 0, 2)
     }
-
 }))
 
 export default function RegisterPage(props) {
@@ -35,6 +39,21 @@ export default function RegisterPage(props) {
 
     const dispatch = useDispatch();
     const [FormErrorMessage, setFormErrorMessage] = useState("")
+
+
+    // 라디오
+    const [selectedValue, setSelectedValue] = React.useState("10대");
+
+    const handleChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+      
+    // 체크박스 
+    const [checked, setChecked] = React.useState(true);
+
+    const handleChange2 = (event) => {
+          setChecked(event.target.checked);
+    };
 
     // 페이지 넘어가는 부분
     const [NextPage, setNextPage] = useState(1);
@@ -58,13 +77,6 @@ export default function RegisterPage(props) {
             // 페이지 1일 경우 뒤로(===메인으로돌아가기, 로그인창) 
         }
     }
-
-    // 체크박스 
-    const [checked, setChecked] = React.useState(true);
-
-    const handleChange = (event) => {
-      setChecked(event.target.checked);
-    };
 
     const validationSchema = Yup.object({
         name : Yup.string().required("이름을 입력해주세요."),
@@ -356,7 +368,7 @@ export default function RegisterPage(props) {
                     Vision Market <HearingIcon fontSize="large"/>
                 </Typography>
                 {/* <form className={classes.form} onSubmit={formik.handleSubmit} noValidate> */}
-                    <Grid container spacing={2}  alignItems="center">
+                    <Grid container spacing={2}  alignItems="center" justify="center">
                     <Grid item xs={12} >
                     <fieldset>    
                     <p>
@@ -367,7 +379,7 @@ export default function RegisterPage(props) {
                     </p>
                     </fieldset>
                     </Grid>
-                        <Grid item xs={10} sm={10}>
+                        <Grid item xs={9} sm={10}>
                             <TextField
                                 autoComplete="address"
                                 name="address"
@@ -387,7 +399,7 @@ export default function RegisterPage(props) {
                             <Grid item xs={2} sm={2}>
                             <Button variant="contained" color="primary" style={{height:'50px', fontSize:'16px'}}>검색</Button>
                         </Grid>
-                        <Grid item xs={6} sm={6} >
+                        <Grid item xs={5} sm={6} >
                             <TextField
                                 autoComplete="ph"
                                 name="ph"
@@ -487,69 +499,141 @@ export default function RegisterPage(props) {
                     <Grid container spacing={2}  alignItems="center" justify="center">
                     <Grid item xs={12} >
                     <fieldset>    
-                    <p>
+                    <p style={{fontSize: '1.0rem'}} >
                     당신의 취향과 프로필을 선택해주세요.<br />
                     스타일의 경우 중복으로 선택할 수 있습니다.<br />
                     </p>
                     </fieldset>
                     </Grid>
                     <Grid item xs={12} >
-                    <fieldset> 
-                    나이<Checkbox 
-                    color="primary" alt="10대"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />10대
-                    <Checkbox 
-                    color="primary" alt="20대"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }
-                    }
-                    />20대
-                    <Checkbox 
-                    color="primary" alt="30대"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />30대
-                    <Checkbox 
-                    color="primary" alt="40대이상"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />40대 이상
+                    <fieldset>
+                        <br />
+                    <div style={{fontSize: '1.0rem'}}>[ 나이 ]</div>
+                    <RadioGroup row aria-label="position" name="position" defaultValue="top" alignItems="center" justify="center">
+                    <FormControlLabel
+                    value="10대"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>10대</p>}
+                    labelPlacement="10대"
+                    alt="10대"
+                    />
+                    <FormControlLabel
+                    value="20대"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>20대</p>}
+                    labelPlacement="20대"
+                    alt="20대"
+                    />
+                    <FormControlLabel
+                    value="30대"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>30대</p>}
+                    labelPlacement="30대"
+                    alt="30대"
+                    />
+                    <FormControlLabel
+                    value="40대이상"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>40대이상</p>}
+                    labelPlacement="40대이상"
+                    alt="40대이상"
+                    />
+                    </RadioGroup>
+                    <hr />
                     <br />
-                    성별
-                    <Checkbox 
-                    color="primary" alt="남자"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />남자
-                    <Checkbox 
-                    color="primary" alt="여자"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />여자
+                    <div style={{fontSize: '1.0rem'}}>[ 성별 ]</div>
+                    <RadioGroup row aria-label="position" name="position" defaultValue="top" alignItems="center" justify="center">
+                    <FormControlLabel
+                    value="남자"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>남자</p>}
+                    labelPlacement="남자"
+                    alt="남자"
+                    />
+                    <FormControlLabel
+                    value="여자"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>여자</p>}
+                    labelPlacement="여자"
+                    alt="여자"
+                    />
+                    </RadioGroup>
+                    <hr />
+                    <br />                    
+                    <div style={{fontSize: '1.0rem'}}>[ 키 ]</div>
+                    <RadioGroup row aria-label="position" name="position" defaultValue="top" alignItems="center" justify="center">
+                    <FormControlLabel
+                    value="140"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>150cm 이하</p>}
+                    labelPlacement="140"
+                    alt="150센티미터이하"
+                    />
+                    <FormControlLabel
+                    value="150"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>150cm</p>}
+                    labelPlacement="150"
+                    alt="150센티미터"
+                    />
+                    <FormControlLabel
+                    value="160"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>160cm</p>}
+                    labelPlacement="160"
+                    alt="160센티미터"
+                    />
+                    <FormControlLabel
+                    value="170"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>170cm</p>}
+                    labelPlacement="170"
+                    alt="170센티미터"
+                    />
+                    <FormControlLabel
+                    value="180"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>180cm</p>}
+                    labelPlacement="180"
+                    alt="180센티미터"
+                    />
+                    <FormControlLabel
+                    value="190"
+                    control={<Radio color="primary" />}
+                    label={<p style={{fontSize : "15px"}}>190cm 이상</p>}
+                    labelPlacement="190"
+                    alt="190센티미터이상"
+                    />
+                    </RadioGroup>
+                    <hr />
                     <br />
-                    키                    
+                    <div style={{fontSize: '1.0rem'}}>[ 스타일 ]</div>
                     <Checkbox 
-                    color="primary" alt="140센치"
+                    color="primary" alt="심플"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />140cm
+                    />심플
                     <Checkbox 
-                    color="primary" alt="150센치"
+                    color="primary" alt="캐주얼"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />150cm
+                    />캐주얼
                     <Checkbox 
-                    color="primary" alt="160센치"
+                    color="primary" alt="시크"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />160cm
+                    />시크
                     <Checkbox 
-                    color="primary" alt="170센치"
+                    color="primary" alt="유니크"
                     inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />170cm
-                    <Checkbox 
-                    color="primary" alt="180센치"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />180cm
-                    <Checkbox 
-                    color="primary" alt="190센치이상"
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />190cm이상
+                    />유니크
                     <br />
-                    스타일<br />
+                    <Checkbox 
+                    color="primary" alt="오피스"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />오피스
+                    <Checkbox 
+                    color="primary" alt="스트릿"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />스트릿
+                    <br />
                     </fieldset>
                     </Grid>
                     </Grid>
