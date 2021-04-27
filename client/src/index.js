@@ -13,6 +13,9 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
+import { HunelProvider, HunelCreditCard } from 'reactjs-credit-card';
+
+const hunel = new HunelCreditCard();
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
@@ -23,10 +26,12 @@ ReactDOM.render(
             window.__REDUX_DEVTOOLS_EXTENSION__ &&
             window.__REDUX_DEVTOOLS_EXTENSION__()
         )}
-    >
+    >   
+        <HunelProvider config={hunel}>
         <BrowserRouter>
             <App />
-        </BrowserRouter>,
+        </BrowserRouter>
+        </HunelProvider>,
     </Provider>
     , document.getElementById('root')
     );

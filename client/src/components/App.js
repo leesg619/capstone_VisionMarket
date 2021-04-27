@@ -13,7 +13,7 @@ import Sidebar from './views/Navbar/Sidebar/Sidebar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import EnrollmentCreditPage from './views/Paymovement/EnrollmentCreditPage';
 import PayPage from './views/Paymovement/PayPage';
-
+import LoadingAndSuccess from './views/Paymovement/LoadingAndSuccess';
 
 function App() {
   return (
@@ -30,7 +30,8 @@ function App() {
         <Route exact path="/" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
-        <Route exact path="/asdf" component={EnrollmentCreditPage} />
+        <Route exact path="/card" component={EnrollmentCreditPage} />
+        <Route exact paht="/loading" component={LoadingAndSuccess} />
       </Switch>
     </Suspense>
   );
