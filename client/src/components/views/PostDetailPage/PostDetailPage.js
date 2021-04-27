@@ -17,6 +17,8 @@ import loopi from './loopi.png'
 import ex1 from './1.jpg'
 import ex2 from './2.jpg'
 import ex3 from './3.jpg'
+import ex0 from './0.png'
+import ex4 from './4.png'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -78,13 +80,13 @@ export default function PostDetailPage(props) {
               </ButtonBase>
             </Grid>
             <Grid item xs={6} md={6}>
-                <Typography component="h1" variant ="h4" >postTitle</Typography>
-                <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />  900개의 상품평
+                <Typography component="h1" variant ="h4" > Basic Stussy TEE </Typography>
+                <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />  900개의 상품 리뷰
                 <Divider />
                 <List component="nav" >
-                <ListItem><ListItemText primary="10000원" /></ListItem>
-                <ListItem><ListItemText primary="판매자이름" /></ListItem>
-                <ListItem><ListItemText primary="색상화이트" /></ListItem>
+                <ListItem><ListItemText primary="59,000원" /></ListItem>
+                <ListItem><ListItemText primary="Stussy Korea" /></ListItem>
+                <ListItem><ListItemText primary="Black" /></ListItem>
                 </List>
 
                 <FormControl required className={classes.formControl}>
@@ -102,6 +104,7 @@ export default function PostDetailPage(props) {
                     <MenuItem value={"S"}>S</MenuItem>
                     <MenuItem value={"M"}>M</MenuItem>
                     <MenuItem value={"L"}>L</MenuItem>
+                    <MenuItem value={"XL"}>XL</MenuItem>
                     </Select>
                     <FormHelperText>Required</FormHelperText>
                     <Box component="span" m={1}><Button /></Box>
@@ -138,6 +141,8 @@ export default function PostDetailPage(props) {
           </Tabs>
         </Paper>
         <Box component="span" m={1}><Button /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={ex0} /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={ex4} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex1} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex2} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex3} /></Box>
