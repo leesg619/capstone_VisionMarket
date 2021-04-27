@@ -4,6 +4,9 @@ import NewsContent from './LandContents/NewsContent'
 import { useDispatch, useSelector } from "react-redux"
 import { searchAdminPost } from "../../../_action/adminPost_action"
 import SubContent from './LandContents/SubContent'
+
+
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(12)
@@ -16,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
+
 const newsPost = {
     title: "Title Sample",
     description: "description Sample, which codes is best code? can you choice that?",
@@ -26,7 +30,7 @@ const newsPost = {
 
 function LandingPage() {
 
-    const classes = useStyles();
+     const classes = useStyles();
     return (
         <Container className={classes.paper} component='main' maxWidth='lg'>
             <CssBaseline />
@@ -70,7 +74,7 @@ function LandingPage() {
                 </Grid>
             </Grid>
         </Container>
-    )
+)
 }
 
 export default LandingPage
