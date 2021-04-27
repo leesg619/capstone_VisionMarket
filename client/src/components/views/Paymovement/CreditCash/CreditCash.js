@@ -18,18 +18,17 @@ const useStyle = makeStyles((theme) => ({
 
 function CreditCash(props) {
 
-    console.log(props.banks)
+    const [Banks, setBanks] = useState(props.banks)
 
-    const [Banks, setBanks] = useState([])
-
-    setBanks(props.banks)
 
     const BankComponent = Banks.map((bank, index) => {
 
 
         return (
         <Paper variant="outlined">
-            <img className={classes.img} src={bank.logo} alt={bank.name} />
+            {bank.name}
+            {bank.logo}
+            <img  src={bank.logo} alt={bank.name} />
         </Paper>)
     })
 
