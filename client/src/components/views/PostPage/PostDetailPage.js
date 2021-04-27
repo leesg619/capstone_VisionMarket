@@ -19,7 +19,7 @@ import ex2 from './2.jpg'
 import ex3 from './3.jpg'
 import ex0 from './0.png'
 import ex4 from './4.png'
-
+//image json파일로 만들어서 코드 map 사용, 빼서 사용하면 일일이 하나씩 import할필요없음
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop : theme.spacing(8),
