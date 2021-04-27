@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Grid, Container,  makeStyles, Paper, Typography, ButtonBase} from '@material-ui/core'
 import CreditCard from './CreditCard/CreditCard'
 import CreditCash from './CreditCash/CreditCash'
+import Banks from './BankInformation.json'
 
 const useStyle = makeStyles((theme => ({
     root: {
@@ -23,6 +24,7 @@ const useStyle = makeStyles((theme => ({
     },
 
 })))
+
 
 function EnrollmentCreditPage(props) {
     const classes = useStyle();
@@ -64,10 +66,11 @@ function EnrollmentCreditPage(props) {
         }
     }
 
+
     const CreditCashComponent = (Action) => {
         if (Action) {
             return (
-                <CreditCash />
+                <CreditCash banks={Banks.banks} />
             )
         }
         else {
@@ -102,7 +105,7 @@ function EnrollmentCreditPage(props) {
                                 <Typography component="h2">
                                     <h2>
                                         계좌번호
-                        </h2>
+                                    </h2>
                                 </Typography>
                             </Paper>
                         </ButtonBase>

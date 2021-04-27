@@ -1,31 +1,43 @@
 import { Container, makeStyles, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Ring } from 'react-awesome-spinners'
 
 const useStyle = makeStyles((theme) => ({
     root : {
-        padding : theme.spacing(20)
+        paddingTop : theme.spacing(30),
+        padding : theme.spacing(20),
+        alignContent : "center",
+        justifyContent : 'center',
+        textAlign : 'center'
     }
 }))
 
 function LoadingAndSuccess(props) {
 
     const classes = useStyle()
+    
+    const [SuccessTime, setSuccessTime] = useState(false)
 
-    const SuccessComponent = setTimeout((cb) => {
+    const timeout = useRef(null)
+
+    timeout.current = setTimeout(() => {
+        setSuccessTime(true)
+    }, 1000)
+
+    if(SuccessTime) {
         return (
-            <Typography component="h1">
-                Success!
-            </Typography>
+        <Container className={classes.root}>
+            <Ring />
+        </Container>
         )
-    }, 6000)
-
-
+    }
+    else {
     return (
         <Container className={classes.root}>
-            {SuccessComponent(Ring)}
+            <h1>Success</h1>
         </Container>
     )
+    }
 }
 
 export default LoadingAndSuccess

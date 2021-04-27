@@ -31,7 +31,7 @@ ReactDOM.render(
         <BrowserRouter>
             <App />
         </BrowserRouter>
-        </HunelProvider>,
+        </HunelProvider>
     </Provider>
     , document.getElementById('root')
     );
