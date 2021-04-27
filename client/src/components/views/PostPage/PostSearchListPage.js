@@ -7,13 +7,14 @@ import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
 
-import stussy from './stussy.jpg';
 
-import PostListToolbar from './PostListToolbar';
+
 import PostCard from './PostCard';
 import posts from './posts';
 
 import Pagination from '@material-ui/lab/Pagination';
+
+import DashboardSidebar from './DashboardSidebar';
 
 const useStyles = makeStyles((theme) => ({
     img: {
@@ -26,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
           marginTop: theme.spacing(2),
         },
-      },
+    },
+
 }))
 
 
@@ -53,39 +55,49 @@ export default function PostSearchListPage(props) {
         }}
         >
         <Container maxWidth={false}>
-        <PostListToolbar />
-        <Box sx={{ pt: 3 }}>
-          <Grid
-            container
-            spacing={3}
-          >
-            {posts.map((post) => (
-              <Grid
-                item
-                key={post.id}
-                lg={4}
-                md={6}
-                xs={12}
-              >
-                <PostCard post={post} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: 3
-          }}
-        >
-        <Pagination
-            color="primary"
-            count={3}
-            size="small"
-          />
-        </Box>
+
+        <Grid container spacing = {2}>
+            <Grid>
+                <DashboardSidebar />
+            </Grid>
+
+            <Grid>
+            <Box sx={{ pt: 3 }}>
+            <Grid
+                container
+                spacing={3}
+            >
+                {posts.map((post) => (
+                <Grid
+                    item
+                    key={post.id}
+                    lg={4}
+                    md={6}
+                    xs={12}
+                >
+                    <PostCard post={post} />
+                </Grid>
+                ))}
+            </Grid>
+            </Box>
+            <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                pt: 3
+            }}
+            >
+            <Pagination
+                color="primary"
+                count={3}
+                size="small"
+            />
+            </Box>
+        </Grid>
+        </Grid>
       </Container>
+            
+        
     </Box>
     </>
     )

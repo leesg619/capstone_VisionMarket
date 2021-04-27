@@ -12,14 +12,13 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import StarIcon from '@material-ui/icons/Star';
 
-import stussy from './stussy.jpg';
-import loopi from './loopi.png'
-import ex1 from './1.jpg'
-import ex2 from './2.jpg'
-import ex3 from './3.jpg'
-import ex0 from './0.png'
-import ex4 from './4.png'
+import stussy from './img/stussy.jpg';
+import ex1 from './img/1.jpg'
+import ex2 from './img/2.jpg'
+import ex0 from './img/0.png'
+import ex4 from './img/4.png'
 //image json파일로 만들어서 코드 map 사용, 빼서 사용하면 일일이 하나씩 import할필요없음
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop : theme.spacing(8),
@@ -145,7 +144,6 @@ export default function PostDetailPage(props) {
         <Box width="100%"><img className={classes.img} alt="complex" src={ex4} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex1} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex2} /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={ex3} /></Box>
         
 
         </Typography>
