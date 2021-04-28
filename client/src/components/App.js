@@ -31,6 +31,7 @@ function App() {
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
+        <Route exact path="/dopay" component={PayPage} />
         <Route exact paht="/loading" component={LoadingAndSuccess} />
       </Switch>
     </Suspense>

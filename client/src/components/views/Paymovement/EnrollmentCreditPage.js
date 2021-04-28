@@ -13,7 +13,8 @@ const useStyle = makeStyles((theme => ({
     },
     mainTitle: {
         padding : theme.spacing(3),
-        borderColor : theme.palette.action.selected
+        borderColor : theme.palette.action.selected,
+        margin : theme.spacing(3)
     },
     creditTitle: {
         width: '100%',
@@ -38,6 +39,7 @@ function EnrollmentCreditPage(props) {
         e.preventDefault()
         if (SelectCredit === true || SelectCash === true) {
             setSelectCredit(false)
+            setSelectCash(false)
         }
         else {
             setSelectCredit(true)
@@ -46,6 +48,7 @@ function EnrollmentCreditPage(props) {
     const HandlingCash = (e) => {
         e.preventDefault()
         if (SelectCash === true || SelectCredit === true) {
+            setSelectCredit(false)
             setSelectCash(false)
         }
         else {
@@ -86,7 +89,7 @@ function EnrollmentCreditPage(props) {
 
                 </Grid>
                 <Grid className={classes.enrollement} component="h2" item xs={6}>
-                    <form onSubmit={HandlingCredit}>
+                    <form target={CreditCardComponent} onSubmit={HandlingCredit}>
                         <ButtonBase type="submit" style={{ alignContent: "center", textAlign: "center", width: '100%' }}>
                             <Paper variant="outlined" className={classes.creditTitle} >
                                 <Typography component="h2">
@@ -99,7 +102,7 @@ function EnrollmentCreditPage(props) {
                     </form>
                 </Grid>
                 <Grid className={classes.enrollement} component="h2" item xs={6}>
-                    <form onSubmit={HandlingCash}>
+                    <form target={CreditCashComponent} onSubmit={HandlingCash}>
                         <ButtonBase type="submit" style={{ alignContent: "center", textAlign: "center", width: '100%' }}>
                             <Paper variant="outlined" className={classes.creditTitle} >
                                 <Typography component="h2">

@@ -1,43 +1,44 @@
-import { Container, makeStyles, Typography } from '@material-ui/core'
-import React, { useRef, useState } from 'react'
-import { Ring } from 'react-awesome-spinners'
+import React, {useEffect, useState} from 'react'
+import { CircularProgress, Grid, Container, makeStyles } from '@material-ui/core'
 
 const useStyle = makeStyles((theme) => ({
     root : {
-        paddingTop : theme.spacing(30),
-        padding : theme.spacing(20),
-        alignContent : "center",
+        paddingTop : theme.spacing(20),
         justifyContent : 'center',
+        alignContent : "center",
         textAlign : 'center'
     }
 }))
 
 function LoadingAndSuccess(props) {
-
     const classes = useStyle()
-    
-    const [SuccessTime, setSuccessTime] = useState(false)
+    const [Loading, setLoading] = useState(true)
 
-    const timeout = useRef(null)
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
+    }, [])
 
-    timeout.current = setTimeout(() => {
-        setSuccessTime(true)
-    }, 1000)
-
-    if(SuccessTime) {
-        return (
-        <Container className={classes.root}>
-            <Ring />
-        </Container>
-        )
+    if(Loading) {
+        setTimeout(() => {
+            props.history.push('/')
+        }, 1000)
     }
-    else {
-    return (
-        <Container className={classes.root}>
-            <h1>Success</h1>
+    
+    return  (
+        <Container component="body">
+            <Grid className={classes.root} container md={12}>
+                { 
+                Loading === false ?
+                <Grid item sm={12}>
+                    <h1> 완료 </h1>
+                </Grid> : 
+                <CircularProgress />
+                }
+            </Grid>
         </Container>
     )
-    }
 }
 
 export default LoadingAndSuccess

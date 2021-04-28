@@ -1,5 +1,5 @@
-import React from 'react'
-import { Grid, Typography, Paper, Button, makeStyles } from '@material-ui/core'
+import React, {useState, useEffect} from 'react'
+import { Grid, Paper, Button, makeStyles, CircularProgress } from '@material-ui/core'
 import {
     CardHolder,
     CardNumber,
@@ -39,10 +39,35 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-function CreditCard() {
+function CreditCard(props) {
 
     const classes = useStyle()
 
+    const [InitialScreen, setInitialScreen] = useState(true)
+    
+    useEffect(() => {
+        setTimeout(() => {
+            setInitialScreen(false)
+        }, 1000)
+    }, [])
+
+
+    const SubmitHandler = (e) => {
+        e.preventDefault()
+        console.log(props)
+
+    }
+
+    if(InitialScreen) {
+        return (
+            <Grid className={classes.creditCard} component="h4" container>
+                <Grid style={{paddingTop : "4rem"}} item md={12}>
+                    <CircularProgress />
+                </Grid>
+            </Grid>
+        )
+    }
+    else {
     return (
         <Grid className={classes.creditCard} component="h4" container>
                     <Grid item md={12}>
@@ -54,9 +79,10 @@ function CreditCard() {
                     <Grid container style={{ width: "80%" }}>
                         <Grid item className={classes.cardPadding} md={6}>
                             <Paper component="body" className={classes.cardForm} variant="outlined" >
-                                <form noValidate autoComplete="off">
+                                <form action="/loading" onSubmit={SubmitHandler} noValidate autoComplete="off">
 
                                     <div >
+
                                     <CardNumber className="card-input" style={{width : '80%'}}  placeholder="카드 번호" />
                                     <CardHolder className="card-input" style={{width : '80%'}} placeholder="이름" />
                                     </div>
@@ -66,7 +92,8 @@ function CreditCard() {
                                     <ValidThruYear className="card-input" />
                                     <CardSecurityCode placeholder="CVV" className="card-input" style={{ width : "47%"}} />
                                     </div>
-                                    <Button className={classes.cardBtn} variant="outlined" type="submit" >등록</Button>
+                                    {/* 버튼 부분 수정해야함 */}
+                                    <Button href="/loading" className={classes.cardBtn} variant="outlined" type="submit" >등록</Button>
                                 </form>
                             </Paper>
                         </Grid>
@@ -74,6 +101,7 @@ function CreditCard() {
                     </Grid>
                 </Grid>
     )
+    }
 }
 
 export default CreditCard

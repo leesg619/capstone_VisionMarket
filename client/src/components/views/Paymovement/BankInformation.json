@@ -2,61 +2,61 @@
     "banks" : [
         {
             "name" : "경남은행",
-            "logo" : "/staitc/BankLogo/BNK경남은행.png"
+            "logo" : "/static/BankLogo/BNK경남은행.png"
         },
         {
             "name" : "부산은행",
-            "logo" : "/staitc/BankLogo/BNK부산은행"
+            "logo" : "/static/BankLogo/BNK부산은행.png"
         },
         {
             "name" : "SC제일은행",
-            "logo" : "/staitc/BankLogo/SC제일은행.svg"
+            "logo" : "/static/BankLogo/SC제일은행.svg"
         },
         {
             "name" : "광주은행",
-            "logo" : "/staitc/BankLogo/광주은행.png"
+            "logo" : "/static/BankLogo/광주은행.png"
         },        {
             "name" : "국민은행",
-            "logo" : "/staitc/BankLogo/국민은행.svg"
+            "logo" : "/static/BankLogo/국민은행.svg"
         },        {
             "name" : "기업은행",
-            "logo" : "/staitc/BankLogo/기업은행.png"
+            "logo" : "/static/BankLogo/기업은행.png"
         },        {
             "name" : "농협은행",
-            "logo" : "/staitc/BankLogo/농협은행.svg"
+            "logo" : "/static/BankLogo/농협은행.svg"
         },        {
             "name" : "대구은행",
-            "logo" : "/staitc/BankLogo/대구은행.png"
+            "logo" : "/static/BankLogo/대구은행.png"
         },        {
             "name" : "산업은행",
-            "logo" : "/staitc/BankLogo/산업은행.png"
+            "logo" : "/static/BankLogo/산업은행.png"
         },{
             "name" : "수협은행",
-            "logo" : "/staitc/BankLogo/수협.png"
+            "logo" : "/static/BankLogo/수협.png"
         },{
             "name" : "신한은행",
-            "logo" : "/staitc/BankLogo/신한은행.png"
+            "logo" : "/static/BankLogo/신한은행.png"
         },{
             "name" : "씨티은행",
-            "logo" : "/staitc/BankLogo/씨티은행.png"
+            "logo" : "/static/BankLogo/씨티은행.png"
         },{
             "name" : "우리은행",
-            "logo" : "/staitc/BankLogo/우리은행.png"
+            "logo" : "/static/BankLogo/우리은행.png"
         },{
             "name" : "전북은행",
-            "logo" : "/staitc/BankLogo/전북은행.png"
+            "logo" : "/static/BankLogo/전북은행.png"
         },{
             "name" : "제주은행",
-            "logo" : "/staitc/BankLogo/제주은행.png"
+            "logo" : "/static/BankLogo/제주은행.png"
         },{
             "name" : "카카오뱅크",
-            "logo" : "/staitc/BankLogo/카카오뱅크.png"
+            "logo" : "/static/BankLogo/카카오뱅크.png"
         },{
             "name" : "케이뱅크",
-            "logo" : "/staitc/BankLogo/케이뱅크.png"
+            "logo" : "/static/BankLogo/케이뱅크.png"
         },{
             "name" : "하나은행",
-            "logo" : "/staitc/BankLogo/하나은행.png"
+            "logo" : "/static/BankLogo/하나은행.png"
         }
     ]
 }
