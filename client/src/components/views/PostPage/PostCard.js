@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 
 export default function MediaCard({post}) {
   const classes = useStyles();
-
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -42,12 +41,12 @@ export default function MediaCard({post}) {
           >
             {post.price}
           </Typography>
-        <CardMedia
-          className={classes.media}
-          image="아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"
-          title="Contemplative Reptile"
+      
+          <CardMedia
+          style={{height:"150px", width: "150px"}}
+          image={post.imgSrc}
+          title={post.title}
         />
-        
       </CardActions>
     </Card>
   );

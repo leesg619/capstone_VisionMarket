@@ -1,4 +1,4 @@
-import { Avatar, Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@material-ui/core'
+import { Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import React, { useState } from 'react'
 import { LockOutlined } from '@material-ui/icons'
@@ -26,18 +26,12 @@ const useStyles = makeStyles((theme) => ({
         flexDirection : 'column',
         alignItems : 'center'
     },
-    avatar: {
-        marginTop : theme.spacing(1),
-        backgroundColor : theme.palette.primary.dark
-    },
-    onSubmit : {
-        margin : theme.spacing(3, 0, 2)
-    },
+
     root: {
         flexGrow: 1,
     },
     container: {
-        padding: theme.spacing(9),
+        padding: theme.spacing(10),
     },
     img: {
         margin: 'auto',
@@ -49,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         minWidth: 120,
       },
-      selectEmpty: {
+    selectEmpty: {
         marginTop: theme.spacing(2),
     },
 }))
@@ -148,156 +142,8 @@ export default function PostDetailPage(props) {
 
         </Typography>
         
-        
 
     </Container>
 
     )
 }
-
-
-
-/*
-export default function RegisterPage(props) {
-    const classes = useStyles()
-
-    const dispatch = useDispatch();
-    const [FormErrorMessage, setFormErrorMessage] = useState("")
-
-    
-
-    
-
-    return (
-        <Container component='main' maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlined />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign Up
-                </Typography>
-                <form className={classes.form} onSubmit={formik.handleSubmit} noValidate>
-                    <Grid container spacing={2}>
-                        
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin='normal'
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="First Name"
-                                autoFocus
-                                value={formik.values.firstName}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error = {formik.touched.firstName && Boolean(formik.errors.firstName)}
-                                helperText = {formik.touched.firstName && formik.errors.firstName}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                margin="normal"
-                                autoComplete="lname"
-                                name="lastName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                autoFocus
-                                value={formik.values.lastName}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error = {formik.touched.lastName && Boolean(formik.errors.lastName)}
-                                helperText = {formik.touched.lastName && formik.errors.lastName}
-                            /> 
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                autoComplete="email"
-                                name="email"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                autoFocus
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error = {formik.touched.email && Boolean(formik.errors.email)}
-                                helperText= {formik.touched.email && formik.errors.email}
-                            />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField
-                                autoComplete="current-password"
-                                name="password"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="password"
-                                label="Password"
-                                type='password'
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error = {formik.touched.password && Boolean(formik.errors.password)}
-                                helperText = {formik.touched.password && formik.errors.password}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField 
-                                autoComplete="confirm-password"
-                                name="confirmPassword"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="confirmPassword"
-                                label="Confirm Password"
-                                type='password'
-                                value={formik.values.confirmPassword}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error = {formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                                helperText = {formik.touched.confirmPassword && formik.errors.confirmPassword}
-                            />
-                        </Grid>
-                    </Grid>
-                    {FormErrorMessage && (
-                        <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{FormErrorMessage}</p></label>
-
-                    )}
-                    <Button
-                        className={classes.onSubmit}
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        disabled={formik.isSubmitting}
-                        onSubmit={formik.handleSubmit}
-                    >
-                        Sign Up
-                    </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link href="/login" variant="body2">
-                                이미 가입하셨나요? Sign In
-                            </Link>
-                        </Grid>
-                    </Grid>
-
-                </form>
-            </div>
-            <Box mt={5}>
-                <CopyrightFooter />
-            </Box>
-        </Container>
-    )
-}
-*/

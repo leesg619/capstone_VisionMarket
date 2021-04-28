@@ -7,7 +7,7 @@ import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
 
-import PostCard2 from './PostCard2';
+import PostCard from './PostCard';
 import Pagination from '@material-ui/lab/Pagination';
 
 import DashboardSidebar from './DashboardSidebar';
@@ -27,11 +27,9 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: '100vh',
     },
     root: {
-        '& > *': {
-          marginTop: theme.spacing(2),
-        },
+        marginTop: theme.spacing(10),
     },
-
+    
 }))
 
 
@@ -51,73 +49,64 @@ export default function PostSearchListPage(props) {
     const posts = [
         {
           id: 0,
-          price: 10000,
-          media: './img/stussy.jpg',
+          price: 59000,
+          imgSrc: stussy,
           title: 'stussy',
         },
         {
           id: 1,
-          price: 20000,
-          media: './img/cloth1.jpg',
+          price: 120000,
+          imgSrc: cloth1,
           title: 'FishTail Coat',
         },
         {
           id: 2,
-          price: 30000,
-          media: './img/cloth2.jpg',
+          price: 69000,
+          imgSrc: cloth2,
           title: 'SlimJeans',
         },
         {
           id: 3,
-          price: 500,
-          media: './img/cloth3.jpg',
+          price: 49000,
+          imgSrc: cloth3,
           title: 'WhiteShirts',
         },
         {
           id: 4,
-          price: 1000000,
-          media: './img/cloth4.jpg',
-          title: 'cloth4',
+          price: 39000,
+          imgSrc: cloth4,
+          title: 'PigletTee',
         },
         {
           id: 5,
-          price: 80000,
-          description: '제품2',
-          media: './img/cloth5.jpg',
-          title: 'cloth5',
-          totalViews: '835'
+          price: 39000,
+          imgSrc: cloth5,
+          title: 'HawkTee',
         }
       ];
       
 
     return (
     <>
-        <Box
-        sx={{
-            backgroundColor: 'background.default',
-            minHeight: '100%',
-            py: 3
-        }}
-        >
         <Container maxWidth={false}>
 
-        <Grid container spacing = {2}>
-            <Grid>
+        <Grid item container spacing = {2} className={classes.root}>
+            <Grid item xs = {2} sm={2}>
                 <DashboardSidebar />
             </Grid>
 
-            <Grid>
+            <Grid item xs={11} sm={8} justify = "center">
             <Box sx={{ pt: 3 }}>
             <Grid container spacing={3}>
                 {posts.map((post) => (
                 <Grid
                     item
                     key={post.id}
-                    lg={4}
+                    lg={3}
                     md={6}
                     xs={12}
                 >
-                <PostCard2 post={post} />
+                <PostCard post={post} />
                 </Grid>
                 ))}
             </Grid>
@@ -139,7 +128,6 @@ export default function PostSearchListPage(props) {
         </Grid>
       </Container>
             
-    </Box>
     </>
     )
 
