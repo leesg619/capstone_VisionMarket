@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -10,11 +9,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { loginUser } from '../../../_action/user_actions'
+import { loginUser } from '../../../_action/user_actions';
+import HearingIcon from '@material-ui/icons/Hearing';
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -53,23 +52,23 @@ export default function Login(props) {
         setrememberE(!rememberE)
     }
 
-    const initialEamil = localStorage.getItem('rememberE') ? localStorage.getItem('rememberE') : '';
+    const initialId = localStorage.getItem('rememberE') ? localStorage.getItem('rememberE') : '';
 
     const validateionSchema = Yup.object().shape({
-        email: Yup.string("Email을 입력해주세요.").email("올바른 Email 형식으로 써주세요.").required("Email이 필요합니다."),
-        password: Yup.string("Paaword를 입력해주세요").min(6, "패스워드는 최소 6자 이상입니다.").required("로그인 시에는 패스워드가 필요합니다.")
+        id: Yup.string("").required("ID를 입력해주세요."),
+        password: Yup.string("").required("Paaword를 입력해주세요.")
     })
 
     const formik = useFormik({
         initialValues: {
-            email: initialEamil,
+            id: initialId,
             password: ''
         },
         validationSchema: validateionSchema,
         onSubmit : ((values, { setSubmitting }) => {
             setTimeout(() => {
                 let dataToSubmit = {
-                    email: values.email,
+                    id: values.id,
                     password: values.password
                 }
 
@@ -78,7 +77,7 @@ export default function Login(props) {
                         if (response.payload.loginSuccess) {
                             window.localStorage.setItem('userId', response.payload.userId);
                             if (rememberE === true) {
-                                window.localStorage.setItem('rememberE', values.email)
+                                window.localStorage.setItem('rememberE', values.id)
                             }
                             else {
                                 window.localStorage.removeItem('rememberE')
@@ -86,10 +85,10 @@ export default function Login(props) {
                             props.history.push('/')
                         }
                         else {
-                            setFormErrorMessage('Email 혹은 Password를 확인해주세요')
+                            setFormErrorMessage('ID 혹은 Password를 확인해주세요.')
                         }
                     }).catch(err => {
-                        setFormErrorMessage('Email 혹은 Password를 확인하세요.')
+                        setFormErrorMessage('ID 혹은 Password를 확인하세요.')
                         setTimeout(() => {
                             setFormErrorMessage('')
                         }, 3000);
@@ -103,30 +102,30 @@ export default function Login(props) {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
+                
                 <Typography component="h1" variant="h5">
-                    Sign in
-          </Typography>
+                    Vision Market <HearingIcon fontSize="large"/> <br />
+                    당신의 비전을 들려주세요.
+                </Typography>
+                
                 <form className={classes.form} onSubmit={formik.handleSubmit} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        value={formik.values.email}
+                        id="id"
+                        label="ID"
+                        name="id"
+                        value={formik.values.id}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={formik.errors.email && formik.touched.email ? 'input-text error' : 'input-text'}
+                        className={formik.errors.id && formik.touched.ud ? 'input-text error' : 'input-text'}
                         autoFocus
+                        alt="아이디입력창"
                     />
-                    {formik.errors.email && formik.touched.email && (
-                        <div style={{color : 'red'}} className="input-text">{formik.errors.email}</div>
+                    {formik.errors.id && formik.touched.id && (
+                        <div style={{color : 'red'}} className="input-text">{formik.errors.id}</div>
                     )}
                     <TextField
                         variant="outlined"  
@@ -142,13 +141,14 @@ export default function Login(props) {
                         onBlur={formik.handleBlur}
                         className={formik.errors.password && formik.touched.password ? 'input-text error' : 'input-text'}
                         autoComplete="current-password"
+                        alt="비밀번호입력창"
                     />
                     {formik.errors.password && formik.touched.password && (
                         <div style={{color : 'red'}} className="input-text">{formik.errors.password}</div>
                     )}
                     <FormControlLabel
                         control={<Checkbox id="rememberE" onChange={handleRemember} checked={rememberE} color="primary" />}
-                        label="Remember me"
+                        label="아이디 저장" alt ="아이디저장"
                     />
                     {FormErrorMessage && (
                         <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{FormErrorMessage}</p></label>
@@ -162,18 +162,26 @@ export default function Login(props) {
                         className={classes.submit}
                         disabled={formik.isSubmitting}
                         onSubmit={formik.handleSubmit}
+                        alt="로그인"
                     >
-                        Sign In
+                        로그인
             </Button>
                     <Grid container>
+                    <Grid item >
+                            <Link href="#" variant="body2" alt="아이디찾기">
+                                아이디 찾기
+                            </Link>
+                            <br/>
+                            <Link href="#" variant="body2" alt="비밀번호찾기">
+                                비밀번호 찾기
+                            </Link>
+                        </Grid>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                </Link>
+
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                            <Link href="#" variant="body2" alt="회원가입">
+                                회원가입
                             </Link>
                         </Grid>
                     </Grid>

@@ -14,11 +14,17 @@ import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import { HunelProvider, HunelCreditCard } from 'reactjs-credit-card';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 
 const hunel = new HunelCreditCard();
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
-
+const theme = createMuiTheme({
+    typography: {
+      fontFamily: 'RecipeKorea',
+    },
+  });
 ReactDOM.render(
     <Provider
         store={createStoreWithMiddleware(
@@ -29,7 +35,10 @@ ReactDOM.render(
     >   
         <HunelProvider config={hunel}>
         <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+
             <App />
+            </MuiThemeProvider>
         </BrowserRouter>
         </HunelProvider>
     </Provider>
