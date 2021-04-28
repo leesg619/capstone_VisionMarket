@@ -38,15 +38,13 @@ function App() {
         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
-<<<<<<< HEAD
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
         <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
-        <Route exact paht="/loading" component={LoadingAndSuccess} />
-=======
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
->>>>>>> 55ec605e0605d0703c741ad0560c6ef8619be8a8
+        <Route exact paht="/loading" component={LoadingAndSuccess} />
+
       </Switch>
     </Suspense>
     </CssBaseline>
