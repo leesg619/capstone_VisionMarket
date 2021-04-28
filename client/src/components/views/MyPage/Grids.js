@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect } from "react";
 import { Grid, Box, Typography, makeStyles, Container, IconButton } from "@material-ui/core";
 import List from '@material-ui/core/List';

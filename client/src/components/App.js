@@ -37,8 +37,8 @@ function App() {
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
-        <Route exact paht="/loading" component={LoadingAndSuccess} />
         <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
+        <Route exact paht="/loading" component={LoadingAndSuccess} />
       </Switch>
     </Suspense>
     </CssBaseline>
