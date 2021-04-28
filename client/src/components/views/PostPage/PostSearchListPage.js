@@ -7,14 +7,17 @@ import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
 
-
-
-import PostCard from './PostCard';
-import posts from './posts';
-
+import PostCard2 from './PostCard2';
 import Pagination from '@material-ui/lab/Pagination';
 
 import DashboardSidebar from './DashboardSidebar';
+
+import cloth1 from './img/cloth1.jpg';
+import cloth2 from './img/cloth2.jpg';
+import cloth3 from './img/cloth3.jpg';
+import cloth4 from './img/cloth4.jpg';
+import cloth5 from './img/cloth5.jpg';
+import stussy from './img/stussy.jpg';
 
 const useStyles = makeStyles((theme) => ({
     img: {
@@ -45,6 +48,48 @@ export default function PostSearchListPage(props) {
         setSize(event.target.value);
     };
 
+    const posts = [
+        {
+          id: 0,
+          price: 10000,
+          media: './img/stussy.jpg',
+          title: 'stussy',
+        },
+        {
+          id: 1,
+          price: 20000,
+          media: './img/cloth1.jpg',
+          title: 'FishTail Coat',
+        },
+        {
+          id: 2,
+          price: 30000,
+          media: './img/cloth2.jpg',
+          title: 'SlimJeans',
+        },
+        {
+          id: 3,
+          price: 500,
+          media: './img/cloth3.jpg',
+          title: 'WhiteShirts',
+        },
+        {
+          id: 4,
+          price: 1000000,
+          media: './img/cloth4.jpg',
+          title: 'cloth4',
+        },
+        {
+          id: 5,
+          price: 80000,
+          description: '제품2',
+          media: './img/cloth5.jpg',
+          title: 'cloth5',
+          totalViews: '835'
+        }
+      ];
+      
+
     return (
     <>
         <Box
@@ -63,10 +108,7 @@ export default function PostSearchListPage(props) {
 
             <Grid>
             <Box sx={{ pt: 3 }}>
-            <Grid
-                container
-                spacing={3}
-            >
+            <Grid container spacing={3}>
                 {posts.map((post) => (
                 <Grid
                     item
@@ -75,7 +117,7 @@ export default function PostSearchListPage(props) {
                     md={6}
                     xs={12}
                 >
-                    <PostCard post={post} />
+                <PostCard2 post={post} />
                 </Grid>
                 ))}
             </Grid>
@@ -97,7 +139,6 @@ export default function PostSearchListPage(props) {
         </Grid>
       </Container>
             
-        
     </Box>
     </>
     )

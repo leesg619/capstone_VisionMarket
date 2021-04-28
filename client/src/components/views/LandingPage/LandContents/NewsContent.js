@@ -92,7 +92,7 @@ function NewsContent() {
         })
     }, [1])
     
-    console.log(post.title)
+    //console.log(post.title)
 
     const [Title, setTitle] = useState(post.title)
     const [Description, setDescription] = useState(post.description)
