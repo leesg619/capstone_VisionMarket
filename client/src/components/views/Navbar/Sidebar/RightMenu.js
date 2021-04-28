@@ -34,6 +34,7 @@ function RightMenu(props) {
     if (user.userData && !user.userData.isAuth){
     return (
         <div className={classes.root}>
+            <Button className={classes.handleButton} href="/myPage/order" color="inherit">myPage Test</Button>
             <Button className={classes.handleButton} href="/register" color="inherit">Sign Up</Button>
             <Button href="/login" color="inherit">Login</Button>
         </div>

@@ -16,6 +16,8 @@ import RegisterPage from './views/RegisterPage/RegisterPage';
 import EnrollmentCreditPage from './views/Paymovement/EnrollmentCreditPage';
 import PayPage from './views/Paymovement/PayPage';
 import LoadingAndSuccess from './views/Paymovement/LoadingAndSuccess';
+import MyPage from './views/MyPage/MyPage';
+
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
         <Route exact paht="/loading" component={LoadingAndSuccess} />
+        <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
       </Switch>
     </Suspense>
     </CssBaseline>
