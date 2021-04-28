@@ -6,7 +6,7 @@ import Banks from './BankInformation.json'
 
 const useStyle = makeStyles((theme => ({
     root: {
-        paddingTop: theme.spacing(15),
+        paddingTop: theme.spacing(30),
         backgroundColor : theme.palette.action.hover,
         height : '100%',
         paddingBottom : "30%"
@@ -92,11 +92,11 @@ function EnrollmentCreditPage(props) {
                     <form target={CreditCardComponent} onSubmit={HandlingCredit}>
                         <ButtonBase type="submit" style={{ alignContent: "center", textAlign: "center", width: '100%' }}>
                             <Paper variant="outlined" className={classes.creditTitle} >
-                                <Typography component="h2">
-                                    <h2>
+                                {/* <Typography component="h2"> */}
+                                    <h1>
                                         신용카드
-                        </h2>
-                                </Typography>
+                        </h1>
+                                {/* </Typography> */}
                             </Paper>
                         </ButtonBase>
                     </form>
@@ -105,11 +105,11 @@ function EnrollmentCreditPage(props) {
                     <form target={CreditCashComponent} onSubmit={HandlingCash}>
                         <ButtonBase type="submit" style={{ alignContent: "center", textAlign: "center", width: '100%' }}>
                             <Paper variant="outlined" className={classes.creditTitle} >
-                                <Typography component="h2">
-                                    <h2>
+                                {/* <Typography component="h2"> */}
+                                    <h1>
                                         계좌번호
-                                    </h2>
-                                </Typography>
+                                    </h1>
+                                {/* </Typography> */}
                             </Paper>
                         </ButtonBase>
                     </form>

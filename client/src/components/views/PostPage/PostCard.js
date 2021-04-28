@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    
   },
   media: {
     height: 140,
@@ -23,7 +24,7 @@ export default function MediaCard({post}) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea href="/postdetail">
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -34,6 +35,7 @@ export default function MediaCard({post}) {
       </CardActionArea>
       <CardActions>
          <Typography
+            
             color="textSecondary"
             display="inline"
             sx={{ pl: 1 }}

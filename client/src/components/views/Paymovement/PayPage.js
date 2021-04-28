@@ -6,7 +6,8 @@ import LoadingAndSuccess from './LoadingAndSuccess'
 
 const useStyle = makeStyles((theme) => ({
     root: {
-        paddingTop : theme.spacing(12)
+        // paddingTop : theme.spacing(12)
+        backgroundColor : "white"
     },
     creditCard: {
         paddingTop: theme.spacing(4),
@@ -14,7 +15,7 @@ const useStyle = makeStyles((theme) => ({
         alignContent: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        width: "80%"
+        width: "100%"
     },
     cardPadding: {
         padding: theme.spacing(2)
@@ -65,7 +66,7 @@ function PayPage() {
                 <LoadingAndSuccess />  :
                 <div>
                 <Grid item md={12}>
-                    <h3 >카드 정보</h3>
+                    <h3 >내 카드 정보</h3>
                 </Grid>
                     <Grid item style={{margin : 'auto'}} className={classes.cardPadding} sm={6}>
                         <Paper component="body" className={classes.cardForm} variant="outlined" >
@@ -74,13 +75,13 @@ function PayPage() {
                                 <div >
                                     <NumberFormat disabled value="4321431243214321" format="####-####-####-####" className={classes.card} style={{ width: '68%' }} placeholder="카드 번호" />
                                     <img style={{ width: "12%", verticalAlign: "middle" }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1024px-Visa.svg.png" alt="VISA" />
-                                    <Input disabled className={classes.card} value="KO YEONG BIN" style={{ width: '88%' }} placeholder="이름" />
+                                    <Input disabled className={classes.card} value="KO YEONG BIN" style={{ width: '80%' }} placeholder="이름" />
                                 </div>
 
                                 <div>
                                 </div>
                                 {/* 버튼 부분 수정해야함 */}
-                                <Button href="/" className={classes.cardBtn} variant="contained" color="primary" type="submit" >결제</Button>
+                                <Button onClick={SuccessHandle} className={classes.cardBtn} variant="contained" color="primary" type="submit" >결제</Button>
                             </form>
                         </Paper>
                     </Grid>

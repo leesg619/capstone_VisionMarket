@@ -114,7 +114,8 @@ const useStyles = makeStyles((theme) => ({
   firstAppbarContainer: {
     maxWidth:'100%',
    margin:theme.spacing(0,0,0,0),
-   padding:theme.spacing(0,0,0,0),
+   padding:theme.spacing(15,0,0,0),
+
 },
 
 firstAppbar: {
@@ -124,9 +125,9 @@ firstAppbar: {
 
 
 secondAppbar: {
-  position:"relative",
+  // position:"relative",
   top:"6%",
-  display: "flex",
+  // display: "flex",
   alignItems: "center",
 },
 
@@ -173,7 +174,8 @@ firstToolbar: {
   flexWrap:'wrap',
 },
 iconComponent:{
-  margin:'0', padding:'0',
+  margin:'0',
+  padding:'0',
   color: '#ffffff'
 },
  chatTypo : {
@@ -198,11 +200,11 @@ iconComponent:{
 
       <Container className={classes.firstAppbarContainer} component='main' maxWidth='xl' >
 
-      <AppBar className={classes.firstAppbar} style={{backgroundColor:"#616161"}}>
+      {/* <AppBar className={classes.firstAppbar} style={{backgroundColor:"#616161"}}>
         <Toolbar  className={classes.firstToolbar} p ={0} >
-          <Grid container spacing={1}>
+          <Grid container spacing={1}> */}
             {/* 챗봇로고 */}
-           <Grid item xs={12} lg={1} >
+           {/* <Grid item xs={12} lg={1} >
              <Box  color="#000000" className={classes.BoxComponent2} p={4} > 
                <IconButton edge="start" style={{margin:'0', padding:'0'}} color="inherit" aria-label="chatBot">
                  <PetsIcon style={{fontSize: '30'}} />
@@ -211,10 +213,10 @@ iconComponent:{
                </Typography>
                </IconButton>
              </Box>
-           </Grid>
+           </Grid> */}
 
            {/* 아이콘들 */}
-           <Grid item xs={7} lg={3}>
+           {/* <Grid item xs={7} lg={3}>
            <Box  color="#000000" className={classes.BoxComponent3} p={4} >
            <IconButton>
              <Brightness6Icon className={classes.iconComponent} />
@@ -229,10 +231,10 @@ iconComponent:{
                <ZoomInIcon className={classes.iconComponent} />
            </IconButton>
            </Box>
-           </Grid>
+           </Grid> */}
 
            {/* 검색창 */}
-           <Grid item xs={12} lg={5} >
+           {/* <Grid item xs={12} lg={5} >
            <Box color="#000000" className={classes.BoxComponent4} p={2}>
              <div className={classes.search}>
                <SearchIcon  className={classes.searchIcon} />
@@ -245,9 +247,9 @@ iconComponent:{
                  />
              </div>
              </Box>
-           </Grid>
+           </Grid> */}
            {/* 주요버튼 */}
-           <Grid item xs>
+           {/* <Grid item xs>
            <Box className={classes.BoxComponent} p={4} >
              <IconButton edge="start" className={classes.orderButton}  color="inherit" aria-label="orderButton" >
                   <Typography variant="h6">
@@ -270,11 +272,11 @@ iconComponent:{
            </Grid>
           </Grid>
           </Toolbar>
-          </AppBar>
+          </AppBar> */}
        
 
          
-             <AppBar className={classes.secondAppbar}  style={{backgroundColor:"#9e9e9e"}}>
+             {/* <AppBar className={classes.secondAppbar}  style={{backgroundColor:"#9e9e9e"}}>
           <Toolbar >
 
           <IconButton className={classes.allCategory} color="inherit" aria-label="second">
@@ -303,14 +305,14 @@ iconComponent:{
 
 
           </Toolbar>
-          </AppBar> 
+          </AppBar>  */}
 
           <Grid item xs={12} align="center">
           <Card  className={classes.adCard}>
         <CardContent >
         
           <ThemeProvider theme={theme}>
-        <Typography  gutterBottom variant="h5" component="h2" className={classes.adCardTite}>
+        <Typography aria-label="당신의 Vision을 들려주세요" gutterBottom variant="h5" component="h2" className={classes.adCardTite}>
          당신의 Vision을 들려주세요
           </Typography>
       </ThemeProvider>

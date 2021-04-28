@@ -20,6 +20,8 @@ import MyPage from './views/MyPage/MyPage';
 
 import PostDetailPage from './views/PostPage/PostDetailPage';
 import PostSearchListPage from './views/PostPage/PostSearchListPage';
+import ShoppingBascket from './views/ShoppingBaskcet/ShoppingBascket';
+import Nav from './views/Navbar/Nav';
 
 
 function App() {
@@ -28,7 +30,7 @@ function App() {
     {/* // Suspense는 Suspense안에 있는 태그 값에 접근하기 전에 선행 후에 접근하게 된다.
     // fallback 이라는 속성을 통해서 아직 데이터가 불러와지지 않았을 경우에 보여지는 화면을 만들어준다. */}
     <Suspense fallback={(<div>...Loding Now</div>)}>
-      {/* <Navbar/> */}
+      <Nav/>
       <Switch>
         {/* Switch & case 문과 비슷하게 해석하면 쉽게 접근 가능
             Route는 내가 원하는 URL 경로를 만들어줌
@@ -43,6 +45,9 @@ function App() {
         <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
+
+        <Route exact path="/shoppingBascket" component={ShoppingBascket} />
+
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 
       </Switch>

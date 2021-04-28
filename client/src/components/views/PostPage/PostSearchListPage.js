@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
         maxHeight: '100vh',
     },
     root: {
-        marginTop: theme.spacing(10),
+        paddingTop: theme.spacing(25),
     },
     
 }))

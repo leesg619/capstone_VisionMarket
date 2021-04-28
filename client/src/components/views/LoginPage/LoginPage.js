@@ -20,8 +20,10 @@ import * as Yup from 'yup'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter';
 
 const useStyles = makeStyles((theme) => ({
+    root : {
+        paddingTop : theme.spacing(25)
+    },
     paper: {
-        marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -99,7 +101,7 @@ export default function Login(props) {
     })
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.root} component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 

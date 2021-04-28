@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from 'react'
 import { CircularProgress, Grid, Container, makeStyles } from '@material-ui/core'
+import {useHistory} from "react-router"
+
 
 const useStyle = makeStyles((theme) => ({
     root : {
         paddingTop : theme.spacing(20),
         justifyContent : 'center',
         alignContent : "center",
-        textAlign : 'center'
+        textAlign : 'center',
+        backgroundColor : "inherit"
     }
 }))
 
 function LoadingAndSuccess(props) {
     const classes = useStyle()
     const [Loading, setLoading] = useState(true)
+
+    const history = useHistory()
 
     useEffect(() => {
         setTimeout(() => {
@@ -22,7 +27,7 @@ function LoadingAndSuccess(props) {
 
     if(Loading) {
         setTimeout(() => {
-            props.history.push('/')
+            history.push('/')
         }, 1000)
     }
     

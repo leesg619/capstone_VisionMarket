@@ -97,7 +97,7 @@ function CreditCard(props) {
                                 </form>
                             </Paper>
                         </Grid>
-                        <Grid className={classes.cardPadding} item md={6}><Card /></Grid>
+                        <Grid className={classes.cardPadding} item md={6}><Card style={{fontSize : "1rem"}} /></Grid>
                     </Grid>
                 </Grid>
     )

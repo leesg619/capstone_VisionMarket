@@ -95,6 +95,10 @@ export default (props) => {
         {
             text: '배송지 관리',
             path: '/myPage/DeliveryPlace'
+        },
+        {
+            text: '카드/계좌등록',
+            path: "/card"
         }
     ]
 

@@ -3,9 +3,9 @@ import React from "react";
 import Grids from "./Grids";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: theme.spacing(12)
-    }
+    // root: {
+    //     marginTop: theme.spacing(12)
+    // }
 }))
 
 const MyPage = (props)=>{

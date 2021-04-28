@@ -15,8 +15,11 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 
 const useStyles = makeStyles((theme) => ({
+    // root : {
+    //     // paddingTop : theme.spacing(25)
+    // },
     paper: {
-        marginTop : theme.spacing(8),
+        paddingTop : theme.spacing(23),
         display : 'flex',
         flexDirection : 'column',
         alignItems : 'center'
@@ -663,7 +666,8 @@ export default function RegisterPage(props) {
                         variant="contained"
                         color="primary"
                         disabled={formik.isSubmitting}
-                        onSubmit={ButtonHandler}
+                        // onSubmit={ButtonHandler}
+                        href="/"
                     >
                         가입완료
                     </Button>

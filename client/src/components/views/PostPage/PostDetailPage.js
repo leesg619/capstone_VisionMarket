@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         padding: theme.spacing(10),
+        paddingTop : theme.spacing(25)
     },
     img: {
         margin: 'auto',
@@ -110,7 +111,7 @@ export default function PostDetailPage(props) {
                     }}
                     />
                     <Box component="span" m={1}><Button /></Box>
-                    <Button variant="outlined" color="primary">장바구니</Button>
+                    <Button variant="outlined" href="/shoppingbascket" color="primary">장바구니</Button>
                     <Box component="span" m={1}><Button /></Box>
                     <Button variant="outlined" color="secondary">구매하기</Button>
             </FormControl>
