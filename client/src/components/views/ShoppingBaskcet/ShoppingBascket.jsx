@@ -54,10 +54,7 @@ export default function ShoppingBascket() {
             <Grid item container >
                 <Grid item xs={1} sm={2} />
                 <Grid item xs={10} sm={8} justify="center" >
-                    <Typography variant="h4" align="left" style={{ padding: '20px' }}>
-                        Vision Markets
-        {/* 버튼형식으로 만들어서 메인 페이지로 바로 가게 기능 변경해야함 */}
-                    </Typography>
+                    <br />
                     <Card className={classes.root}>
                         <ShoppingCartIcon fontSize="Large" />
                         <hr />
