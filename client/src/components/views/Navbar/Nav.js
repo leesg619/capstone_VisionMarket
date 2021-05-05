@@ -120,7 +120,7 @@ function Nav() {
                             <Box color="#000000" className={classes.BoxComponent2} p={4} >
                             <div className={classes.root}>
                             <ButtonGroup variant="text" color="inherit">
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓">
+                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓" href="/">
                             메인
                             </Button>
                             <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇" href="/chat">
@@ -184,7 +184,7 @@ function Nav() {
 
             <AppBar className={classes.secondAppbar} style={{ backgroundColor: "#9e9e9e" }}>
                 <Toolbar >
-                    <IconButton color="inherit" aria-label="모든 카테고리">
+                    <IconButton color="inherit" aria-label="모든 카테고리" href="/category">
                         <Typography >
                             모든 카테고리
             </Typography>
