@@ -123,7 +123,7 @@ function Nav() {
                             <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓">
                             메인
                             </Button>
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇">
+                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇" href="/chat">
                             Chat
                             </Button>
                             <Button size="small" aria-label="고대비">

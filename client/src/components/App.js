@@ -22,6 +22,7 @@ import PostDetailPage from './views/PostPage/PostDetailPage';
 import PostSearchListPage from './views/PostPage/PostSearchListPage';
 import ShoppingBascket from './views/ShoppingBaskcet/ShoppingBascket';
 import Nav from './views/Navbar/Nav';
+import Chat from './views/AIChat/Chat';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
 
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
+        <Route exact path="/chat" component={Chat} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 
