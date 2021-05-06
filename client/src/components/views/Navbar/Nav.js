@@ -13,6 +13,7 @@ const useStyle = makeStyles((theme) => ({
         display: 'flex',
         color: "#ffffff",
         borderColor: '#B6B5B5'
+        
     },
     firstAppbar: {
         display: "flex",
@@ -153,7 +154,7 @@ function Nav() {
                                 </IconButton>
                                 <IconButton edge="start" className={classes.orderButton} color="inherit" aria-label="로그아웃">
                                     <ExitToApp />
-                                    <Typography  className={classes.cartTitle}>
+                                    <Typography   className={classes.cartTitle}>
                                         로그아웃
                 </Typography>
                                 </IconButton>
