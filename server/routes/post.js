@@ -1,11 +1,61 @@
 const express = require('express');
 const router = express.Router();
+const { auth } = require("../middlewares/auth");
+const {Post} = require('../models/Post');
+//const { AdminPost } = require('../models/AdminPost')
 
-const { AdminPost } = require('../models/AdminPost')
 
-router.post('/admin/post', (req, res) => {
-    AdminPost.find({})
+
+//상품 등록
+router.post('/create',auth, (req,res) => {
+   
+
+    var product =  new Post(req.body);
+
+        product.save((err) => {
+            if(err) {  
+                console.log(err);
+                res.status(200).json({ "status": false, "result": "Product Create Failed!" })
+            
+        }
+            res.status(200).json({ "status": true, "result": 'Success!'})
+        })
 })
+
+//상품 삭제
+router.delete('/delete',auth, (req,res) => {
+    Post.findOneAndDelete({"_id":req.body._id})
+    .exec((err) => {
+        if(err) return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
+        else res.status(200).json({ "status": true, "result": 'Success!'})
+    })
+})
+
+//개인이 등록한 상품 모두 조회
+router.get('/read/allProducts',auth,(req,res) => {
+    Post.find({'author' : req.body.author})
+    .exec((err,products) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',products})
+    })
+})
+
+//상품 수정
+router.post('/update',auth,(req,res) => {
+    Post.findOneAndUpdate({"_id":req.body._id},
+    {
+        title: req.body.title,
+        content:req.body.content
+    })
+    .exec((err) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Update Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!'})
+    })
+})
+
+// router.post('/admin/post', (req, res) => {
+//     AdminPost.find({})
+// })
 
 
 
