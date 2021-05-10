@@ -13,7 +13,8 @@ const postSchema = mongoose.Schema({
     },
     author : {
         type : Schema.Types.ObjectId,
-        ref : "User"
+        ref : "User",
+        default : null
     },
     pcategory : {
         type : Schema.Types.ObjectId,
