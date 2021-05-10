@@ -32,9 +32,9 @@ const postSchema = mongoose.Schema({
         */
         default : 0
     },
-    image : [{
+    image : {
         type : String
-    }],
+    },
     pviews : {
         type : Number,
         default : 0
@@ -52,6 +52,9 @@ const postSchema = mongoose.Schema({
     pstock : {
         type : Number
     },
+    detailImage : [{
+        type : String
+    }],
     /*
     posting : {
         type : Number,

@@ -1,3 +1,4 @@
+
 function csvToJSON(csv_string){ // 1. 문자열을 줄바꿈으로 구분 => 배열에 저장 
     //const rows = csv_string.split("\r\n"); // 줄바꿈을 \n으로만 구분해야하는 경우, 아래 코드 사용 
     const rows = csv_string.split("\n");
@@ -48,14 +49,18 @@ function csvToJSON(csv_string){ // 1. 문자열을 줄바꿈으로 구분 => 배
 
 const fs = require('fs');
 
-const file_csv = fs.readFileSync('new남자바지.csv');
+const file_csv = fs.readFileSync('new여자바지.csv');
 
 const string_csv = file_csv.toString();
 
 const arr_json = csvToJSON(string_csv);
 
+// 만든배열을 .json으로 저장하는코드.(파일 : json배열)
 
-
+// 4. JSON을 문자열로 변환 
+const string_json = JSON.stringify(arr_json); 
+// 5. file.json 파일로 생성 
+fs.writeFileSync('womanPants.json', string_json);
 
 // @@@@ csv 손질 @@@@ 
 // 1. ctrl f 로 .jpg,"\n 를 .jpg,  로 바꾸기(대문자까지check)
@@ -65,8 +70,3 @@ const arr_json = csvToJSON(string_csv);
 
 
 
-// 만든배열을 .json으로 저장하는코드.(파일 : json배열)
-// 4. JSON을 문자열로 변환 
-// const string_json = JSON.stringify(arr_json); 
-// 5. file.json 파일로 생성 
-// fs.writeFileSync('manPants.json', string_json);
