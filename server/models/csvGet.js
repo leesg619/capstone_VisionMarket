@@ -49,7 +49,7 @@ function csvToJSON(csv_string){ // 1. 문자열을 줄바꿈으로 구분 => 배
 
 const fs = require('fs');
 
-const file_csv = fs.readFileSync('new여자바지.csv');
+const file_csv = fs.readFileSync('new후드.csv');
 
 const string_csv = file_csv.toString();
 
@@ -60,7 +60,7 @@ const arr_json = csvToJSON(string_csv);
 // 4. JSON을 문자열로 변환 
 const string_json = JSON.stringify(arr_json); 
 // 5. file.json 파일로 생성 
-fs.writeFileSync('womanPants.json', string_json);
+fs.writeFileSync('Hoody.json', string_json);
 
 // @@@@ csv 손질 @@@@ 
 // 1. ctrl f 로 .jpg,"\n 를 .jpg,  로 바꾸기(대문자까지check)

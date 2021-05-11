@@ -3,20 +3,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 
 const { Category } =require('./Category')
-const { Post } =require('./Post')
-const { User } =require('./User')
-
-// const json_file =fs.readFileSync("manPants.json");
-// console.log(json_file.toString());
-const manPants = require('../../manPants.json');
-
-const connect = mongoose.connect(config.mongoURI, 
-    {
-        useNewUrlParser : true, useUnifiedTopology : true,
-        useCreateIndex : true, useFindAndModify : false
-    })
-    .then(()=>console.log("MongoDB Connect..."))
-    .catch(err => console.log(err));
+const { mongoURI } = require("../config/key");
 
 function initCategory(){
     const cates = []
@@ -80,32 +67,15 @@ function initCategory(){
     }
 }
 
-
-function initPost(){
-
-    User.findOne({role: 1}, (err, user) =>{
-        if(!user){
-            console.log("찾지못함");
-            return;
-        }
-        console.log(user);
-
-        for(let i=0; i<json_file.length; i++){
-            let post = new Post(json_file[i]);
-            post.author = user;
-            post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c09888');
-            // category _id값 직접대입
-            post.pstock = 100;
-
-        }
-    })
-
-}
-
-// initCategory();
-
-// var user = User.findOne({email: 'gkwoap@nate.com'}).exec(function(err, docs){
-//     return docs;
-// });
-
-// initPost();
+mongoose.connect(mongoURI,
+    {
+        useNewUrlParser : true, useUnifiedTopology : true,
+        useCreateIndex : true, useFindAndModify : false
+    });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log("Connection Successful!");
+    //Category 생성
+    initCategory();
+});
