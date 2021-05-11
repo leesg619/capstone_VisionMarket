@@ -22,13 +22,20 @@ router.post('/create',auth, (req,res) => {
 })
 
 //상품 삭제
-router.delete('/delete',auth, (req,res) => {
-    
-        Post.findOneAndDelete({"_id":req.body._id})
-    .exec((err) => {
-        if(err) return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
-        else res.status(200).json({ "status": true, "result": 'Success!'})
-    })
+router.delete('/delete',auth, async (req,res) => {
+
+    try {
+        const product = await Post.findById(req.body._id);
+        
+        if(product.compareAuthor(req.user._id)) {
+            Post.findOneAndDelete({"_id":req.body._id}).exec()
+           return  res.status(200).json({ "status": true, "result": "Success!" })
+        } else {
+         return   res.status(200).json({ "status": true, "result": '다른 이의 게시물을 삭제할 수 없습니다.'})
+        }
+    } catch(err) {
+        return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
+    }    
 })
 
 //개인이 등록한 상품 모두 조회
