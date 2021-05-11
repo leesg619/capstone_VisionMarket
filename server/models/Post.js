@@ -61,7 +61,7 @@ const postSchema = mongoose.Schema({
 
 postSchema.pre('save', function(next){
     var post = this
-    User.findById({'_id' : this.author}, (err, doc) => {
+    User.findById({'_id' : post.author}, (err, doc) => {
         if(err) return next(err)
         if(doc.role === 1) {
             post.purpose = 10   //purpose 변경으로 운영자글 명시
@@ -69,6 +69,18 @@ postSchema.pre('save', function(next){
     })
     next()
 })
+
+
+postSchema.methods.compareAuthor = function( user_id ) {
+    var post = this
+    if(post.author.equals(user_id)){
+        result = true
+    }else {
+        result = false
+    }
+    return result
+   
+}
 
 const Post = mongoose.model("Post", postSchema);
 
