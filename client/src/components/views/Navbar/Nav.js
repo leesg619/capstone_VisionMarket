@@ -1,6 +1,6 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Box, Grid, IconButton, makeStyles, Typography, AppBar, Toolbar, InputBase, Container, Input } from '@material-ui/core'
-import { ZoomOut, ZoomIn, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp } from '@material-ui/icons'
+import { ZoomOut, ZoomIn, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp, ZoomInSharp } from '@material-ui/icons'
 import { fade } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -25,24 +25,14 @@ const useStyle = makeStyles((theme) => ({
         color: "#ffffff",
         borderColor: '#B6B5B5'
     },
-    firstAppbar: {
+    appbar: {
         display: "flex",
         position: "relative",
     },
-    firstToolbar: {
+    toolbar: {
         display: "flex",
         flexWrap: 'wrap',
         justifyContent: 'center'
-    },
-    BoxComponent3: {
-        minWidth: '110px',
-        textAlign: 'center',
-        height: '20px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        display: 'flex',
-        color: "#ffffff",
-        borderColor: '#B6B5B5'
     },
     iconComponent: {
         margin: '0', padding: '0',
@@ -72,21 +62,13 @@ const useStyle = makeStyles((theme) => ({
           width: 'auto',
         },
       },
-    inputValue: {
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up("md")]: {
-            width: "24ch"
-        }
-    },
-    firstAppbarContainer: {
+    appbarContainer: {
         maxWidth: '100%',
         margin: theme.spacing(0, 0, 0, 0),
         padding: theme.spacing(0, 0, 0, 0),
         position: "relative",
         zIndex: "2"
     },
-
     orderButton: {
         position: "relative",
         margin: 0,
@@ -99,20 +81,39 @@ const useStyle = makeStyles((theme) => ({
         alignItems: 'center',
         display: 'flex',
     },
-    secondAppbar: {
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-    },
 }))
 
 
-function Nav() {
+function Nav(props) {
     const classes = useStyle();
+  
+    // 확대, 축소 기능
+    var nowZoom = 100;
+    function zoomOut() {
+        nowZoom = nowZoom - 20;
+        if(nowZoom <= 100) nowZoom = 100;
+        zooms();
+    }
+
+    function zoomIn() {
+        nowZoom = nowZoom + 20;
+        if(nowZoom >= 200) nowZoom = 200;
+        zooms();
+    }
+
+    function zomReset(){
+        nowZoom = 100;
+        zooms();
+    }
+
+    function zooms(){
+        document.body.style.zoom = nowZoom + '%';
+    }
+
     return (
-        <Container className={classes.firstAppbarContainer} component='main' maxWidth='xl' >
-            <AppBar className={classes.firstAppbar} style={{ backgroundColor: "#616161" }}>
-                <Toolbar className={classes.firstToolbar} p={1} >
+        <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
+            <AppBar className={classes.appbar} style={{ backgroundColor: "#616161" }}>
+                <Toolbar className={classes.toolbar} p={1} >
                     <Grid container spacing={1}>
 
                         {/* 아이콘모음 */}
@@ -132,10 +133,10 @@ function Nav() {
                             <Button size="small" aria-label="음성검색">
                                 <RecordVoiceOver className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="확대">
+                            <Button size="small" aria-label="확대" onClick={zoomIn}>
                                 <ZoomIn className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="축소">
+                            <Button size="small" aria-label="축소" onClick={zoomOut}>
                                 <ZoomOut className={classes.iconComponent} />
                             </Button>
                             </ButtonGroup>
@@ -165,8 +166,8 @@ function Nav() {
                         {/* 주버튼 */}
                         <Grid item xs={12} sm={4}>
                             <Box className={classes.BoxComponent} p={4} >
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="주문 및 반품" >
-                                        주문/반품
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="마이페이지" href="/myPage/order" >
+                                        마이페이지
                                 </Button>
                                 <Button className={classes.orderButton} style={{ fontSize: '1rem' }} aria-label="장바구니" aria-details="장바구니 링크" href="/shoppingbascket" color="inherit" >
                                 <ShoppingCart  style={{ fontSize: '30' }} />
@@ -179,36 +180,6 @@ function Nav() {
                             </Box>
                         </Grid>
                     </Grid>
-                </Toolbar>
-            </AppBar>
-
-            <AppBar className={classes.secondAppbar} style={{ backgroundColor: "#9e9e9e" }}>
-                <Toolbar >
-                    <IconButton color="inherit" aria-label="모든 카테고리" href="/category">
-                        <Typography >
-                            모든 카테고리
-            </Typography>
-                    </IconButton>
-
-                    <IconButton href="/" color="inherit" aria-label="인기 상품">
-                        <Typography>
-                            인기 상품
-            </Typography>
-                    </IconButton>
-
-                    <IconButton color="inherit" aria-label="소개 및 안내">
-                        <Typography >
-                            소개 및 안내
-            </Typography>
-                    </IconButton>
-
-                    <IconButton href="/myPage/order" color="inherit" aria-label="마이페이지">
-                        <Typography >
-                            마이페이지
-            </Typography>
-                    </IconButton>
-
-
                 </Toolbar>
             </AppBar>
         </Container>

@@ -22,18 +22,14 @@ const useStyles = makeStyles((theme) =>({
 
 function SubContent() {
 
-    
-
     const classes = useStyles()
     return (
         <Paper>
         <Grid container className={classes.mainContainer}>
-            
+        <Grid item md={4} className={classes.gridSecond}>
+            </Grid>
             <Grid item md={8} className={classes.gridFirst}>
                 <h1>hello</h1>
-                <h2>is the second content, a.k.a SubContent</h2>
-            </Grid>
-            <Grid item md={4} className={classes.gridSecond}>
             </Grid>
         </Grid>
         </Paper>
