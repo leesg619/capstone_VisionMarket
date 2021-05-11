@@ -9,9 +9,8 @@ const {Post} = require('../models/Post');
 //상품 등록
 router.post('/create',auth, (req,res) => {
    
-
-    var product =  new Post(req.body);
-
+    const product =  new Post(req.body);
+    product.author = req.user._id
         product.save((err) => {
             if(err) {  
                 console.log(err);
@@ -24,7 +23,8 @@ router.post('/create',auth, (req,res) => {
 
 //상품 삭제
 router.delete('/delete',auth, (req,res) => {
-    Post.findOneAndDelete({"_id":req.body._id})
+    
+        Post.findOneAndDelete({"_id":req.body._id})
     .exec((err) => {
         if(err) return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
         else res.status(200).json({ "status": true, "result": 'Success!'})
@@ -33,7 +33,7 @@ router.delete('/delete',auth, (req,res) => {
 
 //개인이 등록한 상품 모두 조회
 router.get('/read/allProducts',auth,(req,res) => {
-    Post.find({'author' : req.body.author})
+    Post.find({'author' : req.user._id})
     .exec((err,products) => {
         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
         return res.status(200).json({success: true, "result": 'Success!',products})
