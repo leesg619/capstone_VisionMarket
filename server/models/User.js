@@ -10,12 +10,14 @@ const moment = require('moment');
 const userSchema = mongoose.Schema({
     name : {
         type : String,
-        maxlength : 50
+        maxlength : 50,
+        required: true
     },
     email : {
         type : String,
         trim : true,
-        unique : 1
+        unique : 1,
+        required: true
     },
     password : {
         type : String,
@@ -47,7 +49,8 @@ const userSchema = mongoose.Schema({
         type : String
     },
     point : {
-        type : Number
+        type : Number,
+        default: 0
     },
     impaired : { //시각장애 여부
         type : Boolean,
@@ -107,6 +110,16 @@ userSchema.statics.findByToken = function(token, cb) {
         })
     })
 }
+
+//
+userSchema.statics.findByEmailOrName = function({name, email}) {
+    return this.findOne({
+        $or: [
+            { name },
+            { email }
+        ]
+    }).exec();
+};
 
 const User = mongoose.model("User", userSchema);
 

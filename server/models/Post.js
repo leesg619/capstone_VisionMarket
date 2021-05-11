@@ -50,7 +50,8 @@ const postSchema = mongoose.Schema({
         type : Number
     },
     pstock : {
-        type : Number
+        type : Number,
+        default : 100
     },
     detailImage : [{
         type : String

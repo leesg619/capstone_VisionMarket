@@ -15,29 +15,12 @@ const Hoody = require('../../Hoody.json');
 
 const { mongoURI } = require("../config/key");
 
-
-function initPost(json_file){
-
-    for(let i=0; i<json_file.length; i++){
-        let post = new Post(json_file[i]);
-        post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
-        post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c09888');
-        // category _id값 직접대입
-        post.pstock = 100;
-        
-        post.save((err, post) => {
-            if(err) {console.log(err);}
-            console.log(post);
-        })
-    }
-
-}
-
 mongoose.connect(mongoURI,
     {
         useNewUrlParser : true, useUnifiedTopology : true,
         useCreateIndex : true, useFindAndModify : false
     });
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -49,7 +32,6 @@ db.once('open', function() {
         post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
         post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c09888');
         // author, category _id값 직접대입
-        post.pstock = 100;
         post.save(function (err, post){
             if(err) return console.log(err);
             console.log(post);
@@ -61,7 +43,6 @@ db.once('open', function() {
         post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
         post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c09889');
         // author, category _id값 직접대입
-        post.pstock = 100;
         post.save(function (err, post){
             if(err) return console.log(err);
             console.log(post);
@@ -73,7 +54,6 @@ db.once('open', function() {
         post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
         post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c0988e');
         // author, category _id값 직접대입
-        post.pstock = 100;
         post.save(function (err, post){
             if(err) return console.log(err);
             console.log(post);
@@ -85,7 +65,6 @@ db.once('open', function() {
         post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
         post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c0988c');
         // author, category _id값 직접대입
-        post.pstock = 100;
         post.save(function (err, post){
             if(err) return console.log(err);
             console.log(post);
@@ -97,7 +76,6 @@ db.once('open', function() {
         post.author = mongoose.Types.ObjectId('6093b3c222b3d04d6438839f');
         post.pcategory = mongoose.Types.ObjectId('6099327d8cf49c15d4c0988d');
         // author, category _id값 직접대입
-        post.pstock = 100;
         post.save(function (err, post){
             if(err) return console.log(err);
             console.log(post);
