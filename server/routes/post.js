@@ -48,16 +48,23 @@ router.get('/read/allProducts',auth,(req,res) => {
 })
 
 //상품 수정
-router.post('/update',auth,(req,res) => {
-    Post.findOneAndUpdate({"_id":req.body._id},
+router.post('/update',auth, async (req,res) => {
+
+    try {
+        const product = await Post.findById(req.body._id);
+    if(product.compareAuthor(req.user._id)) {
+        Post.findOneAndUpdate({"_id":req.body._id},
     {
         title: req.body.title,
         content:req.body.content
     })
-    .exec((err) => {
-        if(err) return res.status(200).json({ "status": false, "result": "Update Failed!" })
-        return res.status(200).json({success: true, "result": 'Success!'})
-    })
+       return  res.status(200).json({ "status": true, "result": "Success!" })
+    } else {
+     return   res.status(200).json({ "status": true, "result": '다른 이의 게시물을 수정할 수 없습니다.'})
+    }
+} catch(err) {
+    return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
+}    
 })
 
 // router.post('/admin/post', (req, res) => {
