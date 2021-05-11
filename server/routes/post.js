@@ -39,7 +39,7 @@ router.delete('/delete',auth, async (req,res) => {
 })
 
 //개인이 등록한 상품 모두 조회
-router.get('/read/allProducts',auth,(req,res) => {
+router.get('/read/user/allProducts',auth,(req,res) => {
     Post.find({'author' : req.user._id})
     .exec((err,products) => {
         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
@@ -65,6 +65,15 @@ router.post('/update',auth, async (req,res) => {
 } catch(err) {
     return   res.status(200).json({ "status": false, "result": "Delete Failed!" })
 }    
+})
+
+//전체 상품 조회
+router.get('/read/allProducts',(req,res) => {
+    Post.find({})
+    .exec((err,products) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',products})
+    })
 })
 
 // router.post('/admin/post', (req, res) => {
