@@ -42,7 +42,7 @@ function App() {
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
-        <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
+        <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, true)} />
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
 
