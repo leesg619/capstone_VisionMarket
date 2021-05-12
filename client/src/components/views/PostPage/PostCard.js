@@ -6,9 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
-
-
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
@@ -49,6 +47,10 @@ export default function MediaCard({post}) {
           image={post.imgSrc}
           title={post.title}
         />
+      </CardActions>
+      <CardActions className={classes.button}>
+        <Button size="large">상세보기</Button>
+        <Button size="large">장바구니</Button>
       </CardActions>
     </Card>
   );

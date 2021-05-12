@@ -77,7 +77,8 @@ const Content = props => {
                 variant="contained" 
                 color="primary" 
                 style={{height:'80px', fontSize:'20px'}}
-                type="submit">
+                type="submit"
+                >
                 남성패션
                 </Button>
                 </form>
@@ -244,7 +245,7 @@ const Content = props => {
                                     variant="contained" 
                                     color="primary" 
                                     style={{height:'80px', fontSize:'20px'}}
-                                    >
+                                    href="/postsearchlist">
                                     의류
                                     </Button>
                                     </Grid>

@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-
 const newsPost = {
     title: "Title Sample",
     description: "description Sample, which codes is best code? can you choice that?",

@@ -182,7 +182,7 @@ export default function Login(props) {
 
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2" alt="회원가입">
+                            <Link href="/register" variant="body2" alt="회원가입">
                                 회원가입
                             </Link>
                         </Grid>

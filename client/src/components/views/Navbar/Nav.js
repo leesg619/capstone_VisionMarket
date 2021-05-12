@@ -173,7 +173,7 @@ function Nav(props) {
                                 <ShoppingCart  style={{ fontSize: '30' }} />
                                         장바구니
                                 </Button>
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃">
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" href="/login">
                                     <ExitToApp />
                                         로그아웃
                                 </Button>

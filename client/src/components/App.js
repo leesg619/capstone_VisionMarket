@@ -49,6 +49,7 @@ function App() {
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
 
+
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
         <Route exact path="/chat" component={Chat} />
         <Route exact path="/category" component={Category} />

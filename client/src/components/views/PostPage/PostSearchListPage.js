@@ -1,16 +1,11 @@
-import { Avatar, Container, CssBaseline, Grid, makeStyles, Typography, 
-    ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, 
-    MenuItem, FormHelperText, FormControl, Select, TextField
- } from '@material-ui/core'
-import React, { useState } from 'react'
-import { LockOutlined } from '@material-ui/icons'
-import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
+import { Grid, makeStyles, Typography, Box, Button} from '@material-ui/core'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import PostCard from './PostCard';
 import Pagination from '@material-ui/lab/Pagination';
-
-import DashboardSidebar from './DashboardSidebar';
+import { CardMedia, CardActions, CardContent, CardHeader } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import PostCard from './PostCard';
 
 import cloth1 from './img/cloth1.jpg';
 import cloth2 from './img/cloth2.jpg';
@@ -20,16 +15,17 @@ import cloth5 from './img/cloth5.jpg';
 import stussy from './img/stussy.jpg';
 
 const useStyles = makeStyles((theme) => ({
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100vh',
-    },
     root: {
-        paddingTop: theme.spacing(25),
+        paddingTop: theme.spacing(10),
+        justifyContent: 'center',
+        justifyItems: 'center',
+        align: 'center',
+        justify: "center",
+        alignItems: "center"
     },
-    
+    number: {
+      justifyContent: 'center',
+    }
 }))
 
 
@@ -87,48 +83,61 @@ export default function PostSearchListPage(props) {
       
 
     return (
-    <>
-        <Container maxWidth={false}>
-
-        <Grid item container spacing = {2} className={classes.root}>
-            <Grid item xs = {2} sm={2}>
-                <DashboardSidebar />
-            </Grid>
-
-            <Grid item xs={11} sm={8} justify = "center">
-            <Box sx={{ pt: 3 }}>
-            <Grid container spacing={3}>
+      <div className={classes.root}>
+        <Grid item container direction="column" spacing={2}>
+            <Grid item xs={1} />
+            <Grid item xs={10}>
+            <Box >
+            <Grid container spacing={2} >
                 {posts.map((post) => (
                 <Grid
                     item
                     key={post.id}
                     lg={3}
-                    md={6}
-                    xs={12}
+                    sm={6}
+                    xs={10}
                 >
                 <PostCard post={post} />
                 </Grid>
                 ))}
             </Grid>
             </Box>
-            <Box
-            sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                pt: 3
-            }}
-            >
-            <Pagination
-                color="primary"
-                count={3}
-                size="small"
+        {/* <Grid item xs={1} sm={2} />
+        <Grid item xs={10} sm={5} md={4}>
+        <Card>
+            <CardHeader
+            title={"오리오오"}
+            subheader={"오리오"}
             />
-            </Box>
-        </Grid>
-        </Grid>
-      </Container>
-            
-    </>
-    )
-
-}
+            <CardMedia style={{ height : "150px" }} image={cloth1}/>
+            <CardContent>
+            <Typography variant="body2" component="p">
+            설명 <br /><br />
+            </Typography>
+            <Typography variant="body1" component="p" align="right" >
+            별점
+            </Typography>
+          </CardContent>
+        <CardActions className={classes.button}>
+        <Button size="large">상세보기</Button>
+        <Button size="large">장바구니</Button>
+      </CardActions>
+      </Card>
+      </Grid>
+      <Grid item xs={10} sm={5} md={4}>
+          <Box className={classes.number}>
+          <Pagination
+          color="primary"
+          count={10}
+          size="large"
+          />
+          </Box>
+          </Grid>
+          <Grid item xs={1} sm={2} />
+        </Grid> */}
+      </Grid>
+      <Grid item xs={1} />
+      </Grid>
+      </div>
+       
+    )}
