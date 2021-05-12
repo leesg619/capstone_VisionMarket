@@ -2,6 +2,8 @@ import React from 'react'
 import { Box, Grid, IconButton, makeStyles, Typography, AppBar, Toolbar, InputBase, Container, Input } from '@material-ui/core'
 import { Pets, ZoomIn, Search, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp } from '@material-ui/icons'
 import { fade } from "@material-ui/core/styles"
+import { useLocation, useHistory } from "react-router";
+import axios from "axios";
 
 const useStyle = makeStyles((theme) => ({
     BoxComponent2: {
@@ -95,7 +97,19 @@ const useStyle = makeStyles((theme) => ({
 
 
 function Nav() {
+    const history = useHistory()
     const classes = useStyle()
+
+    const onClickHandler = () => {
+    axios.get(`/api/users/logout`)
+    .then(response => {
+        if (response.data.success) {
+            history.push("/login")
+        } else {
+            alert('로그아웃 하는데 실패 했습니다.')
+        }
+    })
+}
     return (
         <Container className={classes.firstAppbarContainer} component='main' maxWidth='xl' >
             <AppBar className={classes.firstAppbar} style={{ backgroundColor: "#616161" }}>
@@ -153,7 +167,7 @@ function Nav() {
                                 </IconButton>
                                 <IconButton edge="start" className={classes.orderButton} color="inherit" aria-label="로그아웃">
                                     <ExitToApp />
-                                    <Typography  className={classes.cartTitle}>
+                                    <Typography  className={classes.cartTitle} onClick={onClickHandler}>
                                         로그아웃
                 </Typography>
                                 </IconButton>
@@ -184,7 +198,7 @@ function Nav() {
             </Typography>
                     </IconButton>
 
-                    <IconButton href="/myPage/order" className={classes.allCategory} color="inherit" aria-label="마이페이지">
+                    <IconButton href="/myPage/order" className={classes.allCategory} color="inherit" aria-label="마이페이지" >
                         <Typography >
                             마이페이지
             </Typography>
