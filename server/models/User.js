@@ -11,13 +11,13 @@ const userSchema = mongoose.Schema({
     name : {
         type : String,
         maxlength : 50,
-        required: true
+        required:[true,'name is required!']
     },
     email : {
         type : String,
         trim : true,
         unique : 1,
-        required: true
+        required:[true,'email is required!']
     },
     password : {
         type : String,
@@ -66,6 +66,10 @@ const userSchema = mongoose.Schema({
 userSchema.pre("save", function( next ) {
     var user = this;
     
+    if(user.name.search("admin")){   //이름이 admin일 경우 role=1
+        user.role = 1;
+    }
+
     if(user.isModified('password')) {
         bcrypt.genSalt(saltRounds, (err, salt) => {
             if (err) return next(err);
