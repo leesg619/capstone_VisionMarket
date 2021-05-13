@@ -12,5 +12,5 @@ yarn-error.log*
 lerna-debug.log*
 
 /server/config/dev.js
+/server/config/key/
 node_modules
-

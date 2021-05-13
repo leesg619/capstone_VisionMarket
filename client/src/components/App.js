@@ -17,14 +17,12 @@ import EnrollmentCreditPage from './views/Paymovement/EnrollmentCreditPage';
 import PayPage from './views/Paymovement/PayPage';
 import LoadingAndSuccess from './views/Paymovement/LoadingAndSuccess';
 import MyPage from './views/MyPage/MyPage';
+import Chatbot from './views/ChatbotPage/Chatbot'
 
 import PostDetailPage from './views/PostPage/PostDetailPage';
 import PostSearchListPage from './views/PostPage/PostSearchListPage';
 import ShoppingBascket from './views/ShoppingBaskcet/ShoppingBascket';
 import Nav from './views/Navbar/Nav';
-import Chat from './views/AIChat/Chat';
-import Category from './views/Category/Category';
-import Introduce from './views/Introduce/Introduce';
 
 
 function App() {
@@ -48,12 +46,8 @@ function App() {
         <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
         <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
-
-
+        <Route exact path="/chatbot" component={Auth(Chatbot, false)}/>
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
-        <Route exact path="/chat" component={Chat} />
-        <Route exact path="/category" component={Category} />
-        <Route exact path="/introduce" component={Introduce} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 

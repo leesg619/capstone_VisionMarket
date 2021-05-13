@@ -413,6 +413,8 @@ export default function RegisterPage(props) {
                                 label="PH"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error = {formik.touched.password && Boolean(formik.errors.password)}
+                                helperText = {formik.touched.password && formik.errors.password}
                                 alt="전화번호입력창"
                             />
                         </Grid>
@@ -427,6 +429,8 @@ export default function RegisterPage(props) {
                                 label="인증번호"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
+                                error = {formik.touched.password && Boolean(formik.errors.password)}
+                                helperText = {formik.touched.password && formik.errors.password}
                                 alt="인증번호입력창"
                             />
                         </Grid>

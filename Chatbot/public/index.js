@@ -50,6 +50,7 @@ function serverMessage(response2){
     $('.msg-page').append(
     $('<div class="received-chats"><div class="received-chats-img"><img src="user2.jpg"></div><div class="received-msg"><div class="received-msg-inbox"><p>'+response2+'</p><span class="time">'+dtText+'</span></div></div></div>'));
     console.log('***MESSAGE SEND!***');
+    speechSynthesis.speak( new SpeechSynthesisUtterance(response2));
     updateScrollbar();
 }
 
@@ -77,11 +78,11 @@ function insertMessage()
     var dtText = CalcDate();
     $('.msg-page').append(
     $('<div class="outgoing-chats"> <div class="outgoing-chats-msg"><p>' + msg+ '</p><span class="time">'+ dtText +'</span></div><div class="outgoing-chats-img"><img src="user1.jpg"></div></div></div>' ));
-    fetchmsg();
+    //fetchmsg();
 
     $('.message-input').val(null);
     updateScrollbar();
-    //serverMessage('Hello!');
+    serverMessage('안녕하세요 음성 테스트입니다.');
 }
 
 function fetchmsg(){

@@ -26,15 +26,26 @@ const connect = mongoose.connect(config.mongoURI,
 const userRoute = require('./routes/user');
 const searchRoute = require('./routes/search');
 const adminPostRoute = require('./routes/adminPost')
+const chatbotRoute = require('./routes/chatbot')
 // app use
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // Pass to next layer of middleware
+    next();
+});
+
 app.get('/', (req, res) => res.send("Hello World"))
 app.use('/api/users', userRoute);
 app.use('/api/searchs', searchRoute);
 app.use('/api/admin/posts', adminPostRoute);
+app.use('/chatbot', chatbotRoute);
 
 const port = 5000
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
@@ -53,7 +54,10 @@ export default function ShoppingBascket() {
             <Grid item container >
                 <Grid item xs={1} sm={2} />
                 <Grid item xs={10} sm={8} justify="center" >
-                    <br />
+                    <Typography variant="h4" align="left" style={{ padding: '20px' }}>
+                        Vision Markets
+        {/* 버튼형식으로 만들어서 메인 페이지로 바로 가게 기능 변경해야함 */}
+                    </Typography>
                     <Card className={classes.root}>
                         <ShoppingCartIcon fontSize="Large" />
                         <hr />

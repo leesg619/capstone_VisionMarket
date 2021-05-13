@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "dialogflow": "^1.2.0",
     "express": "^4.17.1",
+    "package.json": "^2.0.1",
     "uuid": "^8.3.2"
   }
 }
