@@ -10,47 +10,48 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    
+    maxWidth: 400,
+    width: 320,
+    borderRadius: '15px',
   },
   media: {
     height: 140,
   },
+  button: {
+    justifyContent: 'center',
+  }
 });
 
 export default function MediaCard({post}) {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardActionArea href="/postdetail">
-
+    <Card className={classes.root} style={{border:'solid', borderColor:'grey'}}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h5" component="h2" aria-label={post.title}>
             {post.title}
           </Typography>
-        </CardContent>
-        
-      </CardActionArea>
-      <CardActions>
-         <Typography
-            
-            color="textSecondary"
+          <Typography
             display="inline"
-            sx={{ pl: 1 }}
             variant="body2"
           >
             {post.price}
           </Typography>
-      
-          <CardMedia
-          style={{height:"150px", width: "150px"}}
+        </CardContent>
+      <CardActions className={classes.button}>
+      <CardMedia
+          style={{height:"200px", width: "200px"}}
           image={post.imgSrc}
           title={post.title}
         />
       </CardActions>
       <CardActions className={classes.button}>
-        <Button size="large">상세보기</Button>
-        <Button size="large">장바구니</Button>
+      <Button style={{fontSize:'1rem', textDecoration: 'underline', textUnderlinePosition: 'under'}} aria-label={post.keyword} > #{post.keyword} </Button>
+      <Button style={{fontSize:'1rem', textDecoration: 'underline', textUnderlinePosition: 'under'}} aria-label={post.keyword2}> #{post.keyword2} </Button>
+      <Button style={{fontSize:'1rem', textDecoration: 'underline', textUnderlinePosition: 'under'}} aria-label={post.keyword3}> #{post.keyword3} </Button>
+      </CardActions>
+      <CardActions className={classes.button}>
+        <Button size="large" href="/postdetail" aria-label='상세보기'>상세보기</Button>
+        <Button size="large" aria-label='장바구니'>장바구니</Button>
       </CardActions>
     </Card>
   );
