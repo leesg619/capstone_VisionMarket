@@ -77,9 +77,22 @@ router.post('/get/allProducts',(req,res) => {
     })
 })
 
-// router.post('/admin/post', (req, res) => {
-//     AdminPost.find({})
-// })
+
+//상품 정보 디테일한거 한 개
+router.get('/get/posts_by_id',  (req,res) => {
+
+    let type = req.query.type
+    let postId = req.query.id
+     Post.find({_id: postId})
+    .populate('author')
+    .exec((err,post) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',post})
+    })
+
+
+})
+
 
 
 
