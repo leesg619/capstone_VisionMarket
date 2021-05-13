@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { User } = require('./User')
 const { Post } = require('./Post')
-
+const moment = require('moment');
 //장바구니, 다대다모델, 빈번한 DB접근
 const cartSchema = mongoose.Schema({
     post : {

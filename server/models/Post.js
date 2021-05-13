@@ -34,6 +34,9 @@ const postSchema = mongoose.Schema({
     image : [{
         type : String
     }],
+    pcolor:[{
+        type: String
+    }],
     pviews : {
         type : Number,
         default : 0
@@ -50,6 +53,9 @@ const postSchema = mongoose.Schema({
     },
     pstock : {
         type : Number
+    },
+    psize: {
+        type: String
     },
     /*
     posting : {
