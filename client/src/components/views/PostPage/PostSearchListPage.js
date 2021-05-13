@@ -12,12 +12,6 @@ import Pagination from '@material-ui/lab/Pagination';
 
 import DashboardSidebar from './DashboardSidebar';
 
-import cloth1 from './img/cloth1.jpg';
-import cloth2 from './img/cloth2.jpg';
-import cloth3 from './img/cloth3.jpg';
-import cloth4 from './img/cloth4.jpg';
-import cloth5 from './img/cloth5.jpg';
-import stussy from './img/stussy.jpg';
 import axios from 'axios'
 
 
