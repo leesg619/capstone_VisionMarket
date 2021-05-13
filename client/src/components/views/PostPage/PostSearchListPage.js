@@ -2,7 +2,7 @@ import { Avatar, Container, CssBaseline, Grid, makeStyles, Typography,
     ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, 
     MenuItem, FormHelperText, FormControl, Select, TextField
  } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
@@ -18,6 +18,8 @@ import cloth3 from './img/cloth3.jpg';
 import cloth4 from './img/cloth4.jpg';
 import cloth5 from './img/cloth5.jpg';
 import stussy from './img/stussy.jpg';
+import axios from 'axios'
+
 
 const useStyles = makeStyles((theme) => ({
     img: {
@@ -37,6 +39,23 @@ export default function PostSearchListPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
 
+
+
+     const [posts,setPosts] = useState([])
+
+    useEffect(() => {
+
+        axios.post('/api/post/get/allProducts')
+        .then(response => {
+            if(response.data.success) {
+              console.log(response.data)
+              setPosts(response.data.products)
+            } else {
+                alert("상품을 가져오지 못했습니다.")
+            }
+        })
+    }, [])
+
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -46,44 +65,7 @@ export default function PostSearchListPage(props) {
         setSize(event.target.value);
     };
 
-    const posts = [
-        {
-          id: 0,
-          price: 59000,
-          imgSrc: stussy,
-          title: 'stussy',
-        },
-        {
-          id: 1,
-          price: 120000,
-          imgSrc: cloth1,
-          title: 'FishTail Coat',
-        },
-        {
-          id: 2,
-          price: 69000,
-          imgSrc: cloth2,
-          title: 'SlimJeans',
-        },
-        {
-          id: 3,
-          price: 49000,
-          imgSrc: cloth3,
-          title: 'WhiteShirts',
-        },
-        {
-          id: 4,
-          price: 39000,
-          imgSrc: cloth4,
-          title: 'PigletTee',
-        },
-        {
-          id: 5,
-          price: 39000,
-          imgSrc: cloth5,
-          title: 'HawkTee',
-        }
-      ];
+
       
 
     return (

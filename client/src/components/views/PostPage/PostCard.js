@@ -41,12 +41,12 @@ export default function MediaCard({post}) {
             sx={{ pl: 1 }}
             variant="body2"
           >
-            {post.price}
+            {post.pprice}
           </Typography>
       
           <CardMedia
           style={{height:"150px", width: "150px"}}
-          image={post.imgSrc}
+          image={post.image}
           title={post.title}
         />
       </CardActions>
