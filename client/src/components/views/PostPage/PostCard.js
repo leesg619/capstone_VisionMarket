@@ -24,8 +24,8 @@ export default function MediaCard({post}) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea href="/postdetail">
-
+      <CardActionArea href={`/postDetail/${post._id}`}>
+   
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {post.title}
