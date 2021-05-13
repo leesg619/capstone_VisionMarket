@@ -24,11 +24,13 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-speech-recognition": "^3.8.0",
     "reactjs-credit-card": "^1.0.5",
     "reduce": "^1.0.2",
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "speak-tts": "^2.0.8",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
   },

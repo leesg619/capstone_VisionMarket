@@ -1,13 +1,16 @@
 import dog from './1.jpg';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Avatar } from '@material-ui/core';
+import { Avatar, Checkbox, FormControlLabel } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import MicIcon from '@material-ui/icons/Mic';
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
+import Speech from 'speak-tts';
 
 
 import {CTX} from './Store';
@@ -24,9 +27,11 @@ const useStyles = makeStyles((theme) => ({
       padding: '2px'
     },
     chatWindow: {
-      width: '100%',
-      height: '300px',
+      width: '900px',
+      height: '700px',
+      maxHeight: '700px',
       padding: '20px',
+      overflow: 'auto'
     },
     chatBox: {
       width: '85%'
@@ -34,54 +39,142 @@ const useStyles = makeStyles((theme) => ({
     button: {
       width: '15%'
     },
+    micIcon:{
+      color: "#141414",
+      '&:hover': {
+        color: "#7A7A7A",
+        cursor: 'pointer'
+      },
+    },
+    Img:{
+      width: '200px',
+      height: '200px'
+    }
   }));
 
-export default function Dashboard(){
+  const speech = new Speech();
+
+  speech.init({
+    volume: 0.5,
+    lang: "ko-KR",
+    rate: 1,
+    pitch: 1,
+  })
+
+  export default function Dashboard(){
     const classes = useStyles();
+    const messagesEndRef = useRef(null);
+  
+    // CTX store
+    const {allChats, sendChatAction, user} = React.useContext(CTX);
+    const topics = Object.keys(allChats);
+     
+    // local state
+    const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
+    const [ textValue, changeTextValue ] = React.useState('');
+    const [checked, setChecked] = React.useState(true);
+    const [count, setCount] = React.useState(2);
+  
+    const {
+      interimTranscript,
+      finalTranscript,
+    } = useSpeechRecognition();
+  
+    const scrollToBottom = () => {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
 
-  // CTX store
-  const [allChats] = React.useContext(CTX);
-  const topics = Object.keys(allChats);
-
-  // local state
-  const [activeTopic, changeActiveTopic] = React.useState(topics[0]);
-  const [ textValue, changeTextValue ] = React.useState('');
-    
-    return (
-      <div>
-        <Grid container justify="center">
-        <Paper className={classes.root}>
-        <Grid item xs={12}>
-        <Typography variant="h4" component="h4" align="center">
-          인공지능채팅APP
-        </Typography>
-        <div className={classes.flex}>
-            <div className={classes.chatWindow}>
-                {
-                  allChats[activeTopic].map((chat, i)=>(
-                    <div className={classes.flex} key={i}>
-                      <Chip avatar={<Avatar alt="비전" src={dog} />} variant="outlined" size="small" label="비전"/> 
-                       <Typography style={{fontSize:'15px'}}>{chat.msg}</Typography>
-                      </div>
-                  ))
-                }
-            </div>
-        </div>
-        <div className={classes.flex}>
-        <TextField 
-        id="standard-basic" 
-        label="채팅 입력창" 
-        className={classes.chatBox}
-        value={textValue}
-        onChange={e => changeTextValue(e.target.value)}
-        />
-        <Button variant="contained" color="primary">
-        전송
-        </Button>
-        </div>
+    const handleChange = (event) => {
+      setChecked(event.target.checked);
+    };
+  
+    useEffect(() => {
+      scrollToBottom()
+      setCount(count+1);
+      if(allChats.general[count-1].from === "비전" && checked){
+        speech.speak({
+          text: allChats.general[count-1].msg,
+          queue: false
+        })
+      }
+    }, [sendChatAction]);
+  
+    useEffect(()=>{
+      if (finalTranscript !== '') {
+        console.log('Got final result:', finalTranscript);
+        sendChatAction({from: user, msg: finalTranscript, img:'', topic: activeTopic});
+      }
+    }, [interimTranscript, finalTranscript])
+  
+    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+      return null
+    }
+  
+      return (
+        <div>
+          <Grid container justify="center" style={{marginTop: '50px'}}>
+          <Paper className={classes.root}>
+          <Grid item xs={12}>
+          <Typography variant="h4" component="h4" align="center">
+            인공지능채팅APP
+          </Typography>
+          <div className={classes.flex}>
+              <div className={classes.chatWindow}>
+                  {
+                    allChats[activeTopic].map((chat, i)=>(
+                      <div className={classes.flex} key={i}>
+                        <Chip avatar={<Avatar alt="비전" src={dog}/>} variant="outlined" size="small" label={chat.from}/> 
+                         <Typography style={{fontSize:'20px', padding: '5px'}}>{chat.msg}<br/>
+                          {chat.img !== '' ? (
+                            <img src={chat.img} style={{width:'300px'}}/>
+                          ) : (
+                            <div/>
+                          )}
+                         </Typography>
+                        </div>
+                    ))
+                  }
+                  <div ref={messagesEndRef}/>
+              </div>
+          </div>
+          <div className={classes.flex}>
+          <TextField 
+            id="standard-basic" 
+            label="채팅 입력창" 
+            className={classes.chatBox}
+            value={textValue}
+            onChange={e => changeTextValue(e.target.value)}
+            onKeyPress = {(ev) => {
+              if(ev.key=='Enter'){
+                sendChatAction({from: user, msg: textValue, img: '', topic: activeTopic});
+                changeTextValue('');
+                ev.preventDefault();
+              }
+            }}
+          />
+          <MicIcon className={classes.micIcon}
+          onClick={SpeechRecognition.startListening}
+          />
+          <Button variant="contained" color="primary"
+          onClick={()=> {
+            if(textValue!== ''){
+              sendChatAction({from: user, msg: textValue, img:'', topic: activeTopic});
+              changeTextValue('');
+            }
+          }}>
+          전송
+          </Button>
+          <FormControlLabel
+            defaultChecked
+            value="start"
+            control={<Checkbox color="primary" checked={checked} onChange={handleChange}/>}
+            label="voice"
+            labelPlacement="start"
+          />
+          </div>
+          </Grid>
+        </Paper>
         </Grid>
-      </Paper>
-      </Grid>
-      </div>
-    );
-}
+        </div>
+      );
+  }
