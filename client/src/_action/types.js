@@ -5,3 +5,5 @@ export const USER_AUTH = 'user_auth'
 
 export const ADMINPOST_SAVE = 'adminPost_save'
 export const ADMINPOST_SEARCH = 'adminPost_search'
+
+export const POST_DELETE = 'post_delete'

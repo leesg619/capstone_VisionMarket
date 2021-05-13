@@ -81,7 +81,6 @@ export default function Login(props) {
                             window.localStorage.setItem('userId', response.payload.userId);
                             if (rememberE === true) {
                                 window.localStorage.setItem('rememberE', values.id)
-                                console.log(values.id)
                             }
                             else {
                                 window.localStorage.removeItem('rememberE')
