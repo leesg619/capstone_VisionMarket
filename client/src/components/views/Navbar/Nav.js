@@ -24,6 +24,7 @@ const useStyle = makeStyles((theme) => ({
         display: 'flex',
         color: "#ffffff",
         borderColor: '#B6B5B5'
+        
     },
     appbar: {
         display: "flex",
