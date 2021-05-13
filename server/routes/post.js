@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require("../middlewares/auth");
 const {Post} = require('../models/Post');
-//const { AdminPost } = require('../models/AdminPost')
+
 
 
 
@@ -24,7 +24,7 @@ router.post('/create',auth, (req,res) => {
 //상품 삭제
 router.delete('/delete',auth, async (req,res) => {
 
-    try {
+try {
         const product = await Post.findById(req.body._id);
         
         if(product.compareAuthor(req.user._id)) {
@@ -39,7 +39,7 @@ router.delete('/delete',auth, async (req,res) => {
 })
 
 //개인이 등록한 상품 모두 조회
-router.get('/read/user/allProducts',auth,(req,res) => {
+router.post('/read/user/allProducts',auth,(req,res) => {
     Post.find({'author' : req.user._id})
     .exec((err,products) => {
         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
@@ -68,8 +68,9 @@ router.post('/update',auth, async (req,res) => {
 })
 
 //전체 상품 조회
-router.get('/read/allProducts',(req,res) => {
+router.post('/get/allProducts',(req,res) => {
     Post.find({})
+    .populate('author')
     .exec((err,products) => {
         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
         return res.status(200).json({success: true, "result": 'Success!',products})
