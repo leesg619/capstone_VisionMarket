@@ -26,6 +26,10 @@ const connect = mongoose.connect(config.mongoURI,
 const userRoute = require('./routes/user');
 const searchRoute = require('./routes/search');
 const adminPostRoute = require('./routes/adminPost')
+const postRoute = require('./routes/post')
+// const reviewRoute = require('./routes/review')
+// const cartRoute = require('./routes/cart')
+
 // app use
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
@@ -35,8 +39,11 @@ app.get('/', (req, res) => res.send("Hello World"))
 app.use('/api/users', userRoute);
 app.use('/api/searchs', searchRoute);
 app.use('/api/admin/posts', adminPostRoute);
+app.use('/api/post',postRoute);
+// app.use('/api/review',reviewRoute);
+// app.use('/api/cart',cartRoute)
 
 const port = 5000
 
-app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
-
+var server = app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
+server.timeout = 12000;

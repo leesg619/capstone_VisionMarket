@@ -10,17 +10,21 @@ const useStyles = makeStyles((theme) => ({
 
 const MyPage = (props)=>{
     const classes = useStyles();
+    
+    let user = props.user
 
     return(
-        <div className={classes.root}>
-            <Divider/>
-            <br/>
+         <div className={classes.root}>
+         <Divider/>
+             <br/>
 
-            <Grids {...props}/>
-        </div>
+            <Grids {...props} user ={user}
+     
+           />
+        /</div>
         
         
-    )
+     )
 }
 
 export default MyPage

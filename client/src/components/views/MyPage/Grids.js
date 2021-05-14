@@ -1,5 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
+import axios from "axios";
 import { Grid, Box, Typography, makeStyles, Container, IconButton } from "@material-ui/core";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -54,6 +55,8 @@ export default (props) => {
         console.log(PageMenu);
     }, [props.match.params.PageMenu])
 
+    const user = props.user
+    console.log(user)
     const classes = useStyles();
     const history = useHistory()
     const location = useLocation()
@@ -61,10 +64,15 @@ export default (props) => {
     const Coupon = 1
     const point = 1000
 
+  
+
+    
+    
+
     const shopItems = [
         {
             text: '주문목록 / 배송조회',
-            path: '/myPage/order'
+            path: '/myPage/order',
         },
         {
             text: '취소 / 반품 / 교환 / 환불내역',
@@ -117,9 +125,11 @@ export default (props) => {
         </Grid>
         <Grid item xs={6} sm={3}>
             <Box  border={1} borderLeft={0}  p={2} className={classes.BoxComponent}>
-                <IconButton disableRipple color="inherit"
-                onClick={() => history.push('/myPage/order')}
-                >
+                <IconButton disableRipple color="inherit" 
+                onClick={() => {history.push({
+                    pathname: '/myPage/order',
+                    user:{user}
+                  })}}>
                     <Typography variant="h6" >배송중 : {Delivering}개 </Typography>    
                 </IconButton>
             </Box>
