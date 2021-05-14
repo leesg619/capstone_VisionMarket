@@ -1,9 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Box, Grid, IconButton, makeStyles, Typography, AppBar, Toolbar, InputBase, Container, Input } from '@material-ui/core'
+
 import { Pets, ZoomIn, Search, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp } from '@material-ui/icons'
-import { fade } from "@material-ui/core/styles"
 import { useLocation, useHistory } from "react-router";
 import axios from "axios";
+import { fade } from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyle = makeStyles((theme) => ({
     BoxComponent2: {

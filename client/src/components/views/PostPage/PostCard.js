@@ -6,9 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
-
-
+import Button from '@material-ui/core/Button';
+import {  useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -21,18 +20,20 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({post}) {
+  const history = useHistory()
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardActionArea href={`/postDetail/${post._id}`}>
-   
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+
+      <Card className={classes.root} style={{border:'solid', borderColor:'grey'}}>
+        <CardContent >
+          <Typography gutterBottom variant="h5" component="h2" 
+             onClick={() => {history.push({
+              pathname:`/postDetail/${post._id}`
+            })}}>
             {post.title}
           </Typography>
         </CardContent>
         
-      </CardActionArea>
       <CardActions>
          <Typography
             
