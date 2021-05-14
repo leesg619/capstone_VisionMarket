@@ -1,11 +1,7 @@
 import {  Button, Card, CardActions, CardContent, CardHeader, Dialog, DialogActions, DialogTitle, Grid, IconButton, makeStyles, Typography } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons';
-import axios from 'axios';
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../../_action/post_actions';
-
 
 const useStyles = makeStyles({
     root: {
@@ -28,18 +24,12 @@ const useStyles = makeStyles({
     },
   });
 
-export default function BuyCard(props){
-
-
-console.log(props)
-    const postId = props.postId
-
+export default function BuyCard(){
     const classes = useStyles();
-    const dispatch = useDispatch();
+
     const history = useHistory()
 
     const [open, setOpen] = useState(false);
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -49,25 +39,6 @@ console.log(props)
         console.log(e.currentTarget.value)
         setOpen(false);
     }
-
-    const deleteHandleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log(postId)
-
-        // let dataToSubmit = {
-        //     _id: values.id,
-        // }
-        // dispatch(deletePost(dataToSubmit))
-        //     .then(response => {
-        //         if (response.payload.success) {
-        //           console.log("성공")
-        //         } else {
-        //             alert("Failed to sign up")
-        //         }
-        //     })
-    }
-
 
     const bull = <span className={classes.bullet}>•</span>;
     return(
@@ -99,7 +70,7 @@ console.log(props)
                             <Button onClick={handleClose} value='removeNo' color="primary">
                                 아니오
                             </Button>
-                            <Button onClick={handleClose,deleteHandleSubmit}  value='removeYes' color="primary" autoFocus>
+                            <Button onClick={handleClose} value='removeYes' color="primary" autoFocus>
                                 네
                             </Button>
                         </DialogActions>
@@ -142,5 +113,3 @@ console.log(props)
         </div>
     )
 }
-
-

@@ -45,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
     const classes = useStyles();
     const dispatch = useDispatch();
-
     const rememeberLocal = localStorage.getItem('rememberE') ? true : false;
 
     const [rememberE, setrememberE] = useState(rememeberLocal)
@@ -71,7 +70,7 @@ export default function Login(props) {
         onSubmit : ((values, { setSubmitting }) => {
             setTimeout(() => {
                 let dataToSubmit = {
-                    email: values.id,
+                    id: values.id,
                     password: values.password
                 }
 

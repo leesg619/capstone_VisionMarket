@@ -8,9 +8,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import {  useHistory } from "react-router";
-
-
 const useStyles = makeStyles({
   root: {
     maxWidth: 400,
@@ -26,33 +23,24 @@ const useStyles = makeStyles({
 });
 
 export default function MediaCard({post}) {
-  const history = useHistory()
   const classes = useStyles();
   return (
-
-
-      <Card className={classes.root} style={{border:'solid', borderColor:'grey'}}>
-        <CardContent >
-          <Typography gutterBottom variant="h5" component="h2" aria-label={post.title}
-             onClick={() => {history.push({
-              pathname:`/postDetail/${post._id}`
-            })}}>
+    <Card className={classes.root} style={{border:'solid', borderColor:'grey'}}>
+        <CardContent>
+          <Typography variant="h5" component="h2" aria-label={post.title}>
             {post.title}
           </Typography>
-        </CardContent>
-        
-        <CardActions className={classes.button}>
-         <Typography     
-            color="textSecondary"
+          <Typography
             display="inline"
             variant="body2"
           >
-            {post.pprice}
+            {post.price}
           </Typography>
-          <CardMedia
-         style={{height:"200px", width: "200px"}}
-          image={post.image}
-
+        </CardContent>
+      <CardActions className={classes.button}>
+      <CardMedia
+          style={{height:"200px", width: "200px"}}
+          image={post.imgSrc}
           title={post.title}
         />
       </CardActions>
