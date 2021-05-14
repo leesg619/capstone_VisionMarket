@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require("../middlewares/auth");
 const {Category} = require('../models/Category');
+const {Post} = require('../models/Post');
 
 
-
-router.post('/create'),(req,res) => {
+router.post('/create',(req,res) => {
 
     const category = new Category(req.body)
 
@@ -16,19 +16,22 @@ router.post('/create'),(req,res) => {
     }
         res.status(200).json({ "status": true, "result": 'Success!'})
     })
+})
+
+
+//전체 카테고리 가져오기
+router.post('/get/allCategories', (req,res) => {
+
+    Category.find({})
+    .exec((err,categories) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',categories})
+    })
+})
+
+router.post('/get/categoryType'),(req,res) => {
+    req.ctype
 }
-
-module.exports = router;
-
-// //전체 카테고리 가져오기
-// router.post('/get/allCategories', (req,res) => {
-
-//     Category.find({})
-//     .exec((err,categories) => {
-//         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
-//         return res.status(200).json({success: true, "result": 'Success!',categories})
-//     })
-// })
 
 // //카테고리 검색
 // router.get('/get/category_by_id', (req,res) => {
@@ -46,3 +49,5 @@ module.exports = router;
 //         })
 //})
 
+
+module.exports = router;

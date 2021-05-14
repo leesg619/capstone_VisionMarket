@@ -5,7 +5,10 @@ const categorySchema = mongoose.Schema({
     ctype : {
         type : Number,
         default : 0
-        /* 의류 : 0 ,, 시각장애물품 : 1 */
+        /* 0  장애물품  
+           1  공용패션
+           2  남성패션
+           3  여성패션 */
     },
     cname : {
         type : String,

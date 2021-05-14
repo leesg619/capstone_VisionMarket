@@ -1,9 +1,7 @@
-
-
 import React, { useState,useEffect } from 'react'
 import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
-
+import { useLocation } from "react-router";
 import { Grid, makeStyles, Typography, Box, Button} from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 
@@ -32,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostSearchListPage(props) {
     const classes = useStyles();
-
-
+    var location = useLocation();
+  console.log(location.state.ctype)
 
      const [posts,setPosts] = useState([])
 
