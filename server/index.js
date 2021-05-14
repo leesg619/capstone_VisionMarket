@@ -27,6 +27,7 @@ const userRoute = require('./routes/user');
 const searchRoute = require('./routes/search');
 const adminPostRoute = require('./routes/adminPost')
 const postRoute = require('./routes/post')
+const categoryRoute = require('./routes/category')
 // const reviewRoute = require('./routes/review')
 // const cartRoute = require('./routes/cart')
 
@@ -40,6 +41,7 @@ app.use('/api/users', userRoute);
 app.use('/api/searchs', searchRoute);
 app.use('/api/admin/posts', adminPostRoute);
 app.use('/api/post',postRoute);
+app.use('/api/category',categoryRoute)
 // app.use('/api/review',reviewRoute);
 // app.use('/api/cart',cartRoute)
 
