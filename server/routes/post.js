@@ -93,7 +93,8 @@ router.get('/get/posts_by_id',  (req,res) => {
 
 })
 
-
+// onClick={() => {history.push({
+//     pathname: "/postDetail/${post._id}" })}}
 
 
 module.exports = router;
