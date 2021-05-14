@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useLocation } from "react-router";
+import {  useHistory } from "react-router-dom";
 import { Grid, makeStyles, Typography, Box, Button} from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 
@@ -30,24 +31,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostSearchListPage(props) {
     const classes = useStyles();
-    var location = useLocation();
-  console.log(location.state.ctype)
+    const location = useLocation();
+  console.log(location.state.category) //0여기 0이 들어온다.
 
      const [posts,setPosts] = useState([])
 
     useEffect(() => {
 
-        axios.post('/api/post/get/allProducts')
+        axios.post(`/api/post/get/posts_by_category?category=${location.state.category._id}`)
         .then(response => {
-            if(response.data.success) {
-              console.log(response.data)
-              setPosts(response.data.products)
-            } else {
-                alert("상품을 가져오지 못했습니다.")
+            if(response.data.success){
+              setPosts(response.data.post)
             }
         })
     }, [])
-
 
 
     const [page, setPage] = React.useState(1);
@@ -56,11 +53,7 @@ export default function PostSearchListPage(props) {
       setPage(value);
     };
 
-    // const [size, setSize] = React.useState('');
-    // const handleSizeChange = (event) => {
-    //     setSize(event.target.value);
-    // };
-
+   
       
 
     return (

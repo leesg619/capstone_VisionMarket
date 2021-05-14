@@ -5,6 +5,8 @@ const {Category} = require('../models/Category');
 const {Post} = require('../models/Post');
 
 
+//카테고리 생성, 카테고리를 고정해놓고 사용 할 지 유동적으로 생성할 수 있게 할지
+//아직 미정..
 router.post('/create',(req,res) => {
 
     const category = new Category(req.body)
@@ -29,9 +31,8 @@ router.post('/get/allCategories', (req,res) => {
     })
 })
 
-router.post('/get/categoryType'),(req,res) => {
-    req.ctype
-}
+
+
 
 // //카테고리 검색
 // router.get('/get/category_by_id', (req,res) => {
@@ -47,7 +48,7 @@ router.post('/get/categoryType'),(req,res) => {
 //         }
 //             res.status(200).json({ "status": true, "result": 'Success!'})
 //         })
-//})
+// })
 
 
 module.exports = router;

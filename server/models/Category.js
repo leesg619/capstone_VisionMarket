@@ -10,11 +10,11 @@ const categorySchema = mongoose.Schema({
            2  남성패션
            3  여성패션 */
     },
-    cname : {
+    bigName : {
         type : String,
         maxLength : 20
     },
-    smallType : { //대분류
+    smallName : { //대분류
         type : String
     },
     small : { //소분류 필요하면 사용
@@ -22,6 +22,7 @@ const categorySchema = mongoose.Schema({
         maxLength : 20
     }
 })
+
 
 
 const Category = mongoose.model("Category", categorySchema);
