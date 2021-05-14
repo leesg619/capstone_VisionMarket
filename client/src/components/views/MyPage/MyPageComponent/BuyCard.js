@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 export default function BuyCard(props){
 
-    console.log("여기여기")
+
 console.log(props)
     const postId = props.postId
 
