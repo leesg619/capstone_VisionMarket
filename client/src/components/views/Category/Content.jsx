@@ -1,33 +1,62 @@
-import React,{useState}  from 'react';
+import React,{useState,useEffect, useHistory}  from 'react';
 import { Grid } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 
+import axios from 'axios'
 
 const Content = props => {
+
+
+     const history = useHistory()
+   /* 0  장애물품  
+           1  공용패션
+           2  남성패션
+           3  여성패션 */
+const[ctype,setCtype] = useState();
+
+    useEffect(() => {
+
+        axios.post(`/api/category/get/allCategories`)
+        .then(response => {
+            if(response.data.success)
+            console.log(response.data)
+             
+        })
+    }, [])
+
+
     const [NextPage, setNextPage] = useState(1);
 
+    //장애물품 카테고리 ctype 0
     //장애물품 -> 보조도구/생활용품
     const ButtonHandlerA = (e) => {
         e.preventDefault()
         setNextPage(2)
+        setCtype(0)
     } 
 
+    //공용패션 카테고리 ctype 1
     //공용패션 -> 티셔츠/맨투맨/후드티 등
     const ButtonHandlerB = (e) => {
         e.preventDefault()
         setNextPage(3)
+        setCtype(1)
     }
 
+    //남성패션 카테고리 ctype 2
     //남성패션 -> 의류/속옷/잠옷 등
     const ButtonHandlerC = (e) => {
         e.preventDefault()
         setNextPage(4)
+        setCtype(2)
     }
 
+    //여성패션 카테고리 ctype 3
     //여성패션 -> 의류/속옷/잠옷
     const ButtonHandlerD = (e) => {
         e.preventDefault()
         setNextPage(5)
+        setCtype(3)
     }
 
     const ButtonHandler = (e) => {
@@ -245,7 +274,10 @@ const Content = props => {
                                     variant="contained" 
                                     color="primary" 
                                     style={{height:'80px', fontSize:'20px'}}
-                                    href="/postsearchlist">
+                                    onClick={() => {history.push({
+                                        pathname: '/postsearchlist',
+                                        state:{ctype:{ctype}}
+                                      })}}>
                                     의류
                                     </Button>
                                     </Grid>
