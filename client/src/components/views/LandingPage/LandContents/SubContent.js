@@ -1,43 +1,19 @@
-import React, {useState, useEffect} from 'react'
-import {Card, Grid, makeStyles, Paper} from '@material-ui/core'
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import Content from './Content';
 
 
-const useStyles = makeStyles((theme) =>({
-    mainContainer : {
-        position : 'relative',
-        backgroundColor : theme.palette.common.white,
-        backgroundSize : 'cover'
-    },
-    gridSecond : {
-        backgroundImage : "url(https://source.unsplash.com/random)",
-        backgroundRepeat : 'no-repeat',
-        backgroundPosition : 'center',
-        padding : theme.spacing(3),
-    },
-    gridFirst : {
-        backgroundPosition : 'center',
-        padding : theme.spacing(3),
-    }
-}))
-
-function SubContent() {
-
-    
-
-    const classes = useStyles()
-    return (
-        <Paper>
-        <Grid container className={classes.mainContainer}>
-            
-            <Grid item md={8} className={classes.gridFirst}>
-                <h1>hello</h1>
-                <h2>is the second content, a.k.a SubContent</h2>
-            </Grid>
-            <Grid item md={4} className={classes.gridSecond}>
-            </Grid>
+// <Grid item xs={2} /> 경우 가운데 정렬이며, 창모드가 작아져도 가운데 정렬을 유지한다.
+// <Grid item xs={0} sm={2} /> 경우 창이 클 경우 가운데 정렬이지만, 작아지는 경우 왼쪽 정렬로 바뀐다.
+// <Grid item xs={12} sm={8}> 경우 창이 작아질 경우 즉, xs 일 경우에는 내용으로 꽉 채워진다는 의미
+const SubContent = () => {
+  return (
+    <Grid container direction="column">
+      <Grid item container>
+        <Content />
         </Grid>
-        </Paper>
-    )
-}
+    </Grid>
+  );
+};
 
-export default SubContent
+export default SubContent;
