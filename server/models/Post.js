@@ -6,14 +6,15 @@ const { Category } = require('./Category')
 const postSchema = mongoose.Schema({
     title : {
         type : String,
-        maxLength : 20
+        maxLength : 100
     },
     content : {
         type : String
     },
     author : {
         type : Schema.Types.ObjectId,
-        ref : "User"
+        ref : "User",
+        default : null
     },
     //여기가 소분류 ex) 남성패션 -> 의류
     pcategory : {
@@ -32,12 +33,9 @@ const postSchema = mongoose.Schema({
         */
         default : 0
     },
-    image : [{
+    image : {
         type : String
-    }],
-    pcolor:[{
-        type: String
-    }],
+    },
     pviews : {
         type : Number,
         default : 0
@@ -53,11 +51,12 @@ const postSchema = mongoose.Schema({
         type : Number
     },
     pstock : {
-        type : Number
+        type : Number,
+        default : 100
     },
-    psize: {
-        type: String
-    },
+    detailImage : [{
+        type : String
+    }],
     /*
     posting : {
         type : Number,
@@ -66,16 +65,16 @@ const postSchema = mongoose.Schema({
     */
 }, {timestamps : true})  // cretedAt, updatedAt 자동생성
 
-postSchema.pre('save', function(next){
-    var post = this
-    User.findById({'_id' : post.author}, (err, doc) => {
-        if(err) return next(err)
-        if(doc.role === 1) {
-            post.purpose = 10   //purpose 변경으로 운영자글 명시
-        }
-    })
-    next()
-})
+// postSchema.pre('save', function(next){
+//     var post = this
+
+//     User.findById({'_id' : this.author}, (err, doc) => {
+//         if(err) return next(err)
+//         if(doc.role === 1) {
+//             post.purpose = 10   //purpose 변경으로 운영자글 명시
+//         }
+//     })
+// })
 
 
 postSchema.methods.compareAuthor = function( user_id ) {
