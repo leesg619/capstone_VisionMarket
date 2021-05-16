@@ -47,7 +47,7 @@ export default function MediaCard({post}) {
             display="inline"
             variant="body2"
           >
-            {post.pprice}
+            {post.pprice}원
           </Typography>
           <CardMedia
          style={{height:"200px", width: "200px"}}
