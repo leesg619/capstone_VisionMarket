@@ -1,10 +1,10 @@
-import { Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@material-ui/core'
+import { Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select, TableBody } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import React, { useState,useEffect } from 'react'
 import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
-
+import {addCart} from '../../../_action/user_actions'
 import { registerUser } from '../../../_action/user_actions'
 
 import Paper from '@material-ui/core/Paper';
@@ -55,8 +55,35 @@ export default function PostDetailPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
 
-    const [post, setPost] = useState({})
+
+    const [countClick, setCount] = useState(0);
     
+    
+    const clickHandler = () => {
+
+        let body = {
+            post: postId,
+            size: size,
+            quantity: quantity
+        }
+        console.log(body)
+        axios.post('/api/cart/create',body)
+        .then(response => {
+            if(response.data.success) {
+              console.log(response.data)
+            }
+        })
+    }
+    
+    
+
+
+    const[quantity,setQuantity] = useState()
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+    };
+
+    const [post, setPost] = useState({})
    const postId = props.match.params.postId
     useEffect(() => {
 
@@ -99,7 +126,7 @@ export default function PostDetailPage(props) {
                 <ListItem><ListItemText primary={post.pcolor} /></ListItem>
                 </List>
 
-                <FormControl required className={classes.formControl}>
+                <FormControl required className={classes.formControl} >
                     <InputLabel id="demo-simple-select-required-label">Size</InputLabel>
                     <Select
                     labelId="demo-simple-select-required-label"
@@ -122,12 +149,14 @@ export default function PostDetailPage(props) {
                         id="standard-number"
                         label="Number*"
                         type="number"
+                        value= {quantity}
+                        onChange={handleQuantityChange}
                         InputLabelProps={{
                             shrink: true,
                     }}
                     />
                     <Box component="span" m={1}><Button /></Box>
-                    <Button variant="outlined" href="/shoppingbascket" color="primary">장바구니</Button>
+                    <Button variant="outlined"  color="primary" onClick = {clickHandler}>장바구니</Button>
                     <Box component="span" m={1}><Button /></Box>
                     <Button variant="outlined" color="secondary">구매하기</Button>
             </FormControl>
