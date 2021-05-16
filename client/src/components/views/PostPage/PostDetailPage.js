@@ -6,7 +6,7 @@ import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useDispatch } from 'react-redux'
 import {addCart} from '../../../_action/user_actions'
 import { registerUser } from '../../../_action/user_actions'
-
+import { useHistory } from 'react-router';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -54,25 +54,33 @@ const useStyles = makeStyles((theme) => ({
 export default function PostDetailPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
-
+    const history = useHistory();
 
     const [countClick, setCount] = useState(0);
     
     
     const clickHandler = () => {
 
-        let body = {
-            post: postId,
-            size: size,
-            quantity: quantity
-        }
-        console.log(body)
-        axios.post('/api/cart/create',body)
-        .then(response => {
-            if(response.data.success) {
-              console.log(response.data)
+        if(props.user.userData.isAuth) {
+            let body = {
+                post: postId,
+                size: size,
+                quantity: quantity
             }
-        })
+            console.log(body)
+            axios.post('/api/cart/create',body)
+            .then(response => {
+                if(response.data.success) {
+                  console.log(response.data)
+                }
+            })
+        }else {
+            alert('로그인이 필요합니다.')
+            history.push('/login')
+            
+        }
+        
+       
     }
     
     
