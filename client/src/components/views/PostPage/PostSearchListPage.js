@@ -78,33 +78,33 @@ export default function PostSearchListPage(props) {
           keyword2: '긴바지',
           keyword3: '빈티지'
         },
-        {
-          id: 3,
-          price: 49000,
-          imgSrc: cloth3,
-          title: 'WhiteShirts',
-          keyword: '흰셔츠',
-          keyword2: '단정한',
-          keyword3: '긴팔'
-        },
-        {
-          id: 4,
-          price: 39000,
-          imgSrc: cloth4,
-          title: 'PigletTee',
-          keyword: '돼지티',
-          keyword2: '반팔티',
-          keyword3: '분홍색'
-        },
-        {
-          id: 5,
-          price: 39000,
-          imgSrc: cloth5,
-          title: 'HawkTee',
-          keyword: '독수리티',
-          keyword2: '파란색',
-          keyword3: '반팔티'
-        }
+        // {
+        //   id: 3,
+        //   price: 49000,
+        //   imgSrc: cloth3,
+        //   title: 'WhiteShirts',
+        //   keyword: '흰셔츠',
+        //   keyword2: '단정한',
+        //   keyword3: '긴팔'
+        // },
+        // {
+        //   id: 4,
+        //   price: 39000,
+        //   imgSrc: cloth4,
+        //   title: 'PigletTee',
+        //   keyword: '돼지티',
+        //   keyword2: '반팔티',
+        //   keyword3: '분홍색'
+        // },
+        // {
+        //   id: 5,
+        //   price: 39000,
+        //   imgSrc: cloth5,
+        //   title: 'HawkTee',
+        //   keyword: '독수리티',
+        //   keyword2: '파란색',
+        //   keyword3: '반팔티'
+        // }
       ];
       
 
@@ -125,7 +125,7 @@ export default function PostSearchListPage(props) {
           <Grid container spacing={2} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}}>
           <Typography>Page: {page}</Typography>
           <Pagination 
-          color="primary"
+          shape="rounded"
           count={10}
           size="large"
           page={page} 

@@ -112,7 +112,7 @@ function Nav(props) {
 
     return (
         <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
-            <AppBar className={classes.appbar} style={{ backgroundColor: "#616161" }}>
+            <AppBar className={classes.appbar} style={{ backgroundColor: "#303030" }}>
                 <Toolbar className={classes.toolbar} p={1} >
                     <Grid container spacing={1}>
 
@@ -121,22 +121,22 @@ function Nav(props) {
                             <Box color="#000000" className={classes.BoxComponent2} p={4} >
                             <div className={classes.root}>
                             <ButtonGroup variant="text" color="inherit">
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓" href="/">
+                            <Button aria-label="비전마켓 메인화면으로 바로가기" style={{ fontSize: '1rem' }} color="inherit" href="/">
                             메인
                             </Button>
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇" href="/chat">
+                            <Button aria-label="음성챗봇화면으로 넘어가기" style={{ fontSize: '1rem' }} color="inherit" href="/chat">
                             Chat
                             </Button>
-                            <Button size="small" aria-label="고대비">
+                            <Button size="small" aria-label="고대비화면">
                                 <Brightness6 className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="음성검색">
+                            <Button size="small" aria-label="음성검색하기">
                                 <RecordVoiceOver className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="확대" onClick={zoomIn}>
+                            <Button size="small" aria-label="확대하기" onClick={zoomIn}>
                                 <ZoomIn className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="축소" onClick={zoomOut}>
+                            <Button size="small" aria-label="축소하기" onClick={zoomOut}>
                                 <ZoomOut className={classes.iconComponent} />
                             </Button>
                             </ButtonGroup>
