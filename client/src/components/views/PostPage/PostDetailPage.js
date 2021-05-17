@@ -56,10 +56,8 @@ export default function PostDetailPage(props) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [countClick, setCount] = useState(0);
     
-    
-    const clickHandler = () => {
+    const clickCartHandler = () => {
 
         if(props.user.userData.isAuth) {
             let body = {
@@ -71,18 +69,37 @@ export default function PostDetailPage(props) {
             axios.post('/api/cart/create',body)
             .then(response => {
                 if(response.data.success) {
-                  console.log(response.data)
+                  alert('장바구니에 해당 상품을 추가했습니다.')
                 }
             })
         }else {
             alert('로그인이 필요합니다.')
-            history.push('/login')
-            
-        }
-        
-       
+            history.push('/login')   
+            }
     }
     
+//이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
+  const  clickPurchaseHandler = () => {
+    
+    if(props.user.userData.isAuth) {
+            let body = {
+                post: postId,
+                size: size,
+                quantity: quantity,
+                price: post.pprice
+            }
+           // console.log(body)
+            axios.post('/api/purchase/create',body)
+            .then(response => {
+                if(response.data.success) {
+                  //결제 페이지로 이동.
+                }
+            })
+        }else {
+            alert('로그인이 필요합니다.')
+            history.push('/login')   
+            }
+  }
     
 
 
@@ -164,9 +181,9 @@ export default function PostDetailPage(props) {
                     }}
                     />
                     <Box component="span" m={1}><Button /></Box>
-                    <Button variant="outlined"  color="primary" onClick = {clickHandler}>장바구니</Button>
+                    <Button variant="outlined"  color="primary" onClick = {clickCartHandler}>장바구니</Button>
                     <Box component="span" m={1}><Button /></Box>
-                    <Button variant="outlined" color="secondary">구매하기</Button>
+                    <Button variant="outlined" color="secondary" onClick = {clickPurchaseHandler}>구매하기</Button>
             </FormControl>
   
             </Grid>
