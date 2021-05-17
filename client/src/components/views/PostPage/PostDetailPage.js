@@ -3,8 +3,18 @@ import { Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, 
 
 import TextField from '@material-ui/core/TextField'
 import React, { useState,useEffect } from 'react'
-import { LockOutlined } from '@material-ui/icons'
+import { LockOutlined, SlowMotionVideo, SortOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
+
+import { useDispatch } from 'react-redux';
+import SwipeableViews from 'react-swipeable-views';
+import PropTypes from 'prop-types'
+import { useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+
 
 import { useDispatch } from 'react-redux'
 import {addCart} from '../../../_action/user_actions'
@@ -14,8 +24,6 @@ import { useHistory } from 'react-router';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import StarIcon from '@material-ui/icons/Star';
-
 
 import ex1 from './img/1.jpg'
 import ex2 from './img/2.jpg'
@@ -25,6 +33,40 @@ import red from './img/red.png';
 
 import axios from 'axios'
 //image json파일로 만들어서 코드 map 사용, 빼서 사용하면 일일이 하나씩 import할필요없음
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`full-width-tabpanel-${index}`}
+        aria-labelledby={`full-width-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `full-width-tab-${index}`,
+      'aria-controls': `full-width-tabpanel-${index}`,
+    };
+  };
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,10 +78,14 @@ const useStyles = makeStyles((theme) => ({
 
     root: {
         flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+        width: '100%',
     },
     container: {
         padding: theme.spacing(10),
-        paddingTop : theme.spacing(15)
+        paddingTop : theme.spacing(10),
+        justifyContent: 'center',
+        alignContent: 'center'
     },
     img: {
         margin: 'auto',
@@ -59,7 +105,16 @@ const useStyles = makeStyles((theme) => ({
 export default function PostDetailPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
+    const theme = useTheme();
+
+    const [post, setPost] = useState({})
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+      };
+
     const history = useHistory();
+
 
     
 
@@ -164,67 +219,86 @@ export default function PostDetailPage(props) {
                 사이즈
                 </Typography>
                 <ButtonGroup>
-                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
-                    onChange={handleSizeChange} aria-label="XS사이즈">XS</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}value= {size}
-                    onChange={handleSizeChange}  aria-label="S사이즈">S</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
-                    onChange={handleSizeChange} aria-label="L사이즈">L</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
-                    onChange={handleSizeChange} aria-label="XL사이즈">XL</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
-                    onChange={handleSizeChange} aria-label="XXL사이즈">XXL</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="S사이즈">S</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="L사이즈">L</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</Button>
                 </ButtonGroup>
                 <br />
                 <Typography variant ="h6" > 
                 수량
                 </Typography>
                 <ButtonGroup>
-                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
-                        onChange={handleQuantityChange} aria-label="1개">1</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
-                        onChange={handleQuantityChange} aria-label="2개">2</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
-                        onChange={handleQuantityChange} aria-label="3개">3</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
-                        onChange={handleQuantityChange} aria-label="4개">4</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
-                        onChange={handleQuantityChange} aria-label="5개">5</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}}  aria-label="대량구매창으로 넘어가기">대량구매</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="더하기">+</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="1개">1</Button>
+                <Button variant="outlined" style={{fontSize:'1rem'}} aria-label="빼기">-</Button>
                 </ButtonGroup>
                 <br />
 
             </FormControl>
             <ButtonGroup variant="text" fullWidth="true">
-                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="장바구니" onClick = {clickCartHandler}>장바구니</Button>
-                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="바로구매" onClick = {clickPurchaseHandler}>바로구매</Button>
+                <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" href="/shoppingbascket">장바구니</Button>
+                <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
                 </ButtonGroup>
             </Grid>
-        </Grid>
+        </Grid> <br />
+        <Divider />
         <br />
-        <Paper className={classes.root} >
+        <div className={classes.root}>
+      <AppBar position="static" color="default">
           <Tabs
                 value={value}
                 onChange={handleChange}
                 indicatorColor="primary"
                 centered
+                variant="fullWidth"
           >
-          <Tab style={{fontSize:'1.2rem'}} label="상품 상세 보기" />
-          <Tab style={{fontSize:'1.2rem'}} label="음성리뷰 3개 듣기" />
-          <Tab style={{fontSize:'1.2rem'}} label="기본리뷰 10개 보기" />
+          <Tab style={{fontSize:'0.9rem'}} label="상세보기" {...a11yProps(0)} />
+          <Tab style={{fontSize:'0.9rem'}} label="음성리뷰" {...a11yProps(1)} />
+          <Tab style={{fontSize:'0.9rem'}} label="일반리뷰" {...a11yProps(2)} />
           </Tabs>
-        </Paper>
+          </AppBar>
+        <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <TabPanel value={value} index={0} dir={theme.direction}>
         <Box component="span" m={1}><Button /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex0} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex4} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex1} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex2} /></Box>
-        
-
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          음성리뷰창
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+        <Typography variant="h6" style={{padding:'10px'}}>
+        리뷰는 추천순으로 노출됩니다. 총 1개의 리뷰가 있습니다. <br />
         </Typography>
-        
-
+          <Card  variant="outlined">
+        <CardContent>
+        <Typography gutterBottom variant="h6">
+          별점 5점 <br/> 
+        </Typography>
+        <Typography >
+          키 170 / 몸무게 65 <br />
+          옵션 : 라지 사이즈 [ 사이즈가 적당해요. ]<br />
+          소재가 얇아서 더운 여름에도 가볍게 입고 다닐 것 같아요.
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
+        <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
+        </CardActions>
+        </Card>
+        </TabPanel>
+      </SwipeableViews>
+          </div>
+        </Typography>
     </Container>
+
 
     )
 }
