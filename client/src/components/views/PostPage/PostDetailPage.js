@@ -1,12 +1,16 @@
+
 import { Container, CssBaseline, Grid, makeStyles, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, FormHelperText, FormControl, ButtonGroup } from '@material-ui/core'
+
 import TextField from '@material-ui/core/TextField'
 import React, { useState,useEffect } from 'react'
 import { LockOutlined } from '@material-ui/icons'
 import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
-import { useDispatch } from 'react-redux';
+
+import { useDispatch } from 'react-redux'
+import {addCart} from '../../../_action/user_actions'
 
 import { registerUser } from '../../../_action/user_actions'
-
+import { useHistory } from 'react-router';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -55,9 +59,63 @@ const useStyles = makeStyles((theme) => ({
 export default function PostDetailPage(props) {
     const classes = useStyles()
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    
+
+    // href="/shoppingbascket"
+    const clickCartHandler = () => {
+
+        if(props.user.userData.isAuth) {
+            let body = {
+                post: postId,
+                size: size,
+                quantity: quantity
+            }
+            console.log(body)
+            axios.post('/api/cart/create',body)
+            .then(response => {
+                if(response.data.success) {
+                  alert('장바구니에 해당 상품을 추가했습니다.')
+                }
+            })
+        }else {
+            alert('로그인이 필요합니다.')
+            history.push('/login')   
+            }
+    }
+    
+//이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
+  const  clickPurchaseHandler = () => {
+    
+    if(props.user.userData.isAuth) {
+            let body = {
+                post: postId,
+                size: size,
+                quantity: quantity,
+                price: post.pprice
+            }
+           // console.log(body)
+            axios.post('/api/purchase/create',body)
+            .then(response => {
+                if(response.data.success) {
+                  //결제 페이지로 이동.
+                }
+            })
+        }else {
+            alert('로그인이 필요합니다.')
+            history.push('/login')   
+            }
+  }
+    
+
+
+    const[quantity,setQuantity] = useState()
+    const handleQuantityChange = (event) => {
+        setQuantity(event.target.value);
+    };
 
     const [post, setPost] = useState({})
-    
    const postId = props.match.params.postId
     useEffect(() => {
 
@@ -100,34 +158,46 @@ export default function PostDetailPage(props) {
                 "49000원" />
                 </ListItem>
                 </List>
+
                 <FormControl required className={classes.formControl}>
                 <Typography variant ="h6" > 
                 사이즈
                 </Typography>
                 <ButtonGroup>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="XS사이즈">XS</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="S사이즈">S</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="L사이즈">L</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="XL사이즈">XL</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="XXL사이즈">XXL</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
+                    onChange={handleSizeChange} aria-label="XS사이즈">XS</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}value= {size}
+                    onChange={handleSizeChange}  aria-label="S사이즈">S</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
+                    onChange={handleSizeChange} aria-label="L사이즈">L</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
+                    onChange={handleSizeChange} aria-label="XL사이즈">XL</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}} value= {size}
+                    onChange={handleSizeChange} aria-label="XXL사이즈">XXL</Button>
                 </ButtonGroup>
                 <br />
                 <Typography variant ="h6" > 
                 수량
                 </Typography>
                 <ButtonGroup>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="1개">1</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="2개">2</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="3개">3</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="4개">4</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="5개">5</Button>
-                <Button style={{fontSize:'1rem', border:'solid'}} aria-label="대량구매창으로 넘어가기">대량구매</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
+                        onChange={handleQuantityChange} aria-label="1개">1</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
+                        onChange={handleQuantityChange} aria-label="2개">2</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
+                        onChange={handleQuantityChange} aria-label="3개">3</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
+                        onChange={handleQuantityChange} aria-label="4개">4</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}    value= {quantity}
+                        onChange={handleQuantityChange} aria-label="5개">5</Button>
+                <Button style={{fontSize:'1rem', border:'solid'}}  aria-label="대량구매창으로 넘어가기">대량구매</Button>
                 </ButtonGroup>
                 <br />
+
             </FormControl>
             <ButtonGroup variant="text" fullWidth="true">
-                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="장바구니" href="/shoppingbascket">장바구니</Button>
-                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="바로구매">바로구매</Button>
+                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="장바구니" onClick = {clickCartHandler}>장바구니</Button>
+                <Button style={{fontSize:'1.2rem', border:'solid'}} size="large" aria-label="바로구매" onClick = {clickPurchaseHandler}>바로구매</Button>
                 </ButtonGroup>
             </Grid>
         </Grid>
