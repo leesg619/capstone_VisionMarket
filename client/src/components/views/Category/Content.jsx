@@ -282,7 +282,8 @@ const [categories,setCategories] = useState();
                                     onClick={() => {history.push({
                                         pathname: '/postsearchlist',
                                          state:{category:categories.categories[0]}
-                                      })}}>
+                                      })}}
+                                    >
                                     의류
                                     </Button>
                                     </Grid>

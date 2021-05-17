@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     </div>
     <div>
     <Container className={classes.AppbarContainer} >
-    <AppBar className={classes.appbar2} style={{ backgroundColor: "#9e9e9e" }}>
+    <AppBar className={classes.appbar2} style={{ backgroundColor: "#505050" }}>
                 <Toolbar >
                     <Button color="inherit" aria-label="모든 카테고리" href="/category" style={{ fontSize: '1.2rem' }}>
                             모든 카테고리

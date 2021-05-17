@@ -32,19 +32,19 @@ const useStyles = makeStyles((theme) => ({
 export default function PostSearchListPage(props) {
     const classes = useStyles();
     const location = useLocation();
-  console.log(location.state.category) //0여기 0이 들어온다.
+  // console.log(location.state.category) //0여기 0이 들어온다.
 
      const [posts,setPosts] = useState([])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        axios.post(`/api/post/get/posts_by_category?category=${location.state.category._id}`)
-        .then(response => {
-            if(response.data.success){
-              setPosts(response.data.post)
-            }
-        })
-    }, [])
+    //     axios.post(`/api/post/get/posts_by_category?category=${location.state.category._id}`)
+    //     .then(response => {
+    //         if(response.data.success){
+    //           setPosts(response.data.post)
+    //         }
+    //     })
+    // }, [])
 
 
     const [page, setPage] = React.useState(1);

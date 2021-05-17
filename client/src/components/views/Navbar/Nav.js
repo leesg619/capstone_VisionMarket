@@ -118,7 +118,7 @@ function Nav(props) {
 
     return (
         <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
-            <AppBar className={classes.appbar} style={{ backgroundColor: "#616161" }}>
+            <AppBar className={classes.appbar} style={{ backgroundColor: "#303030" }}>
                 <Toolbar className={classes.toolbar} p={1} >
                     <Grid container spacing={1}>
 
@@ -181,44 +181,11 @@ function Nav(props) {
                                 </Button>
                                 <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" href="/login">
                                     <ExitToApp />
-
                                         로그아웃
                                 </Button>
                             </Box>
                         </Grid>
                     </Grid>
-                </Toolbar>
-            </AppBar>
-
-
-            <AppBar className={classes.secondAppbar} style={{ backgroundColor: "#9e9e9e" }}>
-                <Toolbar >
-
-                    <IconButton className={classes.allCategory} color="inherit" aria-label="모든 카테고리">
-                        <Typography >
-                            모든 카테고리
-            </Typography>
-                    </IconButton>
-
-                    <IconButton href="/" className={classes.allCategory} color="inherit" aria-label="인기 상품">
-                        <Typography>
-                            인기 상품
-            </Typography>
-                    </IconButton>
-
-                    <IconButton className={classes.allCategory} color="inherit" aria-label="소개 및 안내">
-                        <Typography >
-                            소개 및 안내
-            </Typography>
-                    </IconButton>
-
-                    <IconButton href="/myPage/order" className={classes.allCategory} color="inherit" aria-label="마이페이지" >
-                        <Typography >
-                            마이페이지
-            </Typography>
-                    </IconButton>
-
-
                 </Toolbar>
             </AppBar>
         </Container>
