@@ -27,8 +27,11 @@ const userRoute = require('./routes/user');
 const searchRoute = require('./routes/search');
 const adminPostRoute = require('./routes/adminPost')
 const postRoute = require('./routes/post')
+
 const cartRoute = require('./routes/cart')
 const purchaseRoute = require('./routes/purchase')
+const categoryRoute = require('./routes/category')
+
 
 // app use
 app.use(bodyParser.urlencoded({extended : true}))
@@ -42,6 +45,8 @@ app.use('/api/admin/posts', adminPostRoute);
 app.use('/api/post',postRoute);
 app.use('/api/cart',cartRoute);
 app.use('/api/purchase',purchaseRoute);
+app.use('/api/category',categoryRoute)
+
 
 const port = 5000
 

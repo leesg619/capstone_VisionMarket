@@ -15,6 +15,7 @@ const postSchema = mongoose.Schema({
         type : Schema.Types.ObjectId,
         ref : "User"
     },
+    //여기가 소분류 ex) 남성패션 -> 의류
     pcategory : {
         type : Schema.Types.ObjectId,
         ref : "Category"

@@ -2,24 +2,28 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const categorySchema = mongoose.Schema({
-    cname : {
-        type : String,
-        maxLength : 20
-    },
     ctype : {
         type : Number,
         default : 0
-        /* 의류 : 0 ,, 시각장애물품 : 1 */
+        /* 0  장애물품  
+           1  공용패션
+           2  남성패션
+           3  여성패션 */
     },
-    large : { //대분류
+    bigName : {
         type : String,
         maxLength : 20
+    },
+    smallName : { //대분류
+        type : String
     },
     small : { //소분류 필요하면 사용
         type : String,
         maxLength : 20
     }
 })
+
+
 
 const Category = mongoose.model("Category", categorySchema);
 

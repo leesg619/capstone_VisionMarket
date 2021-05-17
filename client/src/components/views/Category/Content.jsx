@@ -1,33 +1,67 @@
-import React,{useState}  from 'react';
+import React,{useState,useEffect}  from 'react';
 import { Grid } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-
+import {  useHistory } from "react-router-dom";
+import axios from 'axios'
 
 const Content = props => {
+
+
+     const history = useHistory()
+   /* 0  장애물품  
+           1  공용패션
+           2  남성패션
+           3  여성패션 */
+const [categories,setCategories] = useState();
+
+    useEffect(() => {
+
+        axios.post(`/api/category/get/allCategories`)
+        .then(response => {
+            if(response.data.success) {
+                setCategories(response.data)
+              
+            }  
+        })
+    }, [])
+
+
     const [NextPage, setNextPage] = useState(1);
 
+    //장애물품 카테고리 ctype 0
     //장애물품 -> 보조도구/생활용품
     const ButtonHandlerA = (e) => {
         e.preventDefault()
+        // setOneCategory(category)
         setNextPage(2)
+       
     } 
 
+    //공용패션 카테고리 ctype 1
     //공용패션 -> 티셔츠/맨투맨/후드티 등
     const ButtonHandlerB = (e) => {
         e.preventDefault()
+        // setCtype(1)
         setNextPage(3)
+       
     }
 
+    //남성패션 카테고리 ctype 2
     //남성패션 -> 의류/속옷/잠옷 등
     const ButtonHandlerC = (e) => {
         e.preventDefault()
+        // setCtype(2)
         setNextPage(4)
+       
     }
 
+    //여성패션 카테고리 ctype 3
     //여성패션 -> 의류/속옷/잠옷
     const ButtonHandlerD = (e) => {
         e.preventDefault()
+        // setCtype(3)
         setNextPage(5)
+        
     }
 
     const ButtonHandler = (e) => {
@@ -245,7 +279,11 @@ const Content = props => {
                                     variant="contained" 
                                     color="primary" 
                                     style={{height:'80px', fontSize:'20px'}}
-                                    href="/postsearchlist">
+                                    onClick={() => {history.push({
+                                        pathname: '/postsearchlist',
+                                         state:{category:categories.categories[0]}
+                                      })}}
+                                    >
                                     의류
                                     </Button>
                                     </Grid>

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require("../middlewares/auth");
 const {Post} = require('../models/Post');
-
+const {Category} = require('../models/Category');
 
 
 
@@ -89,12 +89,20 @@ router.get('/get/posts_by_id',  (req,res) => {
         if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
         return res.status(200).json({success: true, "result": 'Success!',post})
     })
+})
+//상품 카테고리에 맞는거 조회
+router.post('/get/posts_by_category', (req,res) => {
 
-
+    let categoryId = req.query.category
+   
+ 
+    Post.find({pcategory:categoryId})
+    .exec((err,post) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',post})
+    })
 })
 
 // onClick={() => {history.push({
 //     pathname: "/postDetail/${post._id}" })}}
-
-
 module.exports = router;
