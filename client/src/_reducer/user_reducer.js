@@ -2,7 +2,7 @@ import {
     USER_REGISTER,
     USER_LOGOUT,
     USER_LOGIN,
-    USER_AUTH
+    USER_AUTH,
 } from '../_action/types'
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -20,3 +20,5 @@ export default function(state={}, action) {
             return state
     }
 }
+
+ 

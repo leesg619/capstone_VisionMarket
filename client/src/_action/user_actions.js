@@ -3,7 +3,7 @@ import {
     USER_AUTH,
     USER_LOGIN,
     USER_LOGOUT,
-    USER_REGISTER
+    USER_REGISTER,
 } from './types'
 
 import { USER_SERVER } from '../components/Config'
@@ -41,9 +41,10 @@ export function logoutUser() {
 export function authUser() {
     const request = axios.get(`${USER_SERVER}/auth`)
     .then(response => response.data)
-    console.log(request)
+    
     return {
         type : USER_AUTH,
         payload : request
     }
 }
+
