@@ -15,8 +15,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
-
-import { useDispatch } from 'react-redux'
 import {addCart} from '../../../_action/user_actions'
 
 import { registerUser } from '../../../_action/user_actions'
@@ -107,7 +105,7 @@ export default function PostDetailPage(props) {
     const dispatch = useDispatch();
     const theme = useTheme();
 
-    const [post, setPost] = useState({})
+ 
 
     const handleChangeIndex = (index) => {
         setValue(index);
