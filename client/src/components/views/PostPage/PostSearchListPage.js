@@ -32,20 +32,26 @@ const useStyles = makeStyles((theme) => ({
 export default function PostSearchListPage(props) {
     const classes = useStyles();
     const location = useLocation();
+
   console.log(location.state.category) //0여기 0이 들어온다.
 
      const [posts,setPosts] = useState([])
 
+const category = location.state.category
+     //sh url만 변경 server post.js에서 상품 카테고리에 맞는거 조회에 해당.
     useEffect(() => {
 
-        axios.post(`/api/post/get/posts_by_category?category=${location.state.category._id}`)
+        axios.post(`/api/post/posts_by_category`,category)
         .then(response => {
+         console.log("실행")
             if(response.data.success){
+              console.log(response)
               setPosts(response.data.post)
             }
         })
     }, [])
 
+    
 
     const [page, setPage] = React.useState(1);
     
