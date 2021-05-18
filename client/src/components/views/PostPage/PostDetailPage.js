@@ -109,18 +109,21 @@ export default function PostDetailPage(props) {
     const dispatch = useDispatch();
     const theme = useTheme();
 
+    const [image,setImage] =useState([])
     const [post, setPost] = useState({})
     const postId = props.match.params.postId
      useEffect(() => {
  
-         axios.get(`/api/post/get/posts_by_id?id=${postId}&type=single`)
+         axios.get(`/api/post/id?id=${postId}`)
          .then(response => {
              console.log(response.data.post[0])
               setPost(response.data.post[0])
+              setImage(response.data.post[0].image)
          })
      }, [])
    
-
+ 
+     
     const handleChangeIndex = (index) => {
         setValue(index);
       };
@@ -144,7 +147,6 @@ export default function PostDetailPage(props) {
                   // alert('장바구니에 해당 상품을 추가했습니다.')
                 }
             })
-
     }
     
     //sh
@@ -199,15 +201,17 @@ export default function PostDetailPage(props) {
 
 
  
-
+    console.log(image)
     return (
+
+      
     <Container component='main' maxWidth="lg" className={classes.container}>
         <CssBaseline />
         <Typography component="div" style={{height: '100vh' }}>
         <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src= {ex4} />
+                <img className={classes.img} alt="complex" src= {image[0]} />
               </ButtonBase>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -274,7 +278,7 @@ export default function PostDetailPage(props) {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
         <Box component="span" m={1}><Button /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={ex4} /></Box>
+        <Box width="100%"><img className={classes.img} alt="complex" src={image[1]} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex4} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex1} /></Box>
         <Box width="100%"><img className={classes.img} alt="complex" src={ex2} /></Box>
