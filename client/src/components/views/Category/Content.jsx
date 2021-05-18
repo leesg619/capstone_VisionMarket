@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import {  useHistory } from "react-router-dom";
 import axios from 'axios'
 
+
+//B 347-350 카테고리
 const Content = props => {
 
 
@@ -19,6 +21,7 @@ const [categories,setCategories] = useState();
         axios.post(`/api/category/get/allCategories`)
         .then(response => {
             if(response.data.success) {
+                console.log(response.data)
                 setCategories(response.data)
               
             }  
@@ -341,6 +344,10 @@ const [categories,setCategories] = useState();
                                             variant="contained" 
                                             color="primary" 
                                             style={{height:'80px', fontSize:'20px'}}
+                                            onClick={() => {history.push({
+                                                pathname: '/postsearchlist',
+                                                 state:{category:categories.categories[8]}
+                                              })}}
                                             >
                                             의류
                                             </Button>
@@ -350,7 +357,8 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}>
+                                            style={{height:'80px', fontSize:'20px'}}
+                                            >
                                             속옷/잠옷
                                             </Button>
                                             </Grid>

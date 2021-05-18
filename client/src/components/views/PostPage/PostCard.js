@@ -51,7 +51,7 @@ export default function MediaCard({post}) {
           </Typography>
           <CardMedia
          style={{height:"200px", width: "200px"}}
-          image={post.image}
+          image={post.image[0]}
 
           title={post.title}
         />
