@@ -4,21 +4,22 @@ import Button from '@material-ui/core/Button';
 import {  useHistory } from "react-router-dom";
 import axios from 'axios'
 
+
+//B 347-350 카테고리
 const Content = props => {
 
 
      const history = useHistory()
-   /* 0  장애물품  
-           1  공용패션
-           2  남성패션
-           3  여성패션 */
+
+     //sh 모든 카테고리 조회 281, 343
 const [categories,setCategories] = useState();
 
     useEffect(() => {
 
-        axios.post(`/api/category/get/allCategories`)
+        axios.get(`/api/category`)
         .then(response => {
             if(response.data.success) {
+                console.log(response.data)
                 setCategories(response.data)
               
             }  
@@ -28,11 +29,10 @@ const [categories,setCategories] = useState();
 
     const [NextPage, setNextPage] = useState(1);
 
-    //장애물품 카테고리 ctype 0
+
     //장애물품 -> 보조도구/생활용품
     const ButtonHandlerA = (e) => {
         e.preventDefault()
-        // setOneCategory(category)
         setNextPage(2)
        
     } 
@@ -41,7 +41,6 @@ const [categories,setCategories] = useState();
     //공용패션 -> 티셔츠/맨투맨/후드티 등
     const ButtonHandlerB = (e) => {
         e.preventDefault()
-        // setCtype(1)
         setNextPage(3)
        
     }
@@ -50,7 +49,6 @@ const [categories,setCategories] = useState();
     //남성패션 -> 의류/속옷/잠옷 등
     const ButtonHandlerC = (e) => {
         e.preventDefault()
-        // setCtype(2)
         setNextPage(4)
        
     }
@@ -59,7 +57,6 @@ const [categories,setCategories] = useState();
     //여성패션 -> 의류/속옷/잠옷
     const ButtonHandlerD = (e) => {
         e.preventDefault()
-        // setCtype(3)
         setNextPage(5)
         
     }
@@ -281,7 +278,7 @@ const [categories,setCategories] = useState();
                                     style={{height:'80px', fontSize:'20px'}}
                                     onClick={() => {history.push({
                                         pathname: '/postsearchlist',
-                                         state:{category:categories.categories[0]}
+                                         state:{category:categories.categories[6]}
                                       })}}
                                     >
                                     의류
@@ -341,6 +338,10 @@ const [categories,setCategories] = useState();
                                             variant="contained" 
                                             color="primary" 
                                             style={{height:'80px', fontSize:'20px'}}
+                                            onClick={() => {history.push({
+                                                pathname: '/postsearchlist',
+                                                 state:{category:categories.categories[8]}
+                                              })}}
                                             >
                                             의류
                                             </Button>
@@ -350,7 +351,8 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}>
+                                            style={{height:'80px', fontSize:'20px'}}
+                                            >
                                             속옷/잠옷
                                             </Button>
                                             </Grid>

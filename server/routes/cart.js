@@ -6,10 +6,14 @@ const {Cart} = require('../models/Cart');
 
 
 
+//유저id로 해당 유저의 카트 상품 목록 추출
+//router.post('/')
+
 //상품 카트에 넣기
 router.post('/create',auth, (req,res) => {
    
     const cart =  new Cart(req.body);
+ 
     cart.user = req.user._id
         cart.save((err) => {
             if(err) {  

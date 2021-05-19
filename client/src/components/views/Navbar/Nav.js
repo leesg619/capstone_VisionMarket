@@ -116,6 +116,17 @@ function Nav(props) {
     }
 
 
+    //sh-119 로그아웃기능 193
+    const clickLogoutHandler = () => {
+      
+        axios.get(`/api/users/logout`)
+        .then(response => {
+            console.log("로그아웃")
+        })
+      }
+  
+
+
     return (
         <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
             <AppBar className={classes.appbar} style={{ backgroundColor: "#303030" }}>
@@ -179,7 +190,7 @@ function Nav(props) {
                                 <ShoppingCart  style={{ fontSize: '30' }} />
                                         장바구니
                                 </Button>
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" href="/login">
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" onClick ={clickLogoutHandler}>
                                     <ExitToApp />
                                         로그아웃
                                 </Button>

@@ -8,6 +8,7 @@ import List from '@material-ui/core/List';
 import ShoppingCard from './ShoppingCard';
 import ShoppingList from './ShoppingContent';
 import PayPage from '../Paymovement/PayPage';
+import { useLocation } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,8 +29,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ShoppingBascket() {
-
+export default function ShoppingBascket(props) {
+    
+    //props에 유저가 들어있으니 이 유저를 이용해서 해당 유저의 cart목록을 찾아오자.
+    const location = useLocation();
+    console.log(location.state.user)
     const getShoppingList = (ShoppingListObj) => {
         return (
             <List>

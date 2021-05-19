@@ -40,14 +40,16 @@ function App() {
             속성 값의 path는 해당하는 URL 경로를 의미함, /는 빈 경로, 계속해서 경로를 이어서 만들어 줄 수 있음
             쉽게 말하면 이 곳에서 URL 경로를 관리함 ( Front로 보여주는 경로만 )
         */}
+
+        {/* sh- 본래 취지에 맞게 속성 재설정 */}
         <Route exact path="/" component={Auth(MainPage, null)} />
-        <Route exact path="/login" component={Auth(LoginPage, null)} />
+        <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
         <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, true)} />
-        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, null)} />
-        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, null)} />
+        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, true)} />
+        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, true)} />
 
 
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
