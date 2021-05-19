@@ -2,12 +2,21 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require("../middlewares/auth");
 const {Cart} = require('../models/Cart');
-
+const{Post} = require('../models/Post')
 
 
 
 //유저id로 해당 유저의 카트 상품 목록 추출
-//router.post('/')
+//추출한 목록 각가의 Post정보를 가져오기
+router.post('/cartList',auth, async  (req,res) => {
+
+    try {
+       let shoppingList = await  Cart.find({user: req.user._id}).populate('post')
+        return res.status(200).json({success: true, "result": 'Success!',shoppingList})
+    }catch(err) {
+        res.status(200).json({ "status": false, "result": "Cart Create Failed!" })
+    }
+})
 
 //상품 카트에 넣기
 router.post('/create',auth, (req,res) => {
@@ -27,16 +36,17 @@ router.post('/create',auth, (req,res) => {
 
 
 //상품 카트에서 빼기
-router.delete('/delete',auth,(req,res) => {
+router.delete('/',auth, async (req,res) => {
 
-    let post = req.body.post
-    let user = req.user._id
+    let cartId = req.body.cartId
+try {    
+    let result = await Cart.findOneAndDelete({ "_id" : cartId} );
+      return res.status(200).json({success: true, "result": 'Success!',result})
 
-    Cart.findOneAndDelete({ "post" : post , "user":user} )
-    .exec((err,cart) => {
-        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
-        return res.status(200).json({success: true, "result": 'Success!',cart})
-    })
+    }catch(err) {
+        return res.status(200).json({ "status": false, "result": "Request Failed!" })
+    }
+
 })
 
 module.exports = router;
