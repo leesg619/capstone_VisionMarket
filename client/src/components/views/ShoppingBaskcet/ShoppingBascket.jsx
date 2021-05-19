@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
@@ -9,6 +9,7 @@ import ShoppingCard from './ShoppingCard';
 import ShoppingList from './ShoppingContent';
 import PayPage from '../Paymovement/PayPage';
 import { useLocation } from 'react-router';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,16 +32,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShoppingBascket(props) {
     
-    //props에 유저가 들어있으니 이 유저를 이용해서 해당 유저의 cart목록을 찾아오자.
-    const location = useLocation();
-    console.log(location.state.user)
     const getShoppingList = (ShoppingListObj) => {
         return (
             <List>
-                <ShoppingCard {...ShoppingListObj} />
+                <ShoppingCard {...ShoppingListObj}  deleteShoppingItem={e => deleteShoppingItem(e)}/>
             </List>
         );
     }
+
+    //sh 44~60 => 38
+    const[ShoppingList,setShoppingList] = useState([])
+
+    useEffect(() => {
+ 
+        axios.post(`/api/cart/cartList`)
+        .then(response => {
+
+            if(response.data.success) {
+                console.log(response)
+                setShoppingList(response.data.shoppingList)
+            }
+        })
+    }, [])
+  
+    function deleteShoppingItem(cartId){ 
+        setShoppingList(ShoppingList.filter(item => item._id !== cartId))
+    }
+
+
 
     const classes = useStyles();
 
