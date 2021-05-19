@@ -26,7 +26,7 @@ import Chat from './views/AIChat/Chat';
 import Category from './views/Category/Category';
 import Introduce from './views/Introduce/Introduce';
 
-
+import PostReviewPage from './views/PostPage/PostReviewPage';
 function App() {
   return (
     <CssBaseline>
@@ -55,7 +55,9 @@ function App() {
         <Route exact path="/category" component={Category} />
         <Route exact path="/introduce" component={Introduce} />
 
-        <Route exact paht="/loading" component={LoadingAndSuccess} />
+        <Route exact path="/loading" component={LoadingAndSuccess} />
+
+        <Route exact path="/review" component={Auth(PostReviewPage, null)} />
 
       </Switch>
     </Suspense>

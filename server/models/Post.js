@@ -88,6 +88,14 @@ postSchema.methods.compareAuthor = function( user_id ) {
    
 }
 
+
+postSchema.statics.findById = function( id ) {
+    return this.findOne({_id: id},
+        (err, post) => {
+            if (err) return console.log(err);
+        })
+};
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = { Post }
