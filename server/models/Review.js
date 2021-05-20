@@ -30,6 +30,32 @@ const reviewSchema = mongoose.Schema({
     }
 })
 
+reviewSchema.statics.findByPostId = function({postId, voice}){
+    return this.find({
+        post: postId,
+        voice: voice  // true : 음성리뷰, false: 일반리뷰
+    })
+    .populate('post').
+    populate('author')
+    .exec();
+} // 한 상품 detail : postid로 voice true / false 따로
+
+reviewSchema.statics.findByUserId = function(userId){
+    return this.find({
+        author: userId
+    })
+    .populate('post').
+    populate('author')
+    .exec();
+}// 1. 개인이 자기가쓴거 조회 : 상관없이 전부보여주게
+
+
+// reviewSchema.statics.findBy--- = function(){
+//     return this.find({
+//         post: postId
+//     }).exec();
+// }
+
 const Review = mongoose.model("Review", reviewSchema);
 
 module.exports = { Review }
