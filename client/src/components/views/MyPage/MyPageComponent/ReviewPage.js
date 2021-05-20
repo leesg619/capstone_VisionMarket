@@ -1,4 +1,4 @@
-import {  makeStyles, Tab, Tabs, Typography, Box, Paper, Container} from "@material-ui/core";
+import {  makeStyles, Typography, Box, Paper, Container} from "@material-ui/core";
 import React from "react";
 import PropTypes from 'prop-types'
 import ReviewableCard from "./ReviewableCard"
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         width: '100%',
-        backgroundColor: '#fefefe',
     },
     panel: {
         backgroundColor: '#fefefe',
@@ -51,26 +50,11 @@ const useStyles = makeStyles((theme) => ({
     };
   
     return (
-        <Container>
+        <Container style={{paddingTop:'2%'}}>
             <Paper className={classes.root}>
-                <Tabs
-                value={value}
-                variant="fullWidth"
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-                >
-                <Tab label="작성 가능 상품 후기 1" />
-                <Tab label="내가 작성한 상품후기 1" />
-                </Tabs>
-            </Paper>
-            <TabPanel value={value} index={0} className={classes.panel}>
-              <ReviewableCard/>  
-            </TabPanel>
-            <TabPanel value={value} index={1} className={classes.panel}>
               <ReviewedCard/>
-            </TabPanel>
+              <ReviewedCard/>
+            </Paper>
       </Container>
     );
   }

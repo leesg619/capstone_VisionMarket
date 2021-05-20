@@ -2,7 +2,6 @@ import {makeStyles, Tab, Tabs, Typography, Box, Paper, Container} from "@materia
 import React from "react";
 import PropTypes from 'prop-types'
 import CancelCard from "./CancelCard";
-import RefundWB from "./RefundWB"
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,9 +70,6 @@ const useStyles = makeStyles((theme) => ({
                     <CancelCard/>
                 }
                 
-            </TabPanel>
-            <TabPanel value={value} index={1} className={classes.panel}>
-                <RefundWB/>
             </TabPanel>
             {
                 value==0 ? 

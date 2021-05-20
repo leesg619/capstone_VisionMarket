@@ -1,33 +1,20 @@
 import React, { useState,useEffect } from 'react'
-import { LockOutlined } from '@material-ui/icons'
-import CopyrightFooter from '../CopyrightFooter/CopyrightFooter'
 import { useLocation } from "react-router";
-import {  useHistory } from "react-router-dom";
-import { Grid, makeStyles, Typography, Box, Button} from '@material-ui/core'
-import { useDispatch } from 'react-redux'
-
+import { Grid, makeStyles, Typography} from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination';
-import { CardMedia, CardActions, CardContent, CardHeader } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
 import PostCard from './PostCard';
-
 import axios from 'axios'
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        //paddingTop: theme.spacing(10),
+        paddingTop: theme.spacing(2),
         justifyContent: 'center',
         justifyItems: 'center',
         align: 'center',
         justify: "center",
         alignItems: "center"
     },
-    number: {
-      justifyContent: 'center',
-    }
 }))
-
 
 export default function PostSearchListPage(props) {
     const classes = useStyles();
@@ -51,16 +38,11 @@ const category = location.state.category
         })
     }, [])
 
-    
-
     const [page, setPage] = React.useState(1);
     
     const handleChange = (event, value) => {
       setPage(value);
     };
-
-   
-      
 
     return (
       <div className={classes.root}>
@@ -79,7 +61,7 @@ const category = location.state.category
           <Grid container spacing={2} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}}>
           <Typography>Page: {page}</Typography>
           <Pagination 
-          color="primary"
+          shape="rounded"
           count={10}
           size="large"
           page={page} 
