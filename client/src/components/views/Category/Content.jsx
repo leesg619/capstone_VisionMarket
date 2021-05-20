@@ -70,7 +70,7 @@ const [categories,setCategories] = useState();
             // 카테고리 페이지가 1일 경우 메인페이지랑 연결
         }
     }
-
+    // F-73 이후 버튼 style 변경 -> backgroundColor: '#505050', color: 'white'
     if(NextPage === 1){
         return (
             <div>
@@ -83,7 +83,7 @@ const [categories,setCategories] = useState();
                 fullWidth
                 variant="contained" 
                 color="primary" 
-                style={{height:'80px', fontSize:'20px'}}
+                style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit">
                 장애물품
                 </Button>
@@ -95,7 +95,7 @@ const [categories,setCategories] = useState();
                 fullWidth 
                 variant="contained" 
                 color="primary" 
-                style={{height:'80px', fontSize:'20px'}}
+                style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit">
                 공용패션
                 </Button>
@@ -106,8 +106,7 @@ const [categories,setCategories] = useState();
                 <Button 
                 fullWidth 
                 variant="contained" 
-                color="primary" 
-                style={{height:'80px', fontSize:'20px'}}
+                style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit"
                 >
                 남성패션
@@ -120,7 +119,7 @@ const [categories,setCategories] = useState();
                 fullWidth 
                 variant="contained" 
                 color="primary" 
-                style={{height:'80px', fontSize:'20px'}}
+                style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit">
                 여성패션
                 </Button>
@@ -139,7 +138,7 @@ const [categories,setCategories] = useState();
                     fullWidth
                     variant="contained" 
                     color="primary" 
-                    style={{height:'80px', fontSize:'20px'}}
+                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     >
                     보조도구
                     </Button>
@@ -149,7 +148,7 @@ const [categories,setCategories] = useState();
                     fullWidth 
                     variant="contained" 
                     color="primary" 
-                    style={{height:'80px', fontSize:'20px'}}>
+                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                     생활용품
                     </Button>
                     </Grid>
@@ -159,7 +158,7 @@ const [categories,setCategories] = useState();
                     fullWidth 
                     variant="contained" 
                     color="primary" 
-                    style={{height:'80px', fontSize:'20px'}}
+                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     type="submit"
                     >
                     뒤로
@@ -179,7 +178,7 @@ const [categories,setCategories] = useState();
                             fullWidth
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                             >
                             티셔츠
                             </Button>
@@ -189,7 +188,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             맨투맨<br />
                             /후드티
                             </Button>
@@ -199,7 +198,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             셔츠
                             </Button>
                             </Grid>
@@ -208,7 +207,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             바지
                             </Button>
                             </Grid>
@@ -217,7 +216,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             운동복
                             </Button>
                             </Grid>
@@ -226,7 +225,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             니트류
                             </Button>
                             </Grid>
@@ -235,7 +234,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             아우터
                             </Button>
                             </Grid>
@@ -244,7 +243,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                             커플룩
                             </Button>
                             </Grid>
@@ -254,7 +253,7 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px'}}
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                             type="submit"
                             >
                             뒤로
@@ -275,7 +274,7 @@ const [categories,setCategories] = useState();
                                     fullWidth
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px'}}
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                     onClick={() => {history.push({
                                         pathname: '/postsearchlist',
                                          state:{category:categories.categories[6]}
@@ -289,7 +288,7 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                                     속옷/잠옷
                                     </Button>
                                     </Grid>
@@ -298,7 +297,7 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                                     신발
                                     </Button>
                                     </Grid>
@@ -307,7 +306,7 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                                     잡화
                                     </Button>
                                     </Grid>
@@ -317,7 +316,7 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px'}}
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                     type="submit"
                                     >
                                     뒤로
@@ -337,7 +336,7 @@ const [categories,setCategories] = useState();
                                             fullWidth
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                             onClick={() => {history.push({
                                                 pathname: '/postsearchlist',
                                                  state:{category:categories.categories[8]}
@@ -351,7 +350,7 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                             >
                                             속옷/잠옷
                                             </Button>
@@ -361,7 +360,7 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}>
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                                             신발
                                             </Button>
                                             </Grid>
@@ -370,7 +369,7 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}>
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
                                             가방/잡화
                                             </Button>
                                             </Grid>
@@ -380,7 +379,7 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px'}}
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                             type="submit"
                                             >
                                             뒤로

@@ -1,4 +1,4 @@
-import { Box, Card, Tabs, Tab, Container, Grid, makeStyles, Paper, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, CardActions } from "@material-ui/core";
+import { Button, Box, Card, Tabs, Tab, Container, Grid, makeStyles, Paper, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, CardActions } from "@material-ui/core";
 import React from "react";
 import PropTypes from 'prop-types'
 
@@ -37,22 +37,26 @@ const useStyles = makeStyles((theme) => ({
     panel: {
         backgroundColor: '#fefefe',
     },
-    table: {
-        minWidth: 650,
+    card: {
+        margin: 'auto',
+        padding: '1% 1%',
     },
+    button: {
+        justifyContent: 'center',
+    }
 }));
 
-function createData(date, point, status, usage, deadline) {
-    return { date, point, status, usage, deadline };
+function createData(point, usage, deadline) {
+    return { point, usage, deadline };
 }
 
 const rows = [
-    createData('2021-04-20', 1000, '승인 완료', '첫 개시 이벤트', '2022-04-20'),
+    createData(1000, '회원가입 이벤트', '7일후 소멸'),
 ];
 
 const rows2 = [
-    createData('2021-04-21', 500, '승인 완료', '마우스 구매'),
-    createData('2021-04-22', 500, '승인 완료', '헤드폰 구매'),
+    createData(500, '마우스 구매', '21년 4월 21일'),
+    createData(500, '헤드폰 구매', '21년 3월 19일'),
 ]
 
 export default function PointPage(){
@@ -66,31 +70,20 @@ export default function PointPage(){
     };
 
     return(
-
-
-        <Container>
-            <Card elevation={3}>
-                <Grid container >
-                <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" component="div">
-                        사용가능 적립금 :<br/> 
-                        <CardActions style={{justifyContent: 'flex-end'}}>
-                            1000원
-                        </CardActions>
-
-                        
+        <Container style={{paddingTop:'2%'}}>
+            <Card className={classes.card}>
+                    <Typography variant="h6" align='center'>
+                        사용가능 적립금은 총 1000원 입니다.
                     </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" component="div">
-                        한달 내 소멸 예정 적립금 :<br/>
-                        <CardActions style={{justifyContent: 'flex-end'}}>
-                            0원
-                        </CardActions>
-                    </Typography> 
-                </Grid>
-                </Grid>
-            </Card>
+                    <CardActions className={classes.button}>
+                    <Button 
+                    variant='outlined' 
+                    style={{fontSize:'1rem'}} 
+                    size="large"
+                    href="http://www.kbuwel.or.kr/Assistance/Info">
+                        기부하기</Button>
+                    </CardActions>
+                </Card>
             <br/>
             <Paper className={classes.root}>
                 <Tabs
@@ -98,35 +91,28 @@ export default function PointPage(){
                 variant="fullWidth"
                 onChange={handleChange}
                 indicatorColor="primary"
-                textColor="primary"
                 centered
                 >
-                <Tab label="적립내역" />
-                <Tab label="사용내역" />
+                <Tab style={{fontSize:'1rem'}} label="적립내역" />
+                <Tab style={{fontSize:'1rem'}} label="사용내역" />
                 </Tabs>
-            </Paper>
+
             <TabPanel value={value} index={0} className={classes.panel}>
             <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
+                <Table>
                     <TableHead>
                     <TableRow>
-                        <TableCell style={{width:'20%'}}>거래일</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">거래 금액</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">상태</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">비고</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">유효기간</TableCell>
+                        <TableCell align="center">적립금</TableCell>
+                        <TableCell align="center">비고</TableCell>
+                        <TableCell align="center">유효기간</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.date}>
-                        <TableCell component="th" scope="row">
-                            {row.date}
-                        </TableCell>
-                        <TableCell align="right">{row.point}</TableCell>
-                        <TableCell align="right">{row.status}</TableCell>
-                        <TableCell align="right">{row.usage}</TableCell>
-                        <TableCell align="right">{row.deadline}</TableCell>
+                        <TableCell align="center">{row.point}</TableCell>
+                        <TableCell align="center">{row.usage}</TableCell>
+                        <TableCell align="center">{row.deadline}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
@@ -139,27 +125,24 @@ export default function PointPage(){
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                     <TableRow>
-                        <TableCell style={{width:'20%'}}>거래일</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">거래 금액</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">상태</TableCell>
-                        <TableCell style={{width:'20%'}} align="right">비고</TableCell>
+                        <TableCell align="center">사용금액</TableCell>
+                        <TableCell align="center">사용처</TableCell>
+                        <TableCell align="center">사용날짜</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {rows2.map((row) => (
                         <TableRow key={row.date}>
-                        <TableCell component="th" scope="row">
-                            {row.date}
-                        </TableCell>
-                        <TableCell align="right">{row.point}</TableCell>
-                        <TableCell align="right">{row.status}</TableCell>
-                        <TableCell align="right">{row.usage}</TableCell>
+                        <TableCell align="center">{row.point}</TableCell>
+                        <TableCell align="center">{row.usage}</TableCell>
+                        <TableCell align="center">{row.deadline}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
                 </Table>
             </TableContainer>
             </TabPanel>
+            </Paper>
         </Container>
     )
 

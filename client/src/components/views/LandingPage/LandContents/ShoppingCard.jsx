@@ -11,9 +11,10 @@ const useStyles = makeStyles({
     },
   });
 
+//F-31 장바구니 버튼 삭제 및 별점 삭제, WHY? 별점은 신상품일 경우 리뷰가 없어 필요없는 정보들이 될 것 같아서
 const ShoppingCard = props => {
     const classes = useStyles();
-    const { title, subtitle, description, imgSrc, star } = props;
+    const { title, subtitle, description, imgSrc} = props;
     return (
         <Card>
             <CardHeader
@@ -22,16 +23,12 @@ const ShoppingCard = props => {
       />
       <CardMedia style={{ height : "150px" }} image={imgSrc}/>
       <CardContent>
-        <Typography variant="body2" component="p">
-            {description} <br /><br />
-        </Typography>
-        <Typography variant="body1" component="p" align="right" >
-            {star}
+        <Typography variant="body1">
+            {description}
         </Typography>
       </CardContent>
       <CardActions className={classes.button}>
-        <Button size="large">상세보기</Button>
-        <Button size="large">장바구니</Button>
+        <Button size="large"  style={{fontSize:'1.2rem'}}>상세보기</Button>
       </CardActions>
     </Card>
     );
