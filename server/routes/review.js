@@ -4,9 +4,6 @@ const multer = require('multer');
 const path = require('path');
 
 const { Review } = require("../models/Review");
-const { Post } = require("../models/Post");
-const { User } = require("../models/User");
-const { auth } = require("../middlewares/auth");
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,9 +18,9 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage,
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname)
-        if (ext !== '.mp3') {
-            console.log('it is not mp3 file');
-            return cb(res.status(400).end('only mp3 is allowed'), false);
+        if (ext !== '.m4a') {
+            console.log('it is not voice file');
+            return cb(res.status(400).end('only m4a is allowed'), false);
         }
         cb(null, true)
     }
@@ -52,15 +49,6 @@ router.post("/uploadReview", (req, res) => {
             success: true 
         })
     })
-
-});
-
-//음성파일을 텍스트로변환
-router.post("/transform", (req, res) => {
-
-    // 음성정보 받아오기
-
-    // 변환하여 저장하기
 
 });
 

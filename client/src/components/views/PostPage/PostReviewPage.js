@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function PostReviewPage(props) {
+
     const classes = useStyles()
     const dispatch = useDispatch();
     const mongoose=require('mongoose');
@@ -52,7 +53,7 @@ export default function PostReviewPage(props) {
             author: user._id,
             post: post._id,
             content: Content,
-            filePath: FilePath,
+            filepath: FilePath,
         }
 
         axios.post('/api/review/uploadReview', variables)
@@ -203,10 +204,6 @@ export default function PostReviewPage(props) {
                         filePath: response.data.filePath,
                         fileName: response.data.fileName
                     }
-                    //음성파일 경로로 텍스트리뷰 생성
-                    //
-                    //axios.post('/api/review/????', variable)
-                    //    .then
 
                 } else{
                     alert('음성 업로드를 실패하였습니다.');
@@ -214,8 +211,6 @@ export default function PostReviewPage(props) {
             })
 
     }, [audioUrl]);
-
-
         
 
     return (
