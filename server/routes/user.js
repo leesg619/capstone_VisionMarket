@@ -52,6 +52,18 @@ router.get("/logout", auth, (req, res) => {
     })
 })
 
+//유저 보유 포인트 조회
+router.get("/point",auth, async (req,res) => {
+    let userId = req.user._id
 
+    try {
+        let result = await User.findOne({_id: userId});
+        return res.status(200).json({success: true, "result": 'Success!',result})
+
+    }catch(err) {
+        return res.status(200).json({ "status": false, "result": "Request Failed!" })
+    }
+    
+})
 
 module.exports = router;
