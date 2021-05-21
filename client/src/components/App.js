@@ -51,7 +51,7 @@ function App() {
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
 
-        <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, true)} />
+        <Route exact path="/MyCategory" component={Auth(MyCategory, true)} />
         <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, null)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, null)} />
 
@@ -64,10 +64,10 @@ function App() {
 
         <Route exact path="/deliveryCard" component={DeliveryCard} />
         <Route exact path="/privacy" component={Privacy} />
-        <Route exact path="/order" component={Order} />
+        <Route exact path="/order" component={Auth(Order, true)}  />
         <Route exact path="/reviewWrite" component={ReviewWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
-        <Route exact path="/pointPage" component={PointPage} />
+        <Route exact path="/pointPage"component={Auth(PointPage, true)}  />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 
