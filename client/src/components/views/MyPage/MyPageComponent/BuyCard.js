@@ -2,8 +2,7 @@ import {  Button, Card, CardActions, CardContent, CardHeader ,ButtonGroup, Grid,
 import { DeleteOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React, { useState,useEffect } from 'react'
-import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+
 
 
 
@@ -25,12 +24,8 @@ const useStyles = makeStyles({
 export default function BuyCard(props){
 
 
-console.log(props)
-    const postId = props.postId
 
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const history = useHistory()
 
     const [open, setOpen] = useState(false);
 
@@ -43,6 +38,8 @@ console.log(props)
         console.log(e.currentTarget.value)
         setOpen(false);
     }
+
+    console.log(props)
 
     return(
         <div>
@@ -59,14 +56,14 @@ console.log(props)
                     />
                     <Grid container>   
                     <Grid item xs={3} sm={3}>
-                        <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/120x120ex/image/retail/images/2019/12/28/10/7/01178ffe-33c8-4019-bc71-27a4fc55e8d6.jpg" />
+                        <img src= {props.post.image[0]} />
                     </Grid>
                     <Grid item xs={9} sm={9}>
                             <Typography style={{marginBottom: '12px'}}>
-                                에프씨팩토리 에브리데이 클린미세먼지 방역마스트 [kf94 50개], 1팩 50매입 주문내역 길게 적기
+                              {props.post.content}
                             </Typography>
                             <Typography className={classes.pos} >
-                                1개, 41500원
+                                {props.quantity}개, {props.total}원
                             </Typography>
                     </Grid>
                     </Grid>         

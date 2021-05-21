@@ -59,4 +59,16 @@ User.findOneAndUpdate(
         })
 })
 
+//구매 목록 가져오기
+router.get('/purchaseList',auth, async (req,res)=> {
+   let userId = req.user._id
+    try {
+       let purchaseList = await Purchase.find({user:userId}).populate('post');
+       return res.status(200).json({success: true, "result": 'Success!',purchaseList})
+    }catch(err) {
+        res.status(200).json({ "status": false, "result": "Cart Create Failed!" })
+    }
+    
+})
+
 module.exports = router;
