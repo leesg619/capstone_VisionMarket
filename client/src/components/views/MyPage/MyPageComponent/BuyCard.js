@@ -56,13 +56,13 @@ export default function BuyCard(props){
                     />
                     <Grid container>   
                     <Grid item xs={3} sm={3}>
-                        <img src= {props.post.image[0]} />
+                        <img src= {props.post.image[0]}  style ={{width:350,height:300}}/>
                     </Grid>
                     <Grid item xs={9} sm={9}>
-                            <Typography style={{marginBottom: '12px'}}>
+                            <Typography style={{marginLeft: '180px',marginBottom: '12px'}}>
                               {props.post.content}
                             </Typography>
-                            <Typography className={classes.pos} >
+                            <Typography className={classes.pos} style={{marginLeft: '180px'}}>
                                 {props.quantity}개, {props.total}원
                             </Typography>
                     </Grid>
