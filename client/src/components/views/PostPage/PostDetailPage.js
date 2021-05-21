@@ -239,7 +239,6 @@ export default function PostDetailPage(props) {
                 <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
                 </ButtonGroup>
                 <br />
-
             </FormControl>
             <ButtonGroup variant="text" fullWidth="true">
                 <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>

@@ -58,8 +58,6 @@ export default function ShoppingBascket(props) {
         setShoppingList(ShoppingList.filter(item => item._id !== cartId))
     }
 
-
-
     const classes = useStyles();
 
     const [Paynow, setPaynow] = useState(false)
@@ -87,16 +85,16 @@ export default function ShoppingBascket(props) {
                         <hr />
                         <div className={classes.flex} style={{ fontSize: '0.9rem' }}>
                             상품가격 45000원 + 배송비 0원 = 총 주문금액 45000원
-        </div>
+                        </div>
                         <hr />
                         <div className={classes.flex}>
                             <Button variant="contained" color="primary">
                                 장바구니비우기
-        </Button>
+                            </Button>
                             <Grid item xs={1} />
                             <Button onClick={Payhandle} variant="contained" color="primary">
                                 구매하기
-        </Button>
+                             </Button>
                         </div>
                         {
                             Paynow && <PayPage />
