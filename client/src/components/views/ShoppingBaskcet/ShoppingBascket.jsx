@@ -6,7 +6,6 @@ import { Grid } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
 import ShoppingCard from './ShoppingCard';
-import ShoppingList from './ShoppingContent';
 import PayPage from '../Paymovement/PayPage';
 import { useLocation } from 'react-router';
 import axios from 'axios'

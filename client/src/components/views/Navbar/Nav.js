@@ -117,11 +117,12 @@ function Nav(props) {
 
 
     //sh-119 로그아웃기능 193
+    const histroy = useHistory()
     const clickLogoutHandler = () => {
       
         axios.get(`/api/users/logout`)
         .then(response => {
-            console.log("로그아웃")
+            histroy.push('/')
         })
       }
   

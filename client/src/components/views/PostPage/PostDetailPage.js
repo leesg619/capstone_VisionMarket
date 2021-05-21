@@ -121,6 +121,10 @@ export default function PostDetailPage(props) {
     
     //sh-254 장바구니 누르면 해당 데이터를 Cart에 넣고 해당 유저의 장바구니 페이지로 이동
     const clickCartHandler = () => {
+
+      // if(!props.user.userData.isAuth){
+      //   alert('로그인을 해주세요.')
+      // }
       
       let user = props.user
             let body = {
