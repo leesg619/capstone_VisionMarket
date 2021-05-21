@@ -17,7 +17,7 @@ import { useHistory } from 'react-router';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
+import AudiotrackOutlinedIcon from '@material-ui/icons/AudiotrackOutlined';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -98,20 +98,69 @@ export default function PostDetailPage(props) {
     const dispatch = useDispatch();
     const theme = useTheme();
 
-    const [image,setImage] =useState([])
+    const [image,setImage] =useState("")
     const [post, setPost] = useState({}) //sh 214
     const postId = props.match.params.postId
+
+    const [detailImage, setDetailImage] = useState([]) //상세이미지추가
+    const [voices, setVoices] = useState([]) //음성리뷰추가
+    const [texts, setTexts] = useState([]) //일반리뷰추가
+    const moment=require('moment');
      useEffect(() => {
  
-         axios.get(`/api/post/id?id=${postId}`)
-         .then(response => {
-             console.log(response.data.post[0])
-              setPost(response.data.post[0])
-              setImage(response.data.post[0].image) //sh 214  // 281~284
-         })
+        axios.get(`/api/post/id?id=${postId}`)
+        .then(response => {
+            // console.log(response.data.post[0])
+            setPost(response.data.post[0])
+            setImage(response.data.post[0].image) //sh 214  // 281~284
+        })
+
+        axios.post('/api/review/getVoiceReviews', {post:postId})
+          .then(response => {
+            if (response.data.success) {
+              setVoices(response.data.voices)
+          } else {
+              alert('Failed to get Voice Review')
+          }
+        })
+
+        axios.post('/api/review/getTextReviews', {post:postId})
+          .then(response => {
+            if (response.data.success) {
+              setTexts(response.data.texts)
+          } else {
+              alert('Failed to get Text Review')
+          }
+        })
+
      }, [])
-   
- 
+  const clickVoice = function(file){
+    var audioFile = new Audio(file);
+    audioFile.autoplay = false;
+    audioFile.volume = 0.5;
+    audioFile.loop=
+    audioFile.play(); 
+  }
+  const voiceCards = voices.map((voice, index) => {
+  return(
+    <Box>
+      아제발
+      <audio
+     controls
+    >
+      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3" type="audio/mp3" />
+
+    </audio>
+    {voice.filepath}
+        </Box>
+    // <ButtonBase onClick={clickVoice(voice.filepath)}>
+    // < AudiotrackOutlinedIcon fontSize='large'/>
+    // <span>작성자 : {voice.author.name} __ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
+
+    // </ButtonBase>
+
+    )
+  })
      
     const handleChangeIndex = (index) => {
         setValue(index);
@@ -140,7 +189,6 @@ export default function PostDetailPage(props) {
             })
     }
     
-    //sh
 //이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
   // const  clickPurchaseHandler = () => {
     
@@ -199,7 +247,7 @@ export default function PostDetailPage(props) {
         <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src= {image[0]} />
+                <img className={classes.img} alt="complex" src= {image} />
               </ButtonBase>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -271,7 +319,7 @@ export default function PostDetailPage(props) {
         <Box width="100%"><img className={classes.img} alt="complex" src={image[4]} /></Box>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          음성리뷰창
+          {voiceCards}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         <Typography variant="h6" style={{padding:'10px'}}>

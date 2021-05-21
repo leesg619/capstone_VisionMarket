@@ -52,5 +52,30 @@ router.post("/uploadReview", (req, res) => {
 
 });
 
+router.post("/getVoiceReviews", (req, res) => {
+    Review.find({
+        'post': req.body.post,
+        'voice': true // true : 음성리뷰, false: 일반리뷰
+    })
+    .populate('author')
+    .sort({ "InputTime": -1}) //최신순
+    .exec((err, voices) => {
+        if(err) return res.status(400).send(err);
+        return res.status(200).json({ success: true, voices })
+    })
+});
+
+router.post("/getTextReviews", (req, res) => {
+    Review.find({
+        'post': req.body.post,
+        'voice': false
+    })
+    .populate('author')
+    .sort({ "InputTime": -1})
+    .exec((err, texts) => {
+        if(err) return res.status(400).send(err);
+        return res.status(200).json({ success: true, texts })
+    })
+});
 
 module.exports = router;
