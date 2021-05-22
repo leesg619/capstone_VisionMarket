@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import MicIcon from '@material-ui/icons/Mic';
 import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 import Speech from 'speak-tts';
+import {useCookies} from 'react-cookie'
 
 
 import {CTX} from './Store';
@@ -27,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
       padding: '2px'
     },
     chatWindow: {
-      width: '900px',
-      height: '700px',
+      width: '100%',
+      height: '100%',
       maxHeight: '700px',
       padding: '20px',
       overflow: 'auto'
@@ -74,6 +75,9 @@ const useStyles = makeStyles((theme) => ({
     const [ textValue, changeTextValue ] = React.useState('');
     const [checked, setChecked] = React.useState(true);
     const [count, setCount] = React.useState(2);
+    const [isRemember, setIsRemember] =React.useState(false);
+    const [token, setToken] = React.useState(Math.random().toString(36).substr(2,11));
+    const [cookies, setCookie, removeCookie] = useCookies(['rememberChatToken']);
   
     const {
       interimTranscript,
@@ -87,22 +91,34 @@ const useStyles = makeStyles((theme) => ({
     const handleChange = (event) => {
       setChecked(event.target.checked);
     };
+
+    useEffect(()=>{
+      if(cookies.rememberChatToken === undefined){
+        setToken(token);
+        setIsRemember(true);
+        setCookie('rememberChatToken', token, {maxAge: 20000});
+        //console.log(token);
+      }
+    }, []);
   
     useEffect(() => {
       scrollToBottom()
+      //console.log(cookies.rememberChatToken);
       setCount(count+1);
       if(allChats.general[count-1].from === "비전" && checked){
         speech.speak({
           text: allChats.general[count-1].msg,
           queue: false
         })
+        // window.open('/introduce');
       }
+      
     }, [sendChatAction]);
   
     useEffect(()=>{
       if (finalTranscript !== '') {
         console.log('Got final result:', finalTranscript);
-        sendChatAction({from: user, msg: finalTranscript, img:'', topic: activeTopic});
+        sendChatAction({from: user, msg: finalTranscript, img:'', topic: activeTopic, sessionId: cookies.rememberChatToken});
       }
     }, [interimTranscript, finalTranscript])
   
@@ -146,9 +162,11 @@ const useStyles = makeStyles((theme) => ({
             onChange={e => changeTextValue(e.target.value)}
             onKeyPress = {(ev) => {
               if(ev.key=='Enter'){
-                sendChatAction({from: user, msg: textValue, img: '', topic: activeTopic});
-                changeTextValue('');
-                ev.preventDefault();
+                if(textValue!== ''){
+                  sendChatAction({from: user, msg: textValue, img: '', topic: activeTopic, sessionId: cookies.rememberChatToken});
+                  changeTextValue('');
+                  ev.preventDefault();
+                }
               }
             }}
           />
@@ -158,7 +176,7 @@ const useStyles = makeStyles((theme) => ({
           <Button variant="contained" color="primary"
           onClick={()=> {
             if(textValue!== ''){
-              sendChatAction({from: user, msg: textValue, img:'', topic: activeTopic});
+              sendChatAction({from: user, msg: textValue, img:'', topic: activeTopic, sessionId: cookies.rememberChatToken});
               changeTextValue('');
             }
           }}>

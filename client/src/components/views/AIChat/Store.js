@@ -36,7 +36,9 @@ export default function Store(props){
         dispatch({type: 'RECEIVE_MESSAGE', payload: value})
         var result = '';
         console.log('값 : ' + value.msg);
-        const url='http://localhost:5000/chatbot/send-msg'
+        var currentUrl = window.location.host;
+        currentUrl = currentUrl.split(':');
+        const url='http://'+ currentUrl[0] +':5000/chatbot/send-msg'
 
         fetch(url,{
             method:'POST',
@@ -45,7 +47,8 @@ export default function Store(props){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                msg: value.msg
+                msg: value.msg,
+                sessionId: value.sessionId
             }),
         })
         .then(response=>response.json())
