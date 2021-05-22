@@ -1,6 +1,8 @@
 const dialogflow = require('@google-cloud/dialogflow');
 const express = require('express');
+const {recommend} = require('../models/recommend');
 const router = express.Router();
+var link_ = '';
 
 router.post('/send-msg', (req, res)=> {
     // console.log(req.body);
@@ -11,7 +13,8 @@ router.post('/send-msg', (req, res)=> {
           var strArray = data.split('|');
           res.send({Reply:strArray[0], Img:strArray[1]});
         } else {
-          res.send({Reply:data, Img: ''});
+          res.send({Reply:data, Img: '', link: link_});
+          link_ = '';
         }
         
     })
@@ -50,6 +53,41 @@ router.post('/send-msg', (req, res)=> {
     console.log(result.parameters.fields.number.listValue.values[0].numberValue);
     // console.log(result.parameters.fields['date-time'].structValue.fields.date_time.stringValue); date-time 출력
   }
+  if(result.intent.displayName === 'introduceIntent'){
+    link_ = '/introduce';
+  }
+  /*
+  //먼저 상품 추천받는 상품 id추출 
+  var productId_ = '1234';
+  //세션 아이디에 대한 추천된 기록이 없으면 만들기, 있다면 업데이트
+  recommend.find({sessionId : customSession}, function(err, doc){
+    if(err){
+      var instance = new recommend();
+      instance.sessionId = customSession;
+      instance.productId = productId_;
+      instance.save(function(err){
+      })
+    }
+    else{
+      recommend.findOneAndUpdate(
+        {sessionId: customSession},
+        {productId: productId_},
+        function(err, result){
+
+        }
+      )
+    }
+  })
+  */
+    //상품 추천 받았을 때
+    // recommend.find({sessionId : customSession}, function(err, doc){
+    //   if(err) return err;
+    //   doc.productId, id의 이미지
+    //   return 프로덕트 링크 이 제품은 어떠세요~ | 이미지 링크
+    // })
+
+    //상품 페이지로 이동할 때
+ 
   console.log(`  Query: ${result.queryText}`);
   console.log(`  Response: ${result.fulfillmentText}`);
   if (result.intent) {

@@ -12,9 +12,11 @@ import MicIcon from '@material-ui/icons/Mic';
 import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition'
 import Speech from 'speak-tts';
 import {useCookies} from 'react-cookie'
+import Linkify from 'react-linkify';
 
 
 import {CTX} from './Store';
+import { Route } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -103,14 +105,18 @@ const useStyles = makeStyles((theme) => ({
   
     useEffect(() => {
       scrollToBottom()
+      console.log();
       //console.log(cookies.rememberChatToken);
       setCount(count+1);
-      if(allChats.general[count-1].from === "비전" && checked){
+      if(allChats.general[count-1].from === "비전" && checked && allChats.general.length > 2){
         speech.speak({
           text: allChats.general[count-1].msg,
           queue: false
         })
-        // window.open('/introduce');
+        console.log(allChats.general[count-1]);
+        if(allChats.general[count-1].link !== ""){
+          window.open(allChats.general[count-1].link);
+        }
       }
       
     }, [sendChatAction]);
@@ -140,13 +146,16 @@ const useStyles = makeStyles((theme) => ({
                     allChats[activeTopic].map((chat, i)=>(
                       <div className={classes.flex} key={i}>
                         <Chip avatar={<Avatar alt="비전" src={dog}/>} variant="outlined" size="small" label={chat.from}/> 
-                         <Typography style={{fontSize:'20px', padding: '5px'}}>{chat.msg}<br/>
+                        <Linkify>
+                          <Typography style={{fontSize:'20px', padding: '5px'}}>{chat.msg}<br/>
+                        
                           {chat.img !== '' ? (
                             <img src={chat.img} style={{width:'300px'}}/>
                           ) : (
                             <div/>
                           )}
                          </Typography>
+                         </Linkify>
                         </div>
                     ))
                   }
