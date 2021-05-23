@@ -29,6 +29,8 @@ import Order from './views/MyPage/MyPageComponent/Order';
 import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
+import OCRpage from './views/PostPage/OCRpage/OCRpage';
+import PostingPage from './views/PostPage/PostingPage';
 
 function App() {
   return (
@@ -51,8 +53,8 @@ function App() {
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
         <Route exact path="/myCategory" component={Auth(MyCategory, true)} />
-        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, true)} />
-        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, true)} />
+        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, null)} />
+        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, null)} />
 
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
         <Route exact path="/chat" component={Chat} />
@@ -65,6 +67,9 @@ function App() {
         <Route exact path="/reviewWrite" component={ReviewWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
         <Route exact path="/pointPage" component={PointPage} />
+
+        <Route exact path="/ocrpage" component={Auth(OCRpage, true)} />
+        <Route exact path="/posting" component={Auth(PostingPage, true)} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 

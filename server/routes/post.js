@@ -4,7 +4,37 @@ const { auth } = require("../middlewares/auth");
 const {Post} = require('../models/Post');
 const {Category} = require('../models/Category');
 
+const multer = require('multer');
 
+let storage = multer.diskStorage({
+    destination : (req, file, cb) => {
+        cb(null, "uploads/post/images")
+    },
+    filename : (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    var ext = path.extname(file.originalname)
+    if (ext !== ".jpg" && ext !== '.png' && ext !== '.gif' && ext !== '.jpeg') {
+        cb(res.status(400).json({success : false, error : "Only image type can do"}))
+    }
+    cb(null, true)
+}
+
+const uploads = multer({storage : storage, fileFilter : fileFilter}).single("file");
+
+// 상품 업로드
+
+router.post('/uploads/files', (req, res) => {
+    uploads(req, res, err => {
+        if (err) {
+            return res.json({success : false, err})
+        }
+        return res.json({success :true, url : res.req.file.path, fileName : res.req.file.filename})
+    })
+})
 
 //상품 등록
 router.post('/create',auth, (req,res) => {

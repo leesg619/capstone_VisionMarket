@@ -50,5 +50,4 @@ app.use('/api/category',categoryRoute)
 
 const port = 5000
 
-var server = app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
-server.timeout = 12000;
+app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});

@@ -58,20 +58,20 @@ export default function Login(props) {
     const initialId = localStorage.getItem('rememberE') ? localStorage.getItem('rememberE') : '';
 
     const validateionSchema = Yup.object().shape({
-        id: Yup.string("").required("ID를 입력해주세요."),
+        email: Yup.string("").required("ID를 입력해주세요."),
         password: Yup.string("").required("Paaword를 입력해주세요.")
     })
 
     const formik = useFormik({
         initialValues: {
-            id: initialId,
+            email: initialId,
             password: ''
         },
         validationSchema: validateionSchema,
         onSubmit : ((values, { setSubmitting }) => {
             setTimeout(() => {
                 let dataToSubmit = {
-                    email: values.id,
+                    email: values.email,
                     password: values.password
                 }
 
@@ -119,16 +119,16 @@ export default function Login(props) {
                         fullWidth
                         id="id"
                         label="ID"
-                        name="id"
-                        value={formik.values.id}
+                        name="email"
+                        value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={formik.errors.id && formik.touched.ud ? 'input-text error' : 'input-text'}
+                        className={formik.errors.email && formik.touched.email ? 'input-text error' : 'input-text'}
                         autoFocus
                         alt="아이디입력창"
                     />
-                    {formik.errors.id && formik.touched.id && (
-                        <div style={{color : 'red'}} className="input-text">{formik.errors.id}</div>
+                    {formik.errors.email && formik.touched.email && (
+                        <div style={{color : 'red'}} className="input-text">{formik.errors.email}</div>
                     )}
                     <TextField
                         variant="outlined"  
