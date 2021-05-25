@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   });
 
 export default function BuyCard(props){
-
+    const moment = require('moment');
 
 
     const classes = useStyles();
@@ -39,8 +39,7 @@ export default function BuyCard(props){
         setOpen(false);
     }
 
-    console.log(props)
-
+    console.log(props);
     return(
         <div>
         <Card className={classes.root} elevation={3}>
@@ -50,7 +49,7 @@ export default function BuyCard(props){
                     <CardHeader
                         title={
                             <Typography variant= "h6" color="#000000" style={{marginBottom: '12px'}}>
-                                4월 26일 월요일 / 배송완료
+                                {moment(props.purchaseDate).format("YYYY년M월DD일")} / {moment(props.purchaseDate).add(3, 'days') > moment() ? "배송중":"배송완료"}
                             </Typography>
                         }
                     />
