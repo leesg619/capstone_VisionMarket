@@ -20,7 +20,6 @@ export default function PostSearchListPage(props) {
     const classes = useStyles();
     const location = useLocation();
 
-  console.log(location.state.category) //0여기 0이 들어온다.
 
      const [posts,setPosts] = useState([])
 
