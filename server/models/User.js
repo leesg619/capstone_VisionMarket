@@ -10,14 +10,12 @@ const moment = require('moment');
 const userSchema = mongoose.Schema({
     name : {
         type : String,
-        maxlength : 50,
-        required:[true,'name is required!']
+        maxlength : 50
     },
     email : {
         type : String,
         trim : true,
-        unique : 1,
-        required:[true,'email is required!']
+        unique : 1
     },
     password : {
         type : String,
@@ -49,8 +47,7 @@ const userSchema = mongoose.Schema({
         type : String
     },
     point : {
-        type : Number,
-        default: 0
+        type : Number
     },
     impaired : { //시각장애 여부
         type : Boolean,
@@ -66,10 +63,6 @@ const userSchema = mongoose.Schema({
 userSchema.pre("save", function( next ) {
     var user = this;
     
-    if(user.name.search("admin")){   //이름이 admin일 경우 role=1
-        user.role = 1;
-    }
-
     if(user.isModified('password')) {
         bcrypt.genSalt(saltRounds, (err, salt) => {
             if (err) return next(err);
@@ -114,16 +107,6 @@ userSchema.statics.findByToken = function(token, cb) {
         })
     })
 }
-
-//
-userSchema.statics.findByEmailOrName = function({name, email}) {
-    return this.findOne({
-        $or: [
-            { name },
-            { email }
-        ]
-    }).exec();
-};
 
 const User = mongoose.model("User", userSchema);
 
