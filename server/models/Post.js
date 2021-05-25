@@ -15,6 +15,7 @@ const postSchema = mongoose.Schema({
         type : Schema.Types.ObjectId,
         ref : "User"
     },
+    //여기가 소분류 ex) 남성패션 -> 의류
     pcategory : {
         type : Schema.Types.ObjectId,
         ref : "Category"
@@ -34,6 +35,9 @@ const postSchema = mongoose.Schema({
     image : [{
         type : String
     }],
+    pcolor:[{
+        type: String
+    }],
     pviews : {
         type : Number,
         default : 0
@@ -51,6 +55,9 @@ const postSchema = mongoose.Schema({
     pstock : {
         type : Number
     },
+    psize: {
+        type: String
+    },
     /*
     posting : {
         type : Number,
@@ -61,14 +68,26 @@ const postSchema = mongoose.Schema({
 
 postSchema.pre('save', function(next){
     var post = this
-
-    User.findById({'_id' : this.author}, (err, doc) => {
+    User.findById({'_id' : post.author}, (err, doc) => {
         if(err) return next(err)
         if(doc.role === 1) {
             post.purpose = 10   //purpose 변경으로 운영자글 명시
         }
     })
+    next()
 })
+
+
+postSchema.methods.compareAuthor = function( user_id ) {
+    var post = this
+    if(post.author.equals(user_id)){
+        result = true
+    }else {
+        result = false
+    }
+    return result
+   
+}
 
 const Post = mongoose.model("Post", postSchema);
 

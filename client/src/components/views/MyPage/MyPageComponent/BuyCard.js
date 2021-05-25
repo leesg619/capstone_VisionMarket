@@ -1,18 +1,16 @@
-import {  Button, Card, CardActions, CardContent, CardHeader, Dialog, DialogActions, DialogTitle, Grid, IconButton, makeStyles, Typography } from '@material-ui/core'
+import {  Button, Card, CardActions, CardContent, CardHeader ,ButtonGroup, Grid, IconButton, makeStyles, Typography } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons';
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+
+
 
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
-      height: 230,
       marginBottom: 10,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
     },
     pos: {
       marginBottom: 12,
@@ -24,12 +22,18 @@ const useStyles = makeStyles({
     },
   });
 
-export default function BuyCard(){
-    const classes = useStyles();
+export default function BuyCard(props){
 
+
+console.log(props)
+    const postId = props.postId
+
+    const classes = useStyles();
+    const dispatch = useDispatch();
     const history = useHistory()
 
     const [open, setOpen] = useState(false);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,7 +44,6 @@ export default function BuyCard(){
         setOpen(false);
     }
 
-    const bull = <span className={classes.bullet}>•</span>;
     return(
         <div>
         <Card className={classes.root} elevation={3}>
@@ -50,32 +53,10 @@ export default function BuyCard(){
                     <CardHeader
                         title={
                             <Typography variant= "h6" color="#000000" style={{marginBottom: '12px'}}>
-                                배송완료 {bull} 4/26(월) 도착
+                                4월 26일 월요일 / 배송완료
                             </Typography>
                         }
-                        action={
-                            <IconButton aria-label="settings" onClick={handleClickOpen}>
-                                <DeleteOutlined />
-                            </IconButton>
-                        }
                     />
-                    <Dialog
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">{"주문 내역을 삭제 하시겠습니까?"}</DialogTitle>
-                        <DialogActions>
-                            <Button onClick={handleClose} value='removeNo' color="primary">
-                                아니오
-                            </Button>
-                            <Button onClick={handleClose} value='removeYes' color="primary" autoFocus>
-                                네
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                    
                     <Grid container>   
                     <Grid item xs={3} sm={3}>
                         <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/120x120ex/image/retail/images/2019/12/28/10/7/01178ffe-33c8-4019-bc71-27a4fc55e8d6.jpg" />
@@ -84,32 +65,31 @@ export default function BuyCard(){
                             <Typography style={{marginBottom: '12px'}}>
                                 에프씨팩토리 에브리데이 클린미세먼지 방역마스트 [kf94 50개], 1팩 50매입 주문내역 길게 적기
                             </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                41,500원 {bull} 1개
+                            <Typography className={classes.pos} >
+                                1개, 41500원
                             </Typography>
                     </Grid>
-                    </Grid>    
-                    
-                    
+                    </Grid>         
                 </Grid>
                 <Grid item xs={12} sm={3}>
                 <CardActions>
-                    <Button variant="outlined" className={classes.button}>배송조회</Button>
-                </CardActions>
-                <CardActions>
-                    <Button variant="outlined" className={classes.button} >교환, 반품 신청</Button>
-                </CardActions>
-                <CardActions>
-                    <Button variant="outlined" className={classes.button} onClick={() => history.push('/myPage/review')}>리뷰 작성하기</Button>
-                </CardActions>
-                <CardActions>
-                    <Button variant="outlined" className={classes.button}>판매자 문의하기</Button>
+                <ButtonGroup
+                    orientation="vertical"
+                    fullWidth
+                >
+                    <Button style={{fontSize:'1rem'}}>주문취소</Button>
+                    <Button style={{fontSize:'1rem'}}>배송조회</Button>
+                    <Button style={{fontSize:'1rem'}}>음성리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}}>문의하기</Button>
+                </ButtonGroup>
                 </CardActions>
                 </Grid>
                 </Grid>
             </CardContent>
         </Card>
-        
         </div>
     )
 }
+
+

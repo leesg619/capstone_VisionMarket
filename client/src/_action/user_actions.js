@@ -3,8 +3,9 @@ import {
     USER_AUTH,
     USER_LOGIN,
     USER_LOGOUT,
-    USER_REGISTER
+    USER_REGISTER,
 } from './types'
+
 import { USER_SERVER } from '../components/Config'
 
 export function registerUser(dataToSubmit) {
@@ -17,9 +18,10 @@ export function registerUser(dataToSubmit) {
     }
 }
 export function loginUser (dataToSubmit) {
+
     const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
     .then(response => response.data)
-    console.log(request)
+
     return {
         type : USER_LOGIN,
         payload : request
@@ -39,9 +41,10 @@ export function logoutUser() {
 export function authUser() {
     const request = axios.get(`${USER_SERVER}/auth`)
     .then(response => response.data)
-    console.log(request)
+    
     return {
         type : USER_AUTH,
         payload : request
     }
 }
+

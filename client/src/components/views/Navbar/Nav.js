@@ -1,6 +1,9 @@
 import React,{useState} from 'react'
-import { Box, Grid, IconButton, makeStyles, Typography, AppBar, Toolbar, InputBase, Container, Input } from '@material-ui/core'
+import { Box, Grid, makeStyles,  AppBar, Toolbar, InputBase, Container } from '@material-ui/core'
+
+import axios from "axios";
 import { ZoomOut, ZoomIn, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp, ZoomInSharp } from '@material-ui/icons'
+
 import { fade } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -111,13 +114,25 @@ function Nav(props) {
         document.body.style.zoom = nowZoom + '%';
     }
 
+
+    //sh-119 로그아웃기능 193
+    const clickLogoutHandler = () => {
+      
+        axios.get(`/api/users/logout`)
+        .then(response => {
+            console.log("로그아웃")
+        })
+      }
+  
+
+
     return (
         <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
-            <AppBar className={classes.appbar} style={{ backgroundColor: "#616161" }}>
+            <AppBar className={classes.appbar} style={{ backgroundColor: "#303030" }}>
                 <Toolbar className={classes.toolbar} p={1} >
                     <Grid container spacing={1}>
 
-                        {/* 아이콘모음 */}
+                        {/* 아이콘모음  F-146 고대비 버튼 삭제 */}
                         <Grid item xs={12} sm={4}>
                             <Box color="#000000" className={classes.BoxComponent2} p={4} >
                             <div className={classes.root}>
@@ -127,9 +142,6 @@ function Nav(props) {
                             </Button>
                             <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇" href="/chat">
                             Chat
-                            </Button>
-                            <Button size="small" aria-label="고대비">
-                                <Brightness6 className={classes.iconComponent} />
                             </Button>
                             <Button size="small" aria-label="음성검색">
                                 <RecordVoiceOver className={classes.iconComponent} />
@@ -167,14 +179,14 @@ function Nav(props) {
                         {/* 주버튼 */}
                         <Grid item xs={12} sm={4}>
                             <Box className={classes.BoxComponent} p={4} >
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="마이페이지" href="/myPage/order" >
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="마이페이지" href="/myCategory" >
                                         마이페이지
                                 </Button>
                                 <Button className={classes.orderButton} style={{ fontSize: '1rem' }} aria-label="장바구니" aria-details="장바구니 링크" href="/shoppingbascket" color="inherit" >
                                 <ShoppingCart  style={{ fontSize: '30' }} />
                                         장바구니
                                 </Button>
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" href="/login">
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" onClick ={clickLogoutHandler}>
                                     <ExitToApp />
                                         로그아웃
                                 </Button>

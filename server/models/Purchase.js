@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { User } = require('./User')
 const { Post } = require('./Post')
+const moment = require('moment');
 
 const purchaseSchema = mongoose.Schema({
     post : {
@@ -23,6 +24,10 @@ const purchaseSchema = mongoose.Schema({
         type : Date,
         default : moment.now()
     },
+    total: {
+        type: Number,
+        default: 0
+    }
 })
 
 const Purchase = mongoose.model("Purchase", purchaseSchema)

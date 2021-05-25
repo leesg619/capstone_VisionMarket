@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button';
@@ -6,8 +6,9 @@ import { Grid } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import List from '@material-ui/core/List';
 import ShoppingCard from './ShoppingCard';
-import ShoppingList from './ShoppingContent';
 import PayPage from '../Paymovement/PayPage';
+import { useLocation } from 'react-router';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,14 +29,33 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ShoppingBascket() {
-
+export default function ShoppingBascket(props) {
+    
     const getShoppingList = (ShoppingListObj) => {
         return (
             <List>
-                <ShoppingCard {...ShoppingListObj} />
+                <ShoppingCard {...ShoppingListObj}  deleteShoppingItem={e => deleteShoppingItem(e)}/>
             </List>
         );
+    }
+
+    //sh 44~60 => 38
+    const[ShoppingList,setShoppingList] = useState([])
+
+    useEffect(() => {
+ 
+        axios.post(`/api/cart/cartList`)
+        .then(response => {
+
+            if(response.data.success) {
+                console.log(response)
+                setShoppingList(response.data.shoppingList)
+            }
+        })
+    }, [])
+  
+    function deleteShoppingItem(cartId){ 
+        setShoppingList(ShoppingList.filter(item => item._id !== cartId))
     }
 
     const classes = useStyles();
@@ -65,16 +85,16 @@ export default function ShoppingBascket() {
                         <hr />
                         <div className={classes.flex} style={{ fontSize: '0.9rem' }}>
                             상품가격 45000원 + 배송비 0원 = 총 주문금액 45000원
-        </div>
+                        </div>
                         <hr />
                         <div className={classes.flex}>
                             <Button variant="contained" color="primary">
                                 장바구니비우기
-        </Button>
+                            </Button>
                             <Grid item xs={1} />
                             <Button onClick={Payhandle} variant="contained" color="primary">
                                 구매하기
-        </Button>
+                             </Button>
                         </div>
                         {
                             Paynow && <PayPage />

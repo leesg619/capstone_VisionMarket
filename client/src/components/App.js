@@ -10,13 +10,10 @@ import Auth from '../hoc/auth';
 //import LandingPage from './views/LandingPage/LandingPage'
 import MainPage from './views/LandingPage/MainPage';
 import LoginPage from './views/LoginPage/LoginPage';
-import Navbar from './views/Navbar/Navbar';
-import Sidebar from './views/Navbar/Sidebar/Sidebar';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import EnrollmentCreditPage from './views/Paymovement/EnrollmentCreditPage';
 import PayPage from './views/Paymovement/PayPage';
 import LoadingAndSuccess from './views/Paymovement/LoadingAndSuccess';
-import MyPage from './views/MyPage/MyPage';
 
 import PostDetailPage from './views/PostPage/PostDetailPage';
 import PostSearchListPage from './views/PostPage/PostSearchListPage';
@@ -25,7 +22,13 @@ import Nav from './views/Navbar/Nav';
 import Chat from './views/AIChat/Chat';
 import Category from './views/Category/Category';
 import Introduce from './views/Introduce/Introduce';
-
+import MyCategory from './views/MyPage/MyCategory';
+import DeliveryCard from './views/MyPage/MyPageComponent/DeliveryCard';
+import Privacy from './views/MyPage/MyPageComponent/Privacy';
+import Order from './views/MyPage/MyPageComponent/Order';
+import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
+import PointPage from './views/MyPage/MyPageComponent/PointPage';
+import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 
 function App() {
   return (
@@ -40,20 +43,28 @@ function App() {
             속성 값의 path는 해당하는 URL 경로를 의미함, /는 빈 경로, 계속해서 경로를 이어서 만들어 줄 수 있음
             쉽게 말하면 이 곳에서 URL 경로를 관리함 ( Front로 보여주는 경로만 )
         */}
+
+        {/* sh- 본래 취지에 맞게 속성 재설정 */}
         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
-        <Route exact path="/myPage/:PageMenu" component={Auth(MyPage, false)} />
-        <Route exact path="/postdetail" component={Auth(PostDetailPage, false)} />
-        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, false)} />
-
+        <Route exact path="/myCategory" component={Auth(MyCategory, true)} />
+        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, true)} />
+        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, true)} />
 
         <Route exact path="/shoppingBascket" component={ShoppingBascket} />
         <Route exact path="/chat" component={Chat} />
         <Route exact path="/category" component={Category} />
         <Route exact path="/introduce" component={Introduce} />
+
+        <Route exact path="/deliveryCard" component={DeliveryCard} />
+        <Route exact path="/privacy" component={Privacy} />
+        <Route exact path="/order" component={Order} />
+        <Route exact path="/reviewWrite" component={ReviewWrite} />
+        <Route exact path="/reviewPage" component={ReviewPage} />
+        <Route exact path="/pointPage" component={PointPage} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
 
