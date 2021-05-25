@@ -1,105 +1,79 @@
-import { Container, CssBaseline, Grid, makeStyles, TextareaAutosize, Input, Typography, ButtonBase, Box, Button, List, ListItem, ListItemText, Divider, InputLabel, MenuItem, FormHelperText, FormControl, Select } from '@material-ui/core'
-import TextField from '@material-ui/core/TextField'
-import React, { useState,useEffect, useSelector, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-
+import { Box, Button, Card, CardContent, Container, Divider, Grid, Input, makeStyles, TextField, Typography } from '@material-ui/core'
+import React, { useState, useEffect, useCallback } from 'react'
+import Rating from '@material-ui/lab/Rating';
 import axios from 'axios'
-import Dropzone from 'react-dropzone';
-
-const useStyles = makeStyles((theme) => ({
-    
-}))
-//////////////석근테스트용////////////////////
-export default function PostReviewPage(props) {
-
-    const classes = useStyles()
-    const dispatch = useDispatch();
-    const mongoose=require('mongoose');
-    const postId = mongoose.Types.ObjectId('609a7ea8e8ffe95ab80c19e2');//props.match.params.postId
-    //일반리뷰    
-    const [user, setUser] = useState({});
-    const [post, setPost] = useState({});
-    const [Content, setContent] = useState("");
-    const [FilePath, setFilePath] = useState("");
-
-    useEffect(() => {
-        axios.get(`api/users/auth`)
-        .then(response =>{
-            setUser(response.data);
-        })
-        axios.get(`/api/post/get/posts_by_id?id=${postId}&type=single`)
-        .then(response => {
-            console.log(response.data.post[0])
-            setPost(response.data.post[0])
-        })
-    }, [])
-
-    const handleChangeContent = (event) => {
-        setContent(event.currentTarget.value)
+const useStyles = makeStyles({
+    root: {
+      height: 180,
+      minHeight: 180,
+      marginBottom: 10,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    BoxComponent:{
+        justifyContent:'center',
+        alignItems:'center',
+        display:'flex',
+        margin:'auto'
+    },
+    InputBoxComponent:{
+        height:'240px',
+        justifyContent:'center',
+        alignItems:'center',
+        display:'flex'
     }
+  });
+
+export default function ReviewVoiceWrite(props){
+    const classes = useStyles();
+
+    const [value, setValue] = React.useState(2); //별점
+    const [FilePath, setFilePath] = useState("");
+    const [post, setPost] = useState({});
+    const userId=localStorage.getItem('userId');
+    const postId = props.match.params.postId;
+
     const handleChangeFilePath = (event) => {
         setFilePath(event.currentTarget.value)
     }
+    
+
+    useEffect(() => {
+        axios.post('/api/post/getPost', {postId:postId})
+        .then(response => {
+            console.log(response.data.post)
+            setPost(response.data.post)
+        })
+    }, [])
 
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (post === null || Content === "" ||
-            FilePath === "") {
+        if (post === null || FilePath === "") {
             return alert('Please first fill all the fields')
         }
 
         const variables = {
-            author: user._id,
+            author: userId,
             post: post._id,
-            content: Content,
             filepath: FilePath,
+            voice: true,
+            star: value
         }
 
         axios.post('/api/review/uploadReview', variables)
             .then(response => {
                 if (response.data.success) {
                     alert('Review Uploaded Successfully')
-                    props.history.push('/')
+                    props.history.push('/order')
                 } else {
                     alert('Failed to upload review')
                 }
             })
 
     }
-    
-    const onDrop = (files) => {
 
-        let formData = new FormData();
-        const config = {
-            header: { 'content-type': 'multipart/form-data' }
-        }
-        console.log(files)
-        formData.append("file", files[0])
-
-        axios.post('/api/review/uploadfiles', formData, config)
-            .then(response => {
-                if (response.data.success) {
-                    console.log(response.data);
-
-                    setFilePath(response.data.filePath)
-
-                    let variable = {
-                        filePath: response.data.filePath,
-                        fileName: response.data.fileName
-                    }
-                    //음성파일 경로로 텍스트리뷰 생성
-                    //
-                    //axios.post('/api/review/????', variable)
-                    //    .then
-
-                } else{
-                    alert('음성 업로드를 실패하였습니다.');
-                }
-            })
-        }
-    // multer 및 dropzone 이용한 업로드 방식 리뷰
-        
     //음성녹음용
     const [stream, setStream] = useState();
     const [media, setMedia] = useState();
@@ -175,8 +149,8 @@ export default function PostReviewPage(props) {
         analyser.disconnect();
         source.disconnect();
       };
-    
-    const onSubmitAudioFile = useCallback(() => {
+
+      const onSubmitAudioFile = useCallback(() => {
         if (audioUrl) {
           console.log(URL.createObjectURL(audioUrl)); // 출력된 링크에서 녹음된 오디오 확인 가능
         }
@@ -204,7 +178,7 @@ export default function PostReviewPage(props) {
                         filePath: response.data.filePath,
                         fileName: response.data.fileName
                     }
-                    alert('음성 녹음에 성공하였습니다.');
+
                 } else{
                     alert('음성 업로드를 실패하였습니다.');
                 }
@@ -212,62 +186,72 @@ export default function PostReviewPage(props) {
 
     }, [audioUrl]);
         
+    return(
+        <div>
+        <Container style={{paddingTop:'2%'}}>
+        <Card className={classes.root} elevation={3}>
+            <CardContent>
+                <Grid container>
+                <Grid item xs={12} sm={9}>
+                    <Grid container>   
+                    <Grid item xs={3} sm={3}>
+                        <img src={post.image}/>
+                    </Grid>
+                    <Grid item xs={9} sm={9}>
+                            <Typography style={{marginBottom: '12px'}}>
+                                {post.title}
+                            </Typography>
+                            <Typography className={classes.pos}>
+                                2021년 04월 27일 배송완료
+                            </Typography>
+                    </Grid>
+                    </Grid>     
+                </Grid>
+                </Grid>
+            </CardContent>
+        </Card>
+        <br/>
+        <Divider/>
+        <br/>
+        <form encType='multipart/form-data'>
+        <Box component="fieldset" mb={3} borderColor="transparent" className={classes.BoxComponent}>
+            <Grid container>
+                <Grid item xs={12}>
+                    <Typography component="legend">[ 별점 ]</Typography>
+                    <Rating
+                    name="simple-controlled"
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+        <Divider/>
+        <Box className={classes.InputBoxComponent}>
+            <Grid container>
+                <Grid item xs={12}>
+                  <Box style={{display:'flex'}}>
+                    <Button onClick={onRec ? onRecAudio : offRecAudio}>녹음하기</Button>
+                    <Button onClick={onSubmitAudioFile}>음성 확인</Button>
+                   
+                    <Input
+                    onChange={handleChangeFilePath}
+                    value={FilePath}
+                    />
 
-    return (
-        
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                HELLO~${post.title}
-
-                <button onClick={onRec ? onRecAudio : offRecAudio}>녹음</button>
-                <button onClick={onSubmitAudioFile}>결과 확인</button>
-
-            </div>
-
-        <form onSubmit={onSubmit} encType='multipart/form-data'>
-            
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Dropzone
-                    onDrop={onDrop}
-                    multiple={false}
-                    maxSize={800000000}>
-                    {({ getRootProps, getInputProps }) => (
-                        <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                            {...getRootProps()}
-                        >
-                            <input {...getInputProps()} />
-                            
-
-                        </div>
-                    )}
-                </Dropzone>
-
-            </div>
-            
-            
-            <br /><br />
-            <label>FilePath</label>
-            <Input
-                onChange={handleChangeFilePath}
-                value={FilePath}
-            />
-            
-            <br /><br />
-            <label>Content</label>
-            <TextareaAutosize
-                aria-label="내용"
-                onChange={handleChangeContent}
-                value={Content}
-            />
-            <br /><br />
-
-            <Button type="primary" size="large" onClick={onSubmit}>
-                Submit
-            </Button>
+                  </Box>
+                </Grid>
+            </Grid>
+        </Box>
+        <Divider/>
+        <Box className={classes.BoxComponent}>
+            <Button onClick={onSubmit}variant="outlined" style={{fontSize:'1.2rem', width:'120px', marginTop:'20px', marginBottom:'20px'}}>등록하기</Button>
+        </Box>
         </form>
-        
+        </Container>
         
         </div>
-
-    );
+    )
 }

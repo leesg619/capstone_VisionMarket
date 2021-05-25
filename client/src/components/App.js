@@ -29,6 +29,7 @@ import Order from './views/MyPage/MyPageComponent/Order';
 import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
+import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
 
 
 import PostReviewPage from './views/PostPage/PostReviewPage';  //석근거
@@ -64,7 +65,8 @@ function App() {
         <Route exact path="/deliveryCard" component={DeliveryCard} />
         <Route exact path="/privacy" component={Privacy} />
         <Route exact path="/order" component={Order} />
-        <Route exact path="/reviewWrite" component={ReviewWrite} />
+        <Route exact path="/reviewWrite/:postId" component={ReviewWrite} />
+        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
         <Route exact path="/pointPage" component={PointPage} />
 

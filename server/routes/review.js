@@ -58,6 +58,7 @@ router.post("/getVoiceReviews", (req, res) => {
         'voice': true // true : 음성리뷰, false: 일반리뷰
     })
     .populate('author')
+    .populate('post')
     .sort({ "InputTime": -1}) //최신순
     .exec((err, voices) => {
         if(err) return res.status(400).send(err);
@@ -71,11 +72,26 @@ router.post("/getTextReviews", (req, res) => {
         'voice': false
     })
     .populate('author')
+    .populate('post')
     .sort({ "InputTime": -1})
     .exec((err, texts) => {
         if(err) return res.status(400).send(err);
         return res.status(200).json({ success: true, texts })
     })
 });
+
+router.post("/getMyReviews", (req, res) => {
+    Review.find({
+        'author': req.body.userId
+    })
+    .populate('author')
+    .populate('post')
+    .sort({ "InputTime": -1})
+    .exec((err, reviews) => {
+        if(err) return res.status(400).send(err);
+        return res.status(200).json({ success: true, reviews })
+    })
+});
+
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, Container, Divider, Grid, Input, makeStyles, TextField, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Rating from '@material-ui/lab/Rating';
-
+import axios from 'axios'
 const useStyles = makeStyles({
     root: {
       height: 180,
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     }
   });
 
-export default function CancelCard(){
+export default function CancelCard(props){
     const classes = useStyles();
     // 모달창
     const [open, setOpen] = useState(false);
@@ -39,8 +39,52 @@ export default function CancelCard(){
         setOpen(false);
     }
 
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(2); //별점
+    //추가
+    const [content, setContent] = useState("");//내용
+    const [post, setPost] = useState({});
+    const userId=localStorage.getItem('userId');
+    const postId = props.match.params.postId;
 
+    const handleChangeContent = (event) => {
+        setContent(event.currentTarget.value)
+    }
+    
+
+    useEffect(() => {
+        axios.post('/api/post/getPost', {postId:postId})
+        .then(response => {
+            console.log(response.data.post)
+            setPost(response.data.post)
+        })
+    }, [])
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+        if (post === null || content === "") {
+            return alert('Please first fill all the fields')
+        }
+
+        const variables = {
+            author: userId,
+            post: post._id,
+            content: content,
+            voice: false,
+            star: value
+        }
+
+        axios.post('/api/review/uploadReview', variables)
+            .then(response => {
+                if (response.data.success) {
+                    alert('Review Uploaded Successfully')
+                    props.history.push('/order')
+                } else {
+                    alert('Failed to upload review')
+                }
+            })
+
+    }
     return(
         <div>
         <Container style={{paddingTop:'2%'}}>
@@ -71,11 +115,11 @@ export default function CancelCard(){
                     </Dialog> */}
                     <Grid container>   
                     <Grid item xs={3} sm={3}>
-                        <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/120x120ex/image/retail/images/2019/12/28/10/7/01178ffe-33c8-4019-bc71-27a4fc55e8d6.jpg" />
+                        <img src={post.image}/>
                     </Grid>
                     <Grid item xs={9} sm={9}>
                             <Typography style={{marginBottom: '12px'}}>
-                                에프씨팩토리 에브리데이 클린미세먼지 방역마스트 [kf94 50개], 1팩 50매입 주문내역 길게 적기
+                                {post.title}
                             </Typography>
                             <Typography className={classes.pos}>
                                 2021년 04월 27일 배송완료
@@ -89,6 +133,7 @@ export default function CancelCard(){
         <br/>
         <Divider/>
         <br/>
+        <form>
         <Box component="fieldset" mb={3} borderColor="transparent" className={classes.BoxComponent}>
             <Grid container>
                 <Grid item xs={12}>
@@ -115,6 +160,8 @@ export default function CancelCard(){
                     rows={8}
                     variant="outlined"
                     style={{ width:'1200px'}}
+                    onChange={handleChangeContent}
+                    value={content}
                 />
                     </Box>
                 </Grid>
@@ -122,9 +169,9 @@ export default function CancelCard(){
         </Box>
         <Divider/>
         <Box className={classes.BoxComponent}>
-            <Button variant="outlined" style={{fontSize:'1.2rem', width:'120px', marginTop:'20px', marginBottom:'20px'}}>등록하기</Button>
+            <Button onClick={onSubmit}variant="outlined" style={{fontSize:'1.2rem', width:'120px', marginTop:'20px', marginBottom:'20px'}}>등록하기</Button>
         </Box>
-
+        </form>
         </Container>
         
         </div>

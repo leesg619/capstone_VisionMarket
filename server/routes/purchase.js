@@ -31,4 +31,15 @@ User.findOneAndUpdate(
         })
 })
 
+
+router.get("/getPurchases", (req, res) => {
+
+    Purchase.find({ 'user': req.body.userId })
+        .populate('post')
+        .exec((err, purchases) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({ success: true, purchases })
+        })
+
+});
 module.exports = router;

@@ -108,11 +108,10 @@ export default function PostDetailPage(props) {
     const moment=require('moment');
      useEffect(() => {
  
-        axios.get(`/api/post/id?id=${postId}`)
+        axios.post('/api/post/getPost', { postId: postId })
         .then(response => {
-            // console.log(response.data.post[0])
-            setPost(response.data.post[0])
-            setImage(response.data.post[0].image) //sh 214  // 281~284
+            setPost(response.data.post)
+            setImage(response.data.post.image) //sh 214  // 281~284
         })
 
         axios.post('/api/review/getVoiceReviews', {post:postId})
@@ -138,27 +137,37 @@ export default function PostDetailPage(props) {
     var audioFile = new Audio(file);
     audioFile.autoplay = false;
     audioFile.volume = 0.5;
-    audioFile.loop=
+    audioFile.loop=false;
     audioFile.play(); 
   }
   const voiceCards = voices.map((voice, index) => {
   return(
+    // <ButtonBase onClick={clickVoice(voice.filepath)}>
+    // < AudiotrackOutlinedIcon fontSize='large'/>
+    // <span>작성자 : {voice.author.name} __ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
+    // </ButtonBase>
+    <Card  variant="outlined">
+    <CardContent>
+    <Typography gutterBottom variant="h6">
+      별점 {voice.star} <br/> 
+    </Typography>
+    <Typography >
     <Box>
       아제발
       <audio
      controls
     >
-      <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3" type="audio/mp3" />
-
+      <source src={voice.filepath} type="audio/mp3" />
     </audio>
     {voice.filepath}
         </Box>
-    // <ButtonBase onClick={clickVoice(voice.filepath)}>
-    // < AudiotrackOutlinedIcon fontSize='large'/>
-    // <span>작성자 : {voice.author.name} __ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
-
-    // </ButtonBase>
-
+    </Typography>
+  </CardContent>
+  <CardActions>
+    <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
+    <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
+    </CardActions>
+    </Card>
     )
   })
      
@@ -238,8 +247,26 @@ export default function PostDetailPage(props) {
         setValue(newValue);
     };
 
-    return (
+    const TextReviewItem =texts.map((text, index) => {
+      return <Card  variant="outlined">
+      <CardContent>
+      <Typography gutterBottom variant="h6">
+        별점 {text.star}점 <br/> 
+      </Typography>
+      <Typography >
+        {text.content}
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
+      <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
+      </CardActions>
+      </Card>
+    });
 
+
+
+    return (
       
     <Container component='main' maxWidth="lg" className={classes.container}>
         <CssBaseline />
@@ -341,6 +368,9 @@ export default function PostDetailPage(props) {
         <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
         </CardActions>
         </Card>
+
+        {TextReviewItem}
+
         </TabPanel>
       </SwipeableViews>
           </div>

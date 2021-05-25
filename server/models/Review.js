@@ -27,7 +27,10 @@ const reviewSchema = mongoose.Schema({
     },
     filepath : { // 음성파일경로
         type : String
-    }
+    },
+    star : {
+        type: Number
+    },
 })
 
 reviewSchema.statics.findByPostId = function({postId, voice}){
