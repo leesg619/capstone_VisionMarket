@@ -35,7 +35,8 @@ const MyContent = props => {
                 color="primary" 
                 style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit"
-                href='order'>
+                href='order'
+                aria-label='나의쇼핑'>
                 나의 쇼핑
                 </Button>
                 </Grid>
@@ -47,6 +48,7 @@ const MyContent = props => {
                 style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit"
                 href='pointPage'
+                aria-label='나의혜택'
                 >
                 나의 혜택
                 </Button>
@@ -58,6 +60,7 @@ const MyContent = props => {
                 variant="contained" 
                 style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                 type="submit"
+                aria-label='나의정보'
                 >
                 나의 정보
                 </Button>
@@ -78,6 +81,7 @@ const MyContent = props => {
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     href='reviewPage'
+                    aria-label='리뷰관리하기'
                     >
                     리뷰관리
                     </Button>
@@ -89,6 +93,7 @@ const MyContent = props => {
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     href='privacy'
+                    aria-label='개인정보수정하기'
                     >
                     개인정보수정
                     </Button>
@@ -100,8 +105,9 @@ const MyContent = props => {
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     href='DeliveryCard'
+                    aria-label='배송정보수정하기'
                     >
-                    배송정보변경
+                    배송정보수정
                     </Button>
                     </Grid>
                     <Grid item xs={10} sm = {3} >
@@ -111,6 +117,7 @@ const MyContent = props => {
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     href='card'
+                    aria-label='카드계좌등록하기'
                     >
                     카드/계좌등록
                     </Button>
@@ -123,6 +130,7 @@ const MyContent = props => {
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                     type="submit"
+                    aria-label='뒤로가기'
                     >
                     뒤로
                     </Button>

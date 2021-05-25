@@ -48,7 +48,7 @@ export default function MediaCard({post}) {
         />
       </CardActions>
       <CardActions className={classes.button}>
-        <Button style={{fontSize:'1.2rem'}} size="large" aria-label='상세보기'
+        <Button style={{fontSize:'1.2rem'}} size="large" aria-label='상품상세보기'
          onClick={() => {history.push({
           pathname:`/postDetail/${post._id}`
         })}}>상세보기</Button>

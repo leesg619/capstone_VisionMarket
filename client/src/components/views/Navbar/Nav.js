@@ -137,19 +137,19 @@ function Nav(props) {
                             <Box color="#000000" className={classes.BoxComponent2} p={4} >
                             <div className={classes.root}>
                             <ButtonGroup variant="text" color="inherit">
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓" href="/">
+                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="비전마켓 바로가기" href="/">
                             메인
                             </Button>
-                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇" href="/chat">
+                            <Button style={{ fontSize: '1rem' }} color="inherit" aria-label="챗봇 실행하기" href="/chat">
                             Chat
                             </Button>
-                            <Button size="small" aria-label="음성검색">
+                            <Button size="small" aria-label="음성으로 검색하기">
                                 <RecordVoiceOver className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="확대" onClick={zoomIn}>
+                            <Button size="small" aria-label="확대버튼" onClick={zoomIn}>
                                 <ZoomIn className={classes.iconComponent} />
                             </Button>
-                            <Button size="small" aria-label="축소" onClick={zoomOut}>
+                            <Button size="small" aria-label="축소버튼" onClick={zoomOut}>
                                 <ZoomOut className={classes.iconComponent} />
                             </Button>
                             </ButtonGroup>
@@ -179,14 +179,14 @@ function Nav(props) {
                         {/* 주버튼 */}
                         <Grid item xs={12} sm={4}>
                             <Box className={classes.BoxComponent} p={4} >
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="마이페이지" href="/myCategory" >
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="마이페이지로 이동하기" href="/myCategory" >
                                         마이페이지
                                 </Button>
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} aria-label="장바구니" aria-details="장바구니 링크" href="/shoppingbascket" color="inherit" >
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} aria-label="장바구니로 이동하기" href="/shoppingbascket" color="inherit" >
                                 <ShoppingCart  style={{ fontSize: '30' }} />
                                         장바구니
                                 </Button>
-                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃" onClick ={clickLogoutHandler}>
+                                <Button className={classes.orderButton} style={{ fontSize: '1rem' }} color="inherit" aria-label="로그아웃하기" onClick ={clickLogoutHandler}>
                                     <ExitToApp />
                                         로그아웃
                                 </Button>
