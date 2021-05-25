@@ -26,92 +26,114 @@ import axios from 'axios'
 //image json파일로 만들어서 코드 map 사용, 빼서 사용하면 일일이 하나씩 import할필요없음
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
-  
-  function a11yProps(index) {
-    return {
-      id: `full-width-tab-${index}`,
-      'aria-controls': `full-width-tabpanel-${index}`,
-    };
-  };
+};
 
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop : theme.spacing(8),
-        display : 'flex',
-        flexDirection : 'column',
-        alignItems : 'center'
-    },
+  paper: {
+      marginTop : theme.spacing(8),
+      display : 'flex',
+      flexDirection : 'column',
+      alignItems : 'center'
+  },
 
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        width: '100%',
+  root: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.paper,
+      width: '100%',
+  },
+  container: {
+      padding: theme.spacing(10),
+      paddingTop : theme.spacing(10),
+      justifyContent: 'center',
+      alignContent: 'center'
+  },
+  img: {
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100vh',
+  },
+  formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
     },
-    container: {
-        padding: theme.spacing(10),
-        paddingTop : theme.spacing(10),
-        justifyContent: 'center',
-        alignContent: 'center'
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100vh',
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-      },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
+  selectEmpty: {
+      marginTop: theme.spacing(2),
+  },
 }))
 
 export default function PostDetailPage(props) {
-    const classes = useStyles()
-    const dispatch = useDispatch();
-    const theme = useTheme();
+  const classes = useStyles()
+  const dispatch = useDispatch();
+  const theme = useTheme();
 
-    const [image,setImage] =useState([])
-    const [post, setPost] = useState({}) //sh 214
-    const postId = props.match.params.postId
-     useEffect(() => {
- 
-         axios.get(`/api/post/id?id=${postId}`)
-         .then(response => {
-             console.log(response.data.post[0])
-              setPost(response.data.post[0])
-              setImage(response.data.post[0].image) //sh 214  // 281~284
-         })
-     }, [])
-   
- 
+  const [image,setImage] =useState([])
+  const [post, setPost] = useState({}) //sh 214
+  const postId = props.match.params.postId
+
+  const [voices, setVoices] = useState([]) //음성리뷰추가★
+  const [texts, setTexts] = useState([]) //일반리뷰추가★
+  const moment=require('moment');//변수추가★
+
+   useEffect(() => {
+
+       axios.get(`/api/post/id?id=${postId}`)
+       .then(response => {
+           console.log(response.data.post[0])
+            setPost(response.data.post[0])
+            setImage(response.data.post[0].image) //sh 214  // 281~284
+       })
+       //voice,text review 불러오기 추가★
+       axios.post('/api/review/getVoiceReviews', {post:postId})
+       .then(response => {
+         if (response.data.success) {
+           setVoices(response.data.voices)
+       } else {
+           alert('Failed to get Voice Review')
+       }
+     })
+
+     axios.post('/api/review/getTextReviews', {post:postId})
+       .then(response => {
+         if (response.data.success) {
+           setTexts(response.data.texts)
+       } else {
+           alert('Failed to get Text Review')
+       }
+     })
+     //voice,text review 불러오기 추가★
+   }, [])
      
     const handleChangeIndex = (index) => {
         setValue(index);
@@ -121,7 +143,6 @@ export default function PostDetailPage(props) {
     
     //sh-254 장바구니 누르면 해당 데이터를 Cart에 넣고 해당 유저의 장바구니 페이지로 이동
     const clickCartHandler = () => {
-
       
       let user = props.user
             let body = {
@@ -133,6 +154,7 @@ export default function PostDetailPage(props) {
             axios.post('/api/cart/create',body)
             .then(response => {
                 if(response.data.status) {
+                  console.log("바스켓")
                   history.push({
                     pathname: '/shoppingbascket',
                     state:{user:user}
@@ -141,7 +163,6 @@ export default function PostDetailPage(props) {
             })
     }
     
-    //sh
 //이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
   // const  clickPurchaseHandler = () => {
     
@@ -191,61 +212,105 @@ export default function PostDetailPage(props) {
         setValue(newValue);
     };
 
+    // 텍스트리뷰 보여주는 변수 추가
+    const TextReviewItem =texts.map((text, index) => {
+      return <Card  variant="outlined">
+      <CardContent>
+      <Typography gutterBottom variant="h6">
+        별점 {text.star}점 <br/> 
+      </Typography>
+      <Typography >
+        {text.content}
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
+      <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
+      </CardActions>
+      </Card>
+    });
+
+
+      // 음성리뷰 보여주는 변수 추가★
+  const voiceCards = voices.map((voice, index) => {
+    return(
+      <Card  variant="outlined">
+      <CardContent>
+      <Typography gutterBottom variant="h6">
+        별점 {voice.star} <br/> 
+      </Typography>
+      <Typography >
+        <Box>
+          <audio controls>
+            <source src={voice.filepath} type="audio/mp3" />
+          </audio>
+          {voice.filepath}
+          <span>작성자 : {voice.author.name} __ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
+        </Box>
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
+      <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
+      </CardActions>
+      </Card>
+      )
+    })
+
     return (
-
       
-    <Container component='main' maxWidth="lg" className={classes.container}>
-        <CssBaseline />
-        <Typography component="div" style={{height: '100vh' }}>
-        <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src= {image[0]} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Typography component="h1" variant ="h4" > 
-                 {post.title}
-                </Typography>
-                별점 4.5점 / 총 13개의 상품 리뷰가 있습니다.
-                <Divider />
-                <List component="nav" >
-                <ListItem><ListItemText primary=
-                {post.pprice}원 />
-                </ListItem>
-                </List>
+      <Container component='main' maxWidth="lg" className={classes.container}>
+      <CssBaseline />
+      <Typography component="div" style={{height: '100vh' }}>
+      <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <ButtonBase className={classes.image}>
+              <img className={classes.img} alt="complex" src= {image[0]} />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={12} md={6}>
+              <Typography component="h1" variant ="h4" > 
+               {post.title}
+              </Typography>
+              별점 4.5점 / 총 13개의 상품 리뷰가 있습니다.
+              <Divider />
+              <List component="nav" >
+              <ListItem><ListItemText primary=
+              {post.pprice}원 />
+              </ListItem>
+              </List>
 
-                <FormControl required className={classes.formControl}>
-                <Typography variant ="h6" > 
-                사이즈
-                </Typography>
-                <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
-                <ToggleButton variant="outlined"  value = "S" style={{fontSize:'1rem'}} aria-label="S사이즈">S</ToggleButton>
-                <ToggleButton variant="outlined"  value = "M" style={{fontSize:'1rem'}} aria-label="S사이즈">M</ToggleButton>
-                <ToggleButton variant="outlined"  value = "L" style={{fontSize:'1rem'}} aria-label="L사이즈">L</ToggleButton>
-                <ToggleButton variant="outlined"  value = "XL" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</ToggleButton>
-                <ToggleButton variant="outlined"  value = "XXL" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</ToggleButton>
-                </ToggleButtonGroup>
-                <br />
-                <Typography variant ="h6" > 
-                수량
-                </Typography>
-                <ButtonGroup>
-                <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handlePlusQuantityChange} aria-label="더하기">+</Button>
-                <Button variant="outlined" style={{fontSize:'1rem'}}  aria-label="1개">{quantity}</Button>
-                <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
-                </ButtonGroup>
-                <br />
-            </FormControl>
-            <ButtonGroup variant="text" fullWidth="true">
-                <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-                <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
-                </ButtonGroup>
-            </Grid>
-        </Grid> <br />
-        <Divider />
-        <br />
-        <div className={classes.root}>
+              <FormControl required className={classes.formControl}>
+              <Typography variant ="h6" > 
+              사이즈
+              </Typography>
+              <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
+              <ToggleButton variant="outlined"  value = "S" style={{fontSize:'1rem'}} aria-label="S사이즈">S</ToggleButton>
+              <ToggleButton variant="outlined"  value = "M" style={{fontSize:'1rem'}} aria-label="S사이즈">M</ToggleButton>
+              <ToggleButton variant="outlined"  value = "L" style={{fontSize:'1rem'}} aria-label="L사이즈">L</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XL" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XXL" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</ToggleButton>
+              </ToggleButtonGroup>
+              <br />
+              <Typography variant ="h6" > 
+              수량
+              </Typography>
+              <ButtonGroup>
+              <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handlePlusQuantityChange} aria-label="더하기">+</Button>
+              <Button variant="outlined" style={{fontSize:'1rem'}}  aria-label="1개">{quantity}</Button>
+              <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
+              </ButtonGroup>
+              <br />
+          </FormControl>
+          <ButtonGroup variant="text" fullWidth="true">
+              <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
+              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
+              </ButtonGroup>
+          </Grid>
+      </Grid> <br />
+      <Divider />
+      <br />
+      <div className={classes.root}>
       <AppBar position="static" color="default">
           <Tabs
                 value={value}
@@ -272,7 +337,9 @@ export default function PostDetailPage(props) {
         <Box width="100%"><img className={classes.img} alt="complex" src={image[4]} /></Box>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          음성리뷰창
+
+          {voiceCards}
+
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
         <Typography variant="h6" style={{padding:'10px'}}>
@@ -294,6 +361,9 @@ export default function PostDetailPage(props) {
         <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
         </CardActions>
         </Card>
+
+        {TextReviewItem}
+
         </TabPanel>
       </SwipeableViews>
           </div>

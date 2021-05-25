@@ -1,9 +1,8 @@
 import {  makeStyles, Typography, Box, Paper, Container} from "@material-ui/core";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
-import ReviewableCard from "./ReviewableCard"
 import ReviewedCard from "./ReviewedCard"
-
+import axios from 'axios'
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -41,19 +40,33 @@ const useStyles = makeStyles((theme) => ({
   }));
   
   export default function ReviewPage() {
-    const cancelCount = 1
+    let reviewCount = 1
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
+    
+    const [reviews, setReviews] = useState([])
+    const userId=localStorage.getItem('userId');
+
+    useEffect(() => {
+        axios.post('/api/review/getMyReviews', {userId:userId})
+        .then(response => {
+            console.log(response.data.reviews)
+            setReviews(response.data.reviews)
+            // reviewCount = reviews.length;
+        })
+    }, [])
+    const ReviewedItems = reviews.map(( review, index) => {
+      return <ReviewedCard review = { review } title = {review.post.title} content={review.content} image={review.post.image}/>
+    });
+
     return (
         <Container style={{paddingTop:'2%'}}>
             <Paper className={classes.root}>
-              <ReviewedCard/>
-              <ReviewedCard/>
+              {ReviewedItems}
             </Paper>
       </Container>
     );

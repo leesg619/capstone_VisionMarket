@@ -62,7 +62,6 @@ export default function ShoppingBascket(props) {
         .then(response => {
 
             if(response.data.success) {
-                console.log(response)
                 setShoppingList(response.data.shoppingList)
             }
         })

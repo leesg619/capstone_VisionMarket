@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { User } = require('./User')
@@ -26,7 +27,6 @@ const postSchema = mongoose.Schema({
         /*
             0번 : 일반판매글(default),
             1번 : 자유형식게시글
-
             운영자 게시물
             10번 : 메인 화면 포스팅,
             11번 : 공지

@@ -30,7 +30,7 @@ import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
-
+import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
 function App() {
   return (
     <CssBaseline>
@@ -45,8 +45,9 @@ function App() {
             쉽게 말하면 이 곳에서 URL 경로를 관리함 ( Front로 보여주는 경로만 )
         */}
 
-        {/* sh- 본래 취지에 맞게 속성 재설정 */}
-        <Route exact path="/" component={Auth(MainPage, null)} />
+
+         {/* sh- 본래 취지에 맞게 속성 재설정 */}
+         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
@@ -66,7 +67,7 @@ function App() {
         <Route exact path="/deliveryCard" component={DeliveryCard} />
         <Route exact path="/privacy" component={Privacy} />
         <Route exact path="/order" component={Auth(Order, true)}  />
-        <Route exact path="/reviewWrite" component={ReviewWrite} />
+        <Route exact path="/reviewWrite/:postId" component={ReviewWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
         <Route exact path="/pointPage"component={Auth(PointPage, true)}  />
         <Route exact path="/qnaPage" component={Auth(QnaPage, true)} />
@@ -74,6 +75,7 @@ function App() {
         <Route exact paht="/loading" component={LoadingAndSuccess} />
         <Route exact path="/reviewPage" component={ReviewPage} />
 
+        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
       </Switch>
     </Suspense>
     </CssBaseline>

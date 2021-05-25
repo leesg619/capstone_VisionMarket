@@ -12,10 +12,8 @@ const{Post} = require('../models/Post')
 router.post('/cartList',auth, async  (req,res) => {
 
     try {
-       let total  = 0;
        let shoppingList = await  Cart.find({user: req.user._id}).populate('post')
-       shoppingList.filter(item => item._id !== cartId) 
-       return res.status(200).json({success: true, "result": 'Success!',shoppingList})
+        return res.status(200).json({success: true, "result": 'Success!',shoppingList})
     }catch(err) {
         res.status(200).json({ "status": false, "result": "Cart Create Failed!" })
     }

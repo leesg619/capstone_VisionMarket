@@ -2,7 +2,9 @@ import {  Button, Card, CardActions, CardContent, CardHeader ,ButtonGroup, Grid,
 import { DeleteOutlined } from '@material-ui/icons';
 import axios from 'axios';
 import React, { useState,useEffect } from 'react'
-
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles({
@@ -27,7 +29,7 @@ export default function BuyCard(props){
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
-
+    const [purchase, setPurchase] = useState({});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -87,11 +89,11 @@ export default function BuyCard(props){
                 <ButtonGroup
                     orientation="vertical"
                     fullWidth
-                >
-                    <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
+                >  
+                <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
-                    <Button style={{fontSize:'1rem'}}>음성리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${post}`} >음성리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${post}`} >일반리뷰작성</Button>
                     <Button style={{fontSize:'1rem'}} href='/qnaPage'>문의하기</Button>
                 </ButtonGroup>
                 </CardActions>

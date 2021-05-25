@@ -1,10 +1,8 @@
 import { makeStyles, Tab, Tabs, Typography, Box, Paper, Container} from "@material-ui/core";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import BuyCard from "./BuyCard";
 import axios from 'axios';
-import React, { useState,useEffect } from 'react'
-
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   
   export default function Order() {
 
-    const orderCount = 3;
+    let orderCount = 3;
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
   

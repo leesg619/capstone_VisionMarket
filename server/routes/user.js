@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
                 res.status(400).json({success : false, msg : "패스워드를 확인해주세요"})
             }
             user.generateToken((err, user) => {
-                if (err) return res.status.json({success : false, err});
+                if (err) return res.status(400).json({success : false, err});
                 res.cookie("w_auth", user.token);
                 res.cookie("w_authExp", user.tokenExp)
                 .status(200).json({loginSuccess : true, userId : user._id})
