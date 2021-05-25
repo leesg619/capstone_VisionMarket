@@ -30,9 +30,6 @@ import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
-
-
-import PostReviewPage from './views/PostPage/PostReviewPage';  //석근거
 function App() {
   return (
     <CssBaseline>
@@ -71,9 +68,6 @@ function App() {
         <Route exact path="/pointPage" component={PointPage} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />
-        <Route exact path="/loading" component={LoadingAndSuccess} />
-
-        <Route exact path="/review" component={Auth(PostReviewPage, null)} />
 
       </Switch>
     </Suspense>
