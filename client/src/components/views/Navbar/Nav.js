@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import SearchIcon from '@material-ui/icons/Search';
 
+
 const useStyle = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -90,7 +91,7 @@ const useStyle = makeStyles((theme) => ({
 
 function Nav(props) {
     const classes = useStyle();
-  
+    
     // 확대, 축소 기능
     var nowZoom = 100;
     function zoomOut() {

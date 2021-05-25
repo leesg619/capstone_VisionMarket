@@ -4,6 +4,8 @@ const { auth } = require("../middlewares/auth");
 const {Post} = require('../models/Post');
 const {Category} = require('../models/Category');
 
+const path = require('path')
+
 const multer = require('multer');
 
 let storage = multer.diskStorage({
@@ -18,7 +20,8 @@ let storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
     var ext = path.extname(file.originalname)
     if (ext !== ".jpg" && ext !== '.png' && ext !== '.gif' && ext !== '.jpeg') {
-        cb(res.status(400).json({success : false, error : "Only image type can do"}))
+        console.log("it must be img files")
+        cb(res.status(400).end('end'), false)
     }
     cb(null, true)
 }

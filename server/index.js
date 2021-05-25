@@ -31,6 +31,7 @@ const postRoute = require('./routes/post')
 const cartRoute = require('./routes/cart')
 const purchaseRoute = require('./routes/purchase')
 const categoryRoute = require('./routes/category')
+const ocrRoute = require('./routes/OCR')
 
 
 // app use
@@ -46,7 +47,7 @@ app.use('/api/post',postRoute);
 app.use('/api/cart',cartRoute);
 app.use('/api/purchase',purchaseRoute);
 app.use('/api/category',categoryRoute)
-
+app.use('/api/ocr', ocrRoute);
 
 const port = 5000
 
