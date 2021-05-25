@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const { User } = require('./User')
@@ -6,15 +7,14 @@ const { Category } = require('./Category')
 const postSchema = mongoose.Schema({
     title : {
         type : String,
-        maxLength : 100
+        maxLength : 20
     },
     content : {
         type : String
     },
     author : {
         type : Schema.Types.ObjectId,
-        ref : "User",
-        default : null
+        ref : "User"
     },
     //여기가 소분류 ex) 남성패션 -> 의류
     pcategory : {
@@ -26,16 +26,18 @@ const postSchema = mongoose.Schema({
         /*
             0번 : 일반판매글(default),
             1번 : 자유형식게시글
-
             운영자 게시물
             10번 : 메인 화면 포스팅,
             11번 : 공지
         */
         default : 0
     },
-    image : {
+    image : [{
         type : String
-    },
+    }],
+    pcolor:[{
+        type: String
+    }],
     pviews : {
         type : Number,
         default : 0
@@ -51,12 +53,11 @@ const postSchema = mongoose.Schema({
         type : Number
     },
     pstock : {
-        type : Number,
-        default : 100
+        type : Number
     },
-    detailImage : [{
-        type : String
-    }],
+    psize: {
+        type: String
+    },
     /*
     posting : {
         type : Number,
@@ -65,16 +66,16 @@ const postSchema = mongoose.Schema({
     */
 }, {timestamps : true})  // cretedAt, updatedAt 자동생성
 
-// postSchema.pre('save', function(next){
-//     var post = this
-
-//     User.findById({'_id' : this.author}, (err, doc) => {
-//         if(err) return next(err)
-//         if(doc.role === 1) {
-//             post.purpose = 10   //purpose 변경으로 운영자글 명시
-//         }
-//     })
-// })
+postSchema.pre('save', function(next){
+    var post = this
+    User.findById({'_id' : post.author}, (err, doc) => {
+        if(err) return next(err)
+        if(doc.role === 1) {
+            post.purpose = 10   //purpose 변경으로 운영자글 명시
+        }
+    })
+    next()
+})
 
 
 postSchema.methods.compareAuthor = function( user_id ) {
@@ -87,7 +88,6 @@ postSchema.methods.compareAuthor = function( user_id ) {
     return result
    
 }
-
 
 postSchema.statics.findById = function( id ) {
     return this.findOne({_id: id},
