@@ -77,7 +77,7 @@ export default function BuyCard(props){
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
                     <Button style={{fontSize:'1rem'}}>음성리뷰작성</Button>
                     <Button style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}}>문의하기</Button>
+                    <Button style={{fontSize:'1rem'}} href='/qnaPage'>문의하기</Button>
                 </ButtonGroup>
                 </CardActions>
                 </Grid>

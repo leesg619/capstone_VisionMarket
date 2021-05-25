@@ -29,6 +29,7 @@ import Order from './views/MyPage/MyPageComponent/Order';
 import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
+import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
 
 function App() {
   return (
@@ -68,8 +69,10 @@ function App() {
         <Route exact path="/reviewWrite" component={ReviewWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
         <Route exact path="/pointPage"component={Auth(PointPage, true)}  />
-
+        <Route exact path="/qnaPage" component={Auth(QnaPage, true)} />
+        
         <Route exact paht="/loading" component={LoadingAndSuccess} />
+        <Route exact path="/reviewPage" component={ReviewPage} />
 
       </Switch>
     </Suspense>
