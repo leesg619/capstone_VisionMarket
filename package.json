@@ -12,6 +12,7 @@
   "author": "bean",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/dialogflow": "^3.5.0",
     "@material-ui/icons": "^4.11.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
