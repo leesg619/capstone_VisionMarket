@@ -1,8 +1,9 @@
 import { makeStyles, Tab, Tabs, Typography, Box, Paper, Container} from "@material-ui/core";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import BuyCard from "./BuyCard";
 
+import axios from 'axios'
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   
   export default function Order() {
 
-    const orderCount = 3;
+    let orderCount = 3;
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
   
@@ -45,6 +46,22 @@ const useStyles = makeStyles((theme) => ({
       setValue(newValue);
     };
   
+    const [purchases, setPurchases] = useState([]);
+    const userId=localStorage.getItem('userId');
+    useEffect(() => {
+        axios.get('/api/purchase/getPurchases', {userId:userId})
+        .then(response => {
+            console.log(response.data.purchases)
+            setPurchases(response.data.purchases)
+                // orderCount = purchases.length;
+        })
+    }, [])
+
+
+    const PurchaseItems = purchases.map(( purchase, index) => {
+      return <BuyCard postId={purchase.post._id} purchase={purchase}></BuyCard>
+    });
+
     return (
         <Container style={{paddingTop:'2%'}}>
             <Paper className={classes.panel}>
@@ -53,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
                     <div>
                         <BuyCard></BuyCard>
                         <BuyCard></BuyCard>
+                        {PurchaseItems}
                     </div>
                 }
             </Paper>

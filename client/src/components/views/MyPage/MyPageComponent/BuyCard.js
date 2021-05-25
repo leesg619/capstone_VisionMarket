@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useState,useEffect } from 'react'
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
-
+import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles({
@@ -33,7 +33,7 @@ console.log(props)
     const history = useHistory()
 
     const [open, setOpen] = useState(false);
-
+    const [purchase, setPurchase] = useState({});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -43,7 +43,11 @@ console.log(props)
         console.log(e.currentTarget.value)
         setOpen(false);
     }
-
+    const mongoose = require('mongoose');
+    const post = mongoose.Types.ObjectId('609a7ea8e8ffe95ab80c19e2');//props.match.params.postId
+    const purchase1 = props.purchase;
+    console.log(purchase1);
+    console.log(post);
     return(
         <div>
         <Card className={classes.root} elevation={3}>
@@ -54,6 +58,7 @@ console.log(props)
                         title={
                             <Typography variant= "h6" color="#000000" style={{marginBottom: '12px'}}>
                                 4월 26일 월요일 / 배송완료
+                                
                             </Typography>
                         }
                     />
@@ -63,7 +68,7 @@ console.log(props)
                     </Grid>
                     <Grid item xs={9} sm={9}>
                             <Typography style={{marginBottom: '12px'}}>
-                                에프씨팩토리 에브리데이 클린미세먼지 방역마스트 [kf94 50개], 1팩 50매입 주문내역 길게 적기
+                                posttitle 
                             </Typography>
                             <Typography className={classes.pos} >
                                 1개, 41500원
@@ -76,11 +81,11 @@ console.log(props)
                 <ButtonGroup
                     orientation="vertical"
                     fullWidth
-                >
+                >  
                     <Button style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
-                    <Button style={{fontSize:'1rem'}}>음성리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${post}`} >음성리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${post}`} >일반리뷰작성</Button>
                     <Button style={{fontSize:'1rem'}}>문의하기</Button>
                 </ButtonGroup>
                 </CardActions>
