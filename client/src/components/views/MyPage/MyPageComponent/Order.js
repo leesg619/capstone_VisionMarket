@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
                if(response.data.success) {
                 console.log(response)
                 setPurchaseList(response.data.purchaseList)
+                
             }
         }
         })
@@ -66,9 +67,13 @@ const useStyles = makeStyles((theme) => ({
 
     const getPurchaseList = (PurchaseListObj) => {
       return (
-          <BuyCard {...PurchaseListObj}></BuyCard>
+          <BuyCard {...PurchaseListObj} deletePurchaseItem={e => deletePurchaseItem(e)}></BuyCard>
       );
   }
+
+  function deletePurchaseItem(purchaseId){ 
+    setPurchaseList(purchaseList.filter(item => item._id !== purchaseId))
+}
 
     return (
         <Container style={{paddingTop:'2%'}}>

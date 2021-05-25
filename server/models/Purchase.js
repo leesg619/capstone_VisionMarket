@@ -3,6 +3,9 @@ const Schema = mongoose.Schema
 const { User } = require('./User')
 const { Post } = require('./Post')
 const moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault("Asia/Seoul");
+
 
 const purchaseSchema = mongoose.Schema({
     post : {
@@ -22,13 +25,18 @@ const purchaseSchema = mongoose.Schema({
     },
     purchaseDate : {
         type : Date,
-        default : moment.now()
+        default : moment().format('YYYY-MM-DD')
     },
     total: {
         type: Number,
         default: 0
+    },
+    arriveDate: {
+        type: Date,
+        default: moment().add(3, 'days').format('YYYY-MM-DD') 
     }
 })
+
 
 const Purchase = mongoose.model("Purchase", purchaseSchema)
 

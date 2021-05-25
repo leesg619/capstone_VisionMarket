@@ -5,7 +5,6 @@ import React, { useState,useEffect } from 'react'
 
 
 
-
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
@@ -39,7 +38,23 @@ export default function BuyCard(props){
         setOpen(false);
     }
 
-    console.log(props);
+   const deletePurchaseHandler = () => {
+
+    if(window.confirm("해당 상품 주문을 취소 하시겠습니까??") == true) {
+    let body = {
+        purchaseId:props._id,
+        quantity:props.quantity
+    }
+    axios.post('api/purchase/delete', body)
+    .then(response => {
+        if(response.data.success) {
+            props.deletePurchaseItem(body.purchaseId);
+          }
+    });
+}
+}
+    console.log(props)
+
     return(
         <div>
         <Card className={classes.root} elevation={3}>
@@ -49,7 +64,7 @@ export default function BuyCard(props){
                     <CardHeader
                         title={
                             <Typography variant= "h6" color="#000000" style={{marginBottom: '12px'}}>
-                                {moment(props.purchaseDate).format("YYYY년M월DD일")} / {moment(props.purchaseDate).add(3, 'days') > moment() ? "배송중":"배송완료"}
+                       주문일: {moment(props.purchaseDate).format("YYYY년M월DD일")} / {moment(props.purchaseDate).add(3, 'days') > moment() ? "배송중":"배송완료"}
                             </Typography>
                         }
                     />
@@ -73,7 +88,7 @@ export default function BuyCard(props){
                     orientation="vertical"
                     fullWidth
                 >
-                    <Button style={{fontSize:'1rem'}}>주문취소</Button>
+                    <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
                     <Button style={{fontSize:'1rem'}}>음성리뷰작성</Button>
                     <Button style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
