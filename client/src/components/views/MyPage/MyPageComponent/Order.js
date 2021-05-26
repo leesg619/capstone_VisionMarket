@@ -2,11 +2,11 @@ import { makeStyles, Tab, Tabs, Typography, Box, Paper, Container} from "@materi
 import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'
 import BuyCard from "./BuyCard";
-
-import axios from 'axios'
+import axios from 'axios';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
+
     return (
       <div
         role="tabpanel"
@@ -45,22 +45,33 @@ const useStyles = makeStyles((theme) => ({
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
-    const [purchases, setPurchases] = useState([]);
-    const userId=localStorage.getItem('userId');
+
+
+    //sh 유저가 구매한 목록 받아와서 BuyCard에 뿌려준다.
+    const [purchaseList,setPurchaseList] = useState([])
     useEffect(() => {
-        axios.get('/api/purchase/getPurchases', {userId:userId})
+
+        axios.get(`/api/purchase/purchaseList`)
         .then(response => {
-            console.log(response.data.purchases)
-            setPurchases(response.data.purchases)
-                // orderCount = purchases.length;
+            if(response.data.success){
+               if(response.data.success) {
+                console.log(response)
+                setPurchaseList(response.data.purchaseList)
+                
+            }
+        }
         })
     }, [])
 
+    const getPurchaseList = (PurchaseListObj) => {
+      return (
+          <BuyCard {...PurchaseListObj} deletePurchaseItem={e => deletePurchaseItem(e)}></BuyCard>
+      );
+  }
 
-    const PurchaseItems = purchases.map(( purchase, index) => {
-      return <BuyCard postId={purchase.post._id} purchase={purchase}></BuyCard>
-    });
+  function deletePurchaseItem(purchaseId){ 
+    setPurchaseList(purchaseList.filter(item => item._id !== purchaseId))
+}
 
     return (
         <Container style={{paddingTop:'2%'}}>
@@ -68,9 +79,7 @@ const useStyles = makeStyles((theme) => ({
               {
                     orderCount < 1 ? '최근 6개월간 주문하신 내역이 없습니다.' : 
                     <div>
-                        <BuyCard></BuyCard>
-                        <BuyCard></BuyCard>
-                        {PurchaseItems}
+                        {purchaseList.map(PurchaseListObj => getPurchaseList(PurchaseListObj))}
                     </div>
                 }
             </Paper>
