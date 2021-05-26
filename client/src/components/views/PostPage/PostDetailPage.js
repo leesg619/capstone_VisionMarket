@@ -154,6 +154,7 @@ export default function PostDetailPage(props) {
             axios.post('/api/cart/create',body)
             .then(response => {
                 if(response.data.status) {
+                  console.log("바스켓")
                   history.push({
                     pathname: '/shoppingbascket',
                     state:{user:user}

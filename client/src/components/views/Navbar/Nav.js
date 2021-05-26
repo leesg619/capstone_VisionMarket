@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Box, Grid, makeStyles,  AppBar, Toolbar, InputBase, Container } from '@material-ui/core'
-
+import { useHistory } from 'react-router';
 import axios from "axios";
 import { ZoomOut, ZoomIn, RecordVoiceOver, Exposure, Brightness6, ShoppingCart, ExitToApp, ZoomInSharp } from '@material-ui/icons'
 
@@ -116,11 +116,12 @@ function Nav(props) {
 
 
     //sh-119 로그아웃기능 193
+    const histroy = useHistory()
     const clickLogoutHandler = () => {
       
         axios.get(`/api/users/logout`)
         .then(response => {
-            console.log("로그아웃")
+            histroy.push('/')
         })
       }
   

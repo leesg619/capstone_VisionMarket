@@ -91,7 +91,7 @@ router.get('/:id',  (req,res) => {
 })
 
 //상품 카테고리에 맞는거 조회
-router.post('/posts_by_category',auth, (req,res) => {
+router.post('/posts_by_category', (req,res) => {
 
     let categoryId = req.body._id
      Post.find({pcategory:categoryId})
