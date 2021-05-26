@@ -31,6 +31,7 @@ import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
 import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
+
 function App() {
   return (
     <CssBaseline>
