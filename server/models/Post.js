@@ -65,16 +65,16 @@ const postSchema = mongoose.Schema({
     
 }, {timestamps : true})  // cretedAt, updatedAt 자동생성
 
-// postSchema.pre('save', function(next){
-//     var post = this
+postSchema.pre('save', function(next){
+    var post = this
 
-//     User.findById({'_id' : this.author}, (err, doc) => {
-//         if(err) return next(err)
-//         if(doc.role === 1) {
-//             post.purpose = 10   //purpose 변경으로 운영자글 명시
-//         }
-//     })
-// })
+    User.findById({'_id' : this.author}, (err, doc) => {
+        if(err) return next(err)
+        if(doc.role === 1) {
+            post.purpose = 10   //purpose 변경으로 운영자글 명시
+        }
+    })
+})
 
 
 postSchema.methods.compareAuthor = function( user_id ) {

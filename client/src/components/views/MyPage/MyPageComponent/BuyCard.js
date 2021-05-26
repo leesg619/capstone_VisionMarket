@@ -92,8 +92,8 @@ export default function BuyCard(props){
                 >  
                 <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
-                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${post}`} >음성리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${post}`} >일반리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${props.post._id}`} >음성리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${props.post._id}`} >일반리뷰작성</Button>
                     <Button style={{fontSize:'1rem'}} href='/qnaPage'>문의하기</Button>
                 </ButtonGroup>
                 </CardActions>
