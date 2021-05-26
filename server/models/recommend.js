@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const { Post } = require('./Post')
 
 //인공지능 모델의 상품평가지표를 갱신하고 저장할 모델
 const recommendSchema = mongoose.Schema({
@@ -8,8 +9,8 @@ const recommendSchema = mongoose.Schema({
         maxLength: 12
     },
     productId : {  
-        type : Number,
-        default : 0
+        type : String,
+        maxLength: 200
     }
 })
 

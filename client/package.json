@@ -29,6 +29,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-speech-recognition": "^3.8.0",
+    "react-swipeable-views": "^0.13.9",
     "reactjs-credit-card": "^1.0.5",
     "reduce": "^1.0.2",
     "redux": "^4.0.5",

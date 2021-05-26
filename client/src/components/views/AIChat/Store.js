@@ -11,7 +11,7 @@ const initState = {
 }
 
 function reducer(state, action){
-    const {from, msg, img, link, topic} = action.payload;
+    const {from, msg, img, link, mp3, topic} = action.payload;
     switch(action.type){
         case 'RECEIVE_MESSAGE':
             // console.log(from, msg, topic);
@@ -19,7 +19,7 @@ function reducer(state, action){
                 ...state,
                 [topic]:[
                     ...state[topic],
-                    {from, msg, img, link}
+                    {from, msg, img, link, mp3}
                 ]
             }
         default :
@@ -55,7 +55,7 @@ export default function Store(props){
         .then(response => {
             console.log(response.Reply); 
             result = response.Reply
-            dispatch({type: 'RECEIVE_MESSAGE', payload: {from:'비전', msg: result, img: response.Img, link: response.link, topic:"general"}})
+            dispatch({type: 'RECEIVE_MESSAGE', payload: {from:'비전', msg: result, img: response.Img, link: response.link, mp3: response.mp3, topic:"general"}})
         }).catch(function(e){
             console.log('에러!')
         })

@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
   export default function Dashboard(){
     const classes = useStyles();
     const messagesEndRef = useRef(null);
+    const musictest = useRef(new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'))
   
     // CTX store
     const {allChats, sendChatAction, user} = React.useContext(CTX);
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     const [isRemember, setIsRemember] =React.useState(false);
     const [token, setToken] = React.useState(Math.random().toString(36).substr(2,11));
     const [cookies, setCookie, removeCookie] = useCookies(['rememberChatToken']);
+    const [music, setMusic] = React.useState(new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'));
   
     const {
       interimTranscript,
@@ -99,26 +101,34 @@ const useStyles = makeStyles((theme) => ({
         setToken(token);
         setIsRemember(true);
         setCookie('rememberChatToken', token, {maxAge: 20000});
-        //console.log(token);
       }
     }, []);
-  
+
     useEffect(() => {
-      scrollToBottom()
-      console.log();
-      //console.log(cookies.rememberChatToken);
       setCount(count+1);
+      //보낸 사람이 비전이고 3번째 채팅 이상일 때
       if(allChats.general[count-1].from === "비전" && checked && allChats.general.length > 2){
         speech.speak({
           text: allChats.general[count-1].msg,
           queue: false
         })
         console.log(allChats.general[count-1]);
+        //링크 섹션에 값이 들어왔을 때, 이동
         if(allChats.general[count-1].link !== ""){
           window.open(allChats.general[count-1].link);
         }
+        //mp3 섹션에 값이 들어왔을 때 플레이
+        if(allChats.general[count-1].mp3 !== ""){
+          musictest.current.pause();
+          musictest.current = new Audio(allChats.general[count-1].mp3);
+          musictest.current.play();
+        }
+        //다시 다른 입력이 들어갔을 때 중지
+        else{
+          musictest.current.pause();
+        }
       }
-      
+      scrollToBottom()
     }, [sendChatAction]);
   
     useEffect(()=>{
