@@ -88,7 +88,6 @@ function PostingPage(props) {
             header : {'content-type' : 'multipart/form-data'}
         }
         formData.append('file', files[0])
-
         Axios.post('/api/post/uploads/files', formData, config)
         .then(response => {
             if (response.data.success) {
