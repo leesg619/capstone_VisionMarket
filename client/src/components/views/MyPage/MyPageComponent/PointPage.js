@@ -1,10 +1,12 @@
 import { Button, Box, Card, Tabs, Tab, Container, Grid, makeStyles, Paper, Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, CardActions } from "@material-ui/core";
-import React from "react";
 import PropTypes from 'prop-types'
+import React, { useState,useEffect } from 'react'
+import axios from 'axios'
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
+     const { children, value, index, ...other } = props;
+   
+
     return (
       <div
         role="tabpanel"
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function createData(point, usage, deadline) {
-    return { point, usage, deadline };
+    return {point, usage, deadline };
 }
 
 const rows = [
@@ -69,11 +71,24 @@ export default function PointPage(){
       setValue(newValue);
     };
 
+
+    //sh 포인트 조회 91
+    const [point,setPoint] = useState(0)
+    useEffect(() => {
+
+       axios.get(`/api/users/point`)
+       .then(response => {
+           if(response.data.success){
+               setPoint(response.data.result.point)
+           }
+       })
+   }, [])
+
     return(
         <Container style={{paddingTop:'2%'}}>
             <Card className={classes.card}>
                     <Typography variant="h6" align='center'>
-                        사용가능 적립금은 총 1000원 입니다.
+                        사용가능 적립금은 총 {point}원 입니다.
                     </Typography>
                     <CardActions className={classes.button}>
                     <Button 

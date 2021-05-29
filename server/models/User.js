@@ -98,6 +98,15 @@ userSchema.methods.generateToken = function( cb ) {
     });
 }
 
+userSchema.methods.deletePoint = function(deletedPoint) {
+    var user = this;
+    console.log(deletedPoint)
+    user.point += deletedPoint;
+
+    console.log(user.point)
+}
+
+
 userSchema.statics.findByToken = function(token, cb) {
     var user = this;
     jwt.verify(token, secret, (err, decoded) => {

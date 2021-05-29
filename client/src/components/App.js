@@ -29,7 +29,9 @@ import Order from './views/MyPage/MyPageComponent/Order';
 import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
+import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
 import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
+
 function App() {
   return (
     <CssBaseline>
@@ -44,31 +46,37 @@ function App() {
             쉽게 말하면 이 곳에서 URL 경로를 관리함 ( Front로 보여주는 경로만 )
         */}
 
-        {/* sh- 본래 취지에 맞게 속성 재설정 */}
-        <Route exact path="/" component={Auth(MainPage, null)} />
+
+         {/* sh- 본래 취지에 맞게 속성 재설정 */}
+         <Route exact path="/" component={Auth(MainPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/card" component={EnrollmentCreditPage} />
         <Route exact path="/dopay" component={PayPage} />
-        <Route exact path="/myCategory" component={Auth(MyCategory, true)} />
-        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, true)} />
-        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, true)} />
 
-        <Route exact path="/shoppingBascket" component={ShoppingBascket} />
+        <Route exact path="/MyCategory" component={Auth(MyCategory, true)} />
+        <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, null)} />
+        <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, null)} />
+
+
+        <Route exact path="/shoppingBascket" component={Auth(ShoppingBascket,true)} />
+
         <Route exact path="/chat" component={Chat} />
         <Route exact path="/category" component={Category} />
         <Route exact path="/introduce" component={Introduce} />
 
         <Route exact path="/deliveryCard" component={DeliveryCard} />
         <Route exact path="/privacy" component={Privacy} />
-        <Route exact path="/order" component={Order} />
+        <Route exact path="/order" component={Auth(Order, true)}  />
         <Route exact path="/reviewWrite/:postId" component={ReviewWrite} />
-        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
         <Route exact path="/reviewPage" component={ReviewPage} />
-        <Route exact path="/pointPage" component={PointPage} />
-
+        <Route exact path="/pointPage"component={Auth(PointPage, true)}  />
+        <Route exact path="/qnaPage" component={Auth(QnaPage, true)} />
+        
         <Route exact paht="/loading" component={LoadingAndSuccess} />
+        <Route exact path="/reviewPage" component={ReviewPage} />
 
+        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
       </Switch>
     </Suspense>
     </CssBaseline>

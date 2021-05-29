@@ -33,7 +33,7 @@ const cartRoute = require('./routes/cart')
 const purchaseRoute = require('./routes/purchase')
 const categoryRoute = require('./routes/category')
 const reviewRoute = require('./routes/review')
-// const cartRoute = require('./routes/cart')
+
 
 // app use
 app.use(bodyParser.urlencoded({extended : true}))
@@ -64,4 +64,4 @@ app.use('/api/review',reviewRoute);
 const port = 5000
 
 var server = app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
-server.timeout = 12000;
+server.timeout = 24000;

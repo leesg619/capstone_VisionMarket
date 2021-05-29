@@ -23,14 +23,10 @@ const useStyles = makeStyles({
   });
 
 export default function BuyCard(props){
+    const moment = require('moment');
 
-
-console.log(props)
-    const postId = props.postId
 
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const history = useHistory()
 
     const [open, setOpen] = useState(false);
     const [purchase, setPurchase] = useState({});
@@ -43,11 +39,24 @@ console.log(props)
         console.log(e.currentTarget.value)
         setOpen(false);
     }
-    const mongoose = require('mongoose');
-    const post = mongoose.Types.ObjectId('609a7ea8e8ffe95ab80c19e2');//props.match.params.postId
-    const purchase1 = props.purchase;
-    console.log(purchase1);
-    console.log(post);
+
+   const deletePurchaseHandler = () => {
+
+    if(window.confirm("해당 상품 주문을 취소 하시겠습니까??") == true) {
+    let body = {
+        purchaseId:props._id,
+        quantity:props.quantity
+    }
+    axios.post('api/purchase/delete', body)
+    .then(response => {
+        if(response.data.success) {
+            props.deletePurchaseItem(body.purchaseId);
+          }
+    });
+}
+}
+    console.log(props)
+
     return(
         <div>
         <Card className={classes.root} elevation={3}>
@@ -57,21 +66,20 @@ console.log(props)
                     <CardHeader
                         title={
                             <Typography variant= "h6" color="#000000" style={{marginBottom: '12px'}}>
-                                4월 26일 월요일 / 배송완료
-                                
+                       주문일: {moment(props.purchaseDate).format("YYYY년M월DD일")} / {moment(props.purchaseDate).add(3, 'days') > moment() ? "배송중":"배송완료"}
                             </Typography>
                         }
                     />
                     <Grid container>   
                     <Grid item xs={3} sm={3}>
-                        <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/120x120ex/image/retail/images/2019/12/28/10/7/01178ffe-33c8-4019-bc71-27a4fc55e8d6.jpg" />
+                        <img src= {props.post.image[0]}  style ={{width:350,height:300}}/>
                     </Grid>
                     <Grid item xs={9} sm={9}>
-                            <Typography style={{marginBottom: '12px'}}>
-                                posttitle 
+                            <Typography style={{marginLeft: '180px',marginBottom: '12px'}}>
+                              {props.post.content}
                             </Typography>
-                            <Typography className={classes.pos} >
-                                1개, 41500원
+                            <Typography className={classes.pos} style={{marginLeft: '180px'}}>
+                                {props.quantity}개, {props.total}원
                             </Typography>
                     </Grid>
                     </Grid>         
@@ -82,11 +90,11 @@ console.log(props)
                     orientation="vertical"
                     fullWidth
                 >  
-                    <Button style={{fontSize:'1rem'}}>주문취소</Button>
+                <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
-                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${post}`} >음성리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${post}`} >일반리뷰작성</Button>
-                    <Button style={{fontSize:'1rem'}}>문의하기</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewVoiceWrite/${props.post._id}`} >음성리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href={`/reviewWrite/${props.post._id}`} >일반리뷰작성</Button>
+                    <Button style={{fontSize:'1rem'}} href='/qnaPage'>문의하기</Button>
                 </ButtonGroup>
                 </CardActions>
                 </Grid>
@@ -96,5 +104,3 @@ console.log(props)
         </div>
     )
 }
-
-
