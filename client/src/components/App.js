@@ -29,7 +29,6 @@ import Order from './views/MyPage/MyPageComponent/Order';
 import ReviewWrite from './views/MyPage/MyPageComponent/ReviewWrite';
 import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
-import OCRpage from './views/PostPage/OCRpage/OCRpage';
 import PostingPage from './views/PostPage/PostingPage';
 
 function App() {
@@ -68,7 +67,6 @@ function App() {
         <Route exact path="/reviewPage" component={ReviewPage} />
         <Route exact path="/pointPage" component={PointPage} />
 
-        <Route exact path="/ocrpage" component={Auth(OCRpage, true)} />
         <Route exact path="/posting" component={Auth(PostingPage, true)} />
 
         <Route exact paht="/loading" component={LoadingAndSuccess} />

@@ -58,20 +58,20 @@ export default function Login(props) {
     const initialId = localStorage.getItem('rememberE') ? localStorage.getItem('rememberE') : '';
 
     const validateionSchema = Yup.object().shape({
-        email: Yup.string("").required("ID를 입력해주세요."),
+        id: Yup.string("").required("ID를 입력해주세요."),
         password: Yup.string("").required("Paaword를 입력해주세요.")
     })
 
     const formik = useFormik({
         initialValues: {
-            email: initialId,
+            id: initialId,
             password: ''
         },
         validationSchema: validateionSchema,
         onSubmit : ((values, { setSubmitting }) => {
             setTimeout(() => {
                 let dataToSubmit = {
-                    email: values.email,
+                    email: values.id,
                     password: values.password
                 }
 
@@ -88,6 +88,7 @@ export default function Login(props) {
                             props.history.push('/')
                         }
                         else {
+                            console.log(response.payload)
                             setFormErrorMessage('ID 혹은 Password를 확인해주세요.')
                         }
                     }).catch(err => {
@@ -97,7 +98,7 @@ export default function Login(props) {
                         }, 3000);
                     });
                 setSubmitting(false)
-            }, 500);
+            }, 1000);
         })
     })
 
@@ -119,16 +120,16 @@ export default function Login(props) {
                         fullWidth
                         id="id"
                         label="ID"
-                        name="email"
-                        value={formik.values.email}
+                        name="id"
+                        value={formik.values.id}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={formik.errors.email && formik.touched.email ? 'input-text error' : 'input-text'}
+                        className={formik.errors.id && formik.touched.id ? 'input-text error' : 'input-text'}
                         autoFocus
                         alt="아이디입력창"
                     />
-                    {formik.errors.email && formik.touched.email && (
-                        <div style={{color : 'red'}} className="input-text">{formik.errors.email}</div>
+                    {formik.errors.id && formik.touched.id && (
+                        <div style={{color : 'red'}} className="input-text">{formik.errors.id}</div>
                     )}
                     <TextField
                         variant="outlined"  

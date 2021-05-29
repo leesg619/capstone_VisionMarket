@@ -265,10 +265,11 @@ export default function PostDetailPage(props) {
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
         <Box component="span" m={1}><Button /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={image[1]} /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={image[2]} /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={image[3]} /></Box>
-        <Box width="100%"><img className={classes.img} alt="complex" src={image[4]} /></Box>
+        {image.map((img, key) => {
+          return <Box width="100%">
+            <img className={classes.img} alt="complex" src={img} />
+          </Box>
+        })}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           음성리뷰창
