@@ -10,7 +10,8 @@ router.post('/create',auth, (req,res) => {
    
     const purchase =  new Purchase(req.body);
     purchase.user = req.user._id
-    purchase.total = req.body.quantity * req.body.price 
+    purchase.total = req.body.quantity * req.body.price
+    purchase.size = req.body.size 
     console.log(req.body.quantity * req.body.price )
 //유저를 가져와서 //유저의 point에 quantity * 1000을해준다. 왜냐하면 각 물품당 천원씩 적립해 줄거니까..
 User.findOneAndUpdate(

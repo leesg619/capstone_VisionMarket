@@ -154,7 +154,6 @@ export default function PostDetailPage(props) {
             axios.post('/api/cart/create',body)
             .then(response => {
                 if(response.data.status) {
-                  console.log("바스켓")
                   history.push({
                     pathname: '/shoppingbascket',
                     state:{user:user}
@@ -163,31 +162,6 @@ export default function PostDetailPage(props) {
             })
     }
     
-//이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
-  // const  clickPurchaseHandler = () => {
-    
-  //   if(props.user.userData.isAuth) {
-  //           let body = {
-  //               post: postId,
-  //               size: size,
-  //               quantity: quantity,
-  //               price: post.pprice
-  //           }
-  //          // console.log(body)
-  //           axios.post('/api/purchase/create',body)
-  //           .then(response => {
-  //               if(response.data.success) {
-  //                 //결제 페이지로 이동.
-  //               }
-  //           })
-  //       }else {
-  //           alert('로그인이 필요합니다.')
-  //           history.push('/login')   
-  //           }
-  // }
-    
-
-
 
     //sh (Quantity , Size  175-201 해당 기능 232-238 // 244-246)   ( 상품 추가 이미지 280 ) (대표이미지 수정)
     const[quantity,setQuantity] = useState(1)
@@ -211,6 +185,21 @@ export default function PostDetailPage(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const buyHandler = () => {
+      let data = {
+        post: postId,
+        size: size,
+        quantity: quantity
+      }
+      history.push({
+        pathname: '/buy/${post._id}',
+        state:{data:data}
+      })
+    }
+
+//     <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" href={`/buy/${post._id}`}>바로구매</Button>
+
 
     // 텍스트리뷰 보여주는 변수 추가
     const TextReviewItem =texts.map((text, index) => {
@@ -256,6 +245,8 @@ export default function PostDetailPage(props) {
       </Card>
       )
     })
+
+
 
     return (
       
@@ -304,7 +295,7 @@ export default function PostDetailPage(props) {
           </FormControl>
           <ButtonGroup variant="text" fullWidth="true">
               <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" href={`/buy/${post._id}`}>바로구매</Button>
+              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" onClick = {buyHandler} >바로구매</Button>
               </ButtonGroup>
           </Grid>
       </Grid> <br />

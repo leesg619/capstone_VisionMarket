@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import axios from 'axios';
-
+import { useLocation } from 'react-router';
 const useStyles = makeStyles((theme) => ({
     root: {
       minWidth: 275,
@@ -45,10 +45,11 @@ export default function BuyPage(props) {
     const [Paynow, setPaynow] = useState(false)
     const [image,setImage] =useState([])
     const [post, setPost] = useState({})
-    const postId = props.match.params.postId;
-    
+    const location = useLocation();
+
+    console.log(props)
     useEffect(() => {
-      axios.get(`/api/post/id?id=${postId}`)
+      axios.get(`/api/post/id?id=${location.state.data.post}`)
       .then(response => {
           console.log(response.data.post[0])
            setPost(response.data.post[0])
@@ -94,6 +95,12 @@ export default function BuyPage(props) {
           <Typography variant="body2" component="p">
                 배송비 무료
           </Typography>
+          <Typography variant="body2" component="p">
+                사이즈 : {location.state.data.size}
+          </Typography>
+          <Typography variant="body2" component="p">
+                수량 : {location.state.data.quantity}
+          </Typography>
               <br />
           </div>
       </div>
@@ -102,7 +109,7 @@ export default function BuyPage(props) {
 
           <hr />
           <div className={classes.flex} style={{ fontSize: '0.9rem' }}>
-              상품가격 {post.pprice}원 + 배송비 0원 = 총 주문금액 {post.pprice}원
+              상품가격 {post.pprice * location.state.data.quantity}원 + 배송비 0원 = 총 주문금액 {post.pprice * location.state.data.quantity}원
           </div>
           <hr />
           <div className={classes.flex}>
@@ -112,7 +119,7 @@ export default function BuyPage(props) {
                 </Button>
           </div>
           {
-              Paynow && <PayPage postId={post._id} price={post.pprice} />
+              Paynow && <PayPage postId={post._id} price={post.pprice}  size={location.state.data.size} quantity = {location.state.data.quantity}/>
           }
       </Card>
 

@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format'
 import { Check } from '@material-ui/icons'
 import LoadingAndSuccess from './LoadingAndSuccess'
 import axios from 'axios';
-
+import { useHistory } from 'react-router';
 const useStyle = makeStyles((theme) => ({
     root: {
         // paddingTop : theme.spacing(12)
@@ -48,7 +48,7 @@ const useStyle = makeStyles((theme) => ({
 
 function PayPage(props) {
     const classes = useStyle()
-
+    const history = useHistory()
     const [Success, setSuccess] = useState(false)
 
 
@@ -58,14 +58,15 @@ function PayPage(props) {
         if(props.postId !== undefined){
             let body = {
                 post: props.postId,
-                quantity: 1,
+                quantity: props.quantity,
+                size:props.size,
                 price: props.price,
             }
 
             axios.post('/api/purchase/create',body)
             .then(response => {
                 
-                if(response.data.success) {
+                if(response.data.status) {
                     setSuccess(true)
                     alert('구매에 성공하였습니다.');
                     props.history.push('/order')
