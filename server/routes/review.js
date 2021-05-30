@@ -42,7 +42,8 @@ router.post("/uploadfiles", (req, res) => {
 router.post("/uploadReview", (req, res) => {
 
     const review = new Review(req.body)
-
+    let filepath_re = review.filepath.slice(16,);
+    review.filepath= filepath_re
     review.save((err, doc) => {
         if(err) return res.status(400).json({ success: false, err })
         return res.status(200).json({
@@ -93,5 +94,9 @@ router.post("/getMyReviews", (req, res) => {
     })
 });
 
-
+router.get("/getMyPort", (req, res) => {
+    let myPort = process.env.PORT || 5000;
+    myPort = myPort+"";
+    return res.status(200).json({ success: true, myPort })
+})
 module.exports = router;
