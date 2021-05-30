@@ -3,6 +3,7 @@ import { Grid, Container, makeStyles, Card, Input, Paper, Button, CircularProgre
 import NumberFormat from 'react-number-format'
 import { Check } from '@material-ui/icons'
 import LoadingAndSuccess from './LoadingAndSuccess'
+import axios from 'axios';
 
 const useStyle = makeStyles((theme) => ({
     root: {
@@ -45,7 +46,7 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-function PayPage() {
+function PayPage(props) {
     const classes = useStyle()
 
     const [Success, setSuccess] = useState(false)
@@ -53,10 +54,36 @@ function PayPage() {
 
     const SuccessHandle = (e) => {
         e.preventDefault()
+        
+        if(props.postId !== undefined){
+            let body = {
+                post: props.postId,
+                quantity: 1,
+                price: props.price,
+            }
 
-        setSuccess(true)
+            axios.post('/api/purchase/create',body)
+            .then(response => {
+                
+                if(response.data.success) {
+                    setSuccess(true)
+                    alert('구매에 성공하였습니다.');
+                    props.history.push('/order')
+                }
+            })
+        }
+        else if(props.ShoppingList !== undefined){ //일반 쇼핑카트 결제
+            // const ShoppingList = props.ShoppingList;
+            // for (let i=0; i< (props.ShoppingList.length); i++){
+            // }
+
+                // axios.post('/api/purchase/createMany', body)
+
+        }
+       
     }
 
+    
 
     return (
         <Container component="body" className={classes.root}>

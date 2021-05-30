@@ -304,7 +304,7 @@ export default function PostDetailPage(props) {
           </FormControl>
           <ButtonGroup variant="text" fullWidth="true">
               <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
+              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" href={`/buy/${post._id}`}>바로구매</Button>
               </ButtonGroup>
           </Grid>
       </Grid> <br />
