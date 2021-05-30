@@ -53,7 +53,7 @@ function PayPage(props) {
 
 
     const SuccessHandle = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         
         if(props.postId !== undefined){
             let body = {
@@ -69,16 +69,26 @@ function PayPage(props) {
                 if(response.data.status) {
                     setSuccess(true)
                     alert('구매에 성공하였습니다.');
-                    props.history.push('/order')
+                    history.push('/order')
                 }
             })
         }
         else if(props.ShoppingList !== undefined){ //일반 쇼핑카트 결제
-            const ShoppingList = props.ShoppingList;
+            
             let body = {
                 shopList: props.ShoppingList
             }
             axios.post('/api/purchase/createMany', body)
+            
+            axios.delete('/api/cart/allCart')
+            .then(response => {
+                if(response.data.success) {
+                    setSuccess(true)
+                    alert('구매에 성공하였습니다.');
+                    history.push('/order')
+                }
+            })
+            
 
         }
        
@@ -109,7 +119,7 @@ function PayPage(props) {
                                 <div>
                                 </div>
                                 {/* 버튼 부분 수정해야함 */}
-                                <Button onClick={SuccessHandle} className={classes.cardBtn} variant="contained" color="primary" type="submit" >결제</Button>
+                                <Button onClick={SuccessHandle} className={classes.cardBtn} variant="contained" color="primary">결제</Button>
                             </form>
                         </Paper>
                     </Grid>
