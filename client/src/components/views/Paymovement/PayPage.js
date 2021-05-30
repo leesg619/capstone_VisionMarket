@@ -74,11 +74,11 @@ function PayPage(props) {
             })
         }
         else if(props.ShoppingList !== undefined){ //일반 쇼핑카트 결제
-            // const ShoppingList = props.ShoppingList;
-            // for (let i=0; i< (props.ShoppingList.length); i++){
-            // }
-
-                // axios.post('/api/purchase/createMany', body)
+            const ShoppingList = props.ShoppingList;
+            let body = {
+                shopList: props.ShoppingList
+            }
+            axios.post('/api/purchase/createMany', body)
 
         }
        
