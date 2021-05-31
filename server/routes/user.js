@@ -36,7 +36,7 @@ router.post("/login", (req, res) => {
                 res.status(400).json({success : false, msg : "패스워드를 확인해주세요"})
             }
             user.generateToken((err, user) => {
-                if (err) return res.status.json({success : false, err});
+                if (err) return res.status(400).json({success : false, err});
                 res.cookie("w_auth", user.token);
                 res.cookie("w_authExp", user.tokenExp)
                 .status(200).json({loginSuccess : true, userId : user._id})
@@ -52,6 +52,18 @@ router.get("/logout", auth, (req, res) => {
     })
 })
 
+//유저 보유 포인트 조회
+router.get("/point",auth, async (req,res) => {
+    let userId = req.user._id
 
+    try {
+        let result = await User.findOne({_id: userId});
+        return res.status(200).json({success: true, "result": 'Success!',result})
+
+    }catch(err) {
+        return res.status(200).json({ "status": false, "result": "Request Failed!" })
+    }
+    
+})
 
 module.exports = router;

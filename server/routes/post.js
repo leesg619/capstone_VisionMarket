@@ -91,7 +91,7 @@ router.get('/:id',  (req,res) => {
 })
 
 //상품 카테고리에 맞는거 조회
-router.post('/posts_by_category',auth, (req,res) => {
+router.post('/posts_by_category', (req,res) => {
 
     let categoryId = req.body._id
      Post.find({pcategory:categoryId})
@@ -101,5 +101,15 @@ router.post('/posts_by_category',auth, (req,res) => {
     })
 })
 
+router.post("/getPost", (req, res) => {
+
+    Post.findOne({ "_id" : req.body.postId })
+    .populate('author')
+    .populate('post')
+    .exec((err, post) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success: true, post })
+    })
+});
 
 module.exports = router;

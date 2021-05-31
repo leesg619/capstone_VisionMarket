@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     },
   });
 
-export default function CancelCard(){
+export default function ReviewedCard(props){
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
@@ -20,6 +20,9 @@ export default function CancelCard(){
         console.log(e.currentTarget.value)
         setOpen(false);
     }
+    const review = props.review;
+    // const [content, setContent] =useState(review.content)
+    // const [title, setTitle] = useState(review.title)
 
     return(
         <Card className={classes.root} elevation={3}>
@@ -28,16 +31,18 @@ export default function CancelCard(){
                 <Grid item xs={12} sm={9}>
                     <Grid container justify='center'>   
                     <Grid item xs={4} sm={2}>
-                        <img src="https://thumbnail6.coupangcdn.com/thumbnails/remote/120x120ex/image/retail/images/2019/12/28/10/7/01178ffe-33c8-4019-bc71-27a4fc55e8d6.jpg" />
+                        <img src={props.image} />
                     </Grid>
                     <Grid item xs={8} sm={10}>
                             <Typography style={{marginBottom: '12px'}}>
-                                에프씨팩토리 에브리데이 클린미세먼지 방역마스트 [kf94 50개], 1팩 50매입 주문내역 길게 적기
+                              {props.title}
                             </Typography>
                             <Typography >
-                                리뷰 : 너무 좋아요 !! <br/>
-                                파워디지몬 파워레인저 <br/>
-                                방가방가햄토리
+                                {
+                                    props.content ?
+                                    props.content:
+                                    "음성리뷰"
+                                }
                             </Typography>
                     </Grid> 
                     </Grid>     
