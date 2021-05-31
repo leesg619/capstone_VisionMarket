@@ -39,6 +39,8 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+app.use('/uploads', express.static('uploads'));
+
 app.get('/', (req, res) => res.send("Hello World"))
 app.use('/api/users', userRoute);
 app.use('/api/searchs', searchRoute);

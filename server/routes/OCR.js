@@ -12,9 +12,54 @@ const path = require('path')
 const { Post } = require('../models/Post')
 
 
-router.post('/text/return', (req, res) => {
+router.post('/onlineimage/text/return', (req, res) => {
+    let timestamp = new Date().getTime();
+    var sumText = "";
 
+    Post.findById(req.body.postId, (err, doc) => {
+        if (err) return res.status(400).json({success : false, err})
+        
+        doc.image.map((image, key) => {
+            if (image === req.body.imageUrl) {
+                console.log(path.extname(image).substr(1, 4))
+                
+                var filenanme = image
+                const headers = {
+                    headers : {
+                        "Content-Type" : "application/json",
+                        "X-OCR-SECRET" : config.OCR_API_KEY
+                    }
+                }
 
+                axios.post(config.OCR_API_URL, {
+                    'lang' : "ko",
+                    "requestId" : "string",
+                    "timestamp" : timestamp,
+                    "version" : "V2",
+                    "images" : [
+                        {
+                            "format" : path.extname(filenanme).substr(1, 4),
+                            "name" : "medium",
+                            "data" : null,
+                            "url" : filenanme
+                        }
+                    ]
+                }, headers)
+                .then(response => {
+                    response.data.images[0].fields.forEach(element => {
+                        console.log(element.inferText)
+                        sumText += " " + element.inferText;
+                    })
+
+                    return res.status(200).json({success : true, sumText : sumText})
+                })
+            }
+        })
+        return res.status(400).json({success : false, err : "매치되는 이미지가 없습니다."})
+    })
+})
+
+router.post('/localimage/text/return', (req, res) => {
 
     let timestamp = new Date().getTime();
     var sumText = "";

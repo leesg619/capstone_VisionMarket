@@ -277,7 +277,7 @@ const [categories,setCategories] = useState();
                                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                     onClick={() => {history.push({
                                         pathname: '/postsearchlist',
-                                         state:{category:categories.categories[6]}
+                                         state:{category:categories.categories[10]}
                                       })}}
                                     >
                                     의류
