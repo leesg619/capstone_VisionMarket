@@ -139,7 +139,9 @@ function Nav(props) {
         }).catch((err) => {
             console.warn(err);
         })
-        
+
+        window.location.replace("/postsearchlist");
+
         histroy.push({
             pathname: '/postsearchlist',
             state:{
