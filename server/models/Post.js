@@ -96,6 +96,9 @@ postSchema.statics.findById = function( id ) {
         })
 };
 
+postSchema.index({ title: 'text' , content: 'text'});
+//검색위해 index추가
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = { Post }
