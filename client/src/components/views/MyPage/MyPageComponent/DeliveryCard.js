@@ -25,7 +25,7 @@ export default function BuyCard(){
                     <Typography className={classes.text}>문 앞</Typography>
             </CardContent>
             <CardActions className={classes.button}>
-                <Button style={{fontSize:'1.2rem'}} size="large" aria-label='수정'>
+                <Button style={{fontSize:'1.2rem'}} size="large" aria-label='주소정보수정하기'>
                 수정</Button>
             </CardActions>
         </Card>

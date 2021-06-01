@@ -80,7 +80,7 @@ const removeCartItem = () => {
         <div className={classes.flex}>
           <div className={classes.window}>
             <Typography className={classes.title} color="textSecondary" gutterBottom>
-              상품명 : {post.productName}
+              상품명 : {post.productName} / 사이즈 L
             </Typography>
             <CardMedia
               style={{ height: "150px", width: "150px" }}

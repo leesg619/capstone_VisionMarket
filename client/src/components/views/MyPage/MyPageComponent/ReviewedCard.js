@@ -53,8 +53,8 @@ export default function ReviewedCard(props){
                     orientation="vertical"
                     fullWidth
                 >
-                    <Button style={{fontSize:'1rem'}}>수정</Button>
-                    <Button style={{fontSize:'1rem'}}>삭제</Button>
+                    <Button aria-label='리뷰수정하기' style={{fontSize:'1rem'}}>수정</Button>
+                    <Button aria-label='리뷰삭제하기' style={{fontSize:'1rem'}}>삭제</Button>
                 </ButtonGroup>
                 </CardActions>
                 </Grid>

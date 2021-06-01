@@ -122,6 +122,7 @@ export default function ShoppingBascket(props) {
                         </div>
                         <hr />
                         <div className={classes.flex} style={{ fontSize: '0.9rem' }}>
+
                             상품가격 {totalPrice}원 + 배송비 0원 = 총 주문금액 {totalPrice}원
                         </div>
                         <hr />
