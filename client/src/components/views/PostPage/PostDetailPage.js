@@ -160,6 +160,16 @@ export default function PostDetailPage(props) {
        }
      })
      //voice,text review 불러오기 추가★
+
+     axios.get('/api/review/getMyPort')
+     .then(response => {
+      if (response.data.success) {
+        window.localStorage.setItem('port', response.data.myPort);
+      } else {
+          alert('Failed to get Port')
+      }
+    })
+    //포트 불러오기 추가★
    }, [])
      
     const handleChangeIndex = (index) => {
@@ -181,7 +191,6 @@ export default function PostDetailPage(props) {
             axios.post('/api/cart/create',body)
             .then(response => {
                 if(response.data.status) {
-                  console.log("바스켓")
                   history.push({
                     pathname: '/shoppingbascket',
                     state:{user:user}
@@ -190,31 +199,6 @@ export default function PostDetailPage(props) {
             })
     }
     
-//이거 일단 보류.. 구매하는 코드임. 근데 사실 여기서는 의미없는데, 나중에 구매할때 사용할 것.
-  // const  clickPurchaseHandler = () => {
-    
-  //   if(props.user.userData.isAuth) {
-  //           let body = {
-  //               post: postId,
-  //               size: size,
-  //               quantity: quantity,
-  //               price: post.pprice
-  //           }
-  //          // console.log(body)
-  //           axios.post('/api/purchase/create',body)
-  //           .then(response => {
-  //               if(response.data.success) {
-  //                 //결제 페이지로 이동.
-  //               }
-  //           })
-  //       }else {
-  //           alert('로그인이 필요합니다.')
-  //           history.push('/login')   
-  //           }
-  // }
-    
-
-
 
     //sh (Quantity , Size  175-201 해당 기능 232-238 // 244-246)   ( 상품 추가 이미지 280 ) (대표이미지 수정)
     const[quantity,setQuantity] = useState(1)
@@ -239,6 +223,21 @@ export default function PostDetailPage(props) {
         setValue(newValue);
     };
 
+    const buyHandler = () => {
+      let data = {
+        post: postId,
+        size: size,
+        quantity: quantity
+      }
+      history.push({
+        pathname: '/buy/${post._id}',
+        state:{data:data}
+      })
+    }
+
+//     <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" href={`/buy/${post._id}`}>바로구매</Button>
+
+
     // 텍스트리뷰 보여주는 변수 추가
     const TextReviewItem =texts.map((text, index) => {
       return <Card  variant="outlined">
@@ -260,6 +259,9 @@ export default function PostDetailPage(props) {
 
       // 음성리뷰 보여주는 변수 추가★
   const voiceCards = voices.map((voice, index) => {
+    let baepo_index = window.location.href.indexOf('.com') + 4;
+    let locationPath = window.location.href.slice(7,16) == 'localhost' ? window.location.href.slice(0,16) : window.location.href.slice(0,baepo_index)
+    let newFilePath = locationPath + ':' + window.localStorage.getItem('port') + '/' + voice.filepath;
     return(
       <Card  variant="outlined">
       <CardContent>
@@ -269,20 +271,17 @@ export default function PostDetailPage(props) {
       <Typography >
         <Box>
           <audio controls>
-            <source src={voice.filepath} type="audio/mp3" />
+            <source src= {newFilePath} type="audio/mp3" />
           </audio>
-          {voice.filepath}
-          <span>작성자 : {voice.author.name} __ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
         </Box>
+        <span>{voice.author.name} _ {moment(voice.InputTime).format("YYYY년M월d일")} </span>
       </Typography>
     </CardContent>
-    <CardActions>
-      <Button aria-label="리뷰추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>추천</Button>
-      <Button aria-label="리뷰비추천하기" variant="outlined" style={{fontSize:'1.1rem'}}>비추천</Button>
-      </CardActions>
       </Card>
       )
     })
+
+
 
     return (
       
@@ -388,7 +387,7 @@ export default function PostDetailPage(props) {
 //           </FormControl>
 //           <ButtonGroup variant="text" fullWidth="true">
 //               <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-//               <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
+//               <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" onClick = {buyHandler} >바로구매</Button>
 //               </ButtonGroup>
 //           </Grid>
 //       </Grid> <br />

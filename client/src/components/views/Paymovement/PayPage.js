@@ -3,7 +3,8 @@ import { Grid, Container, makeStyles, Card, Input, Paper, Button, CircularProgre
 import NumberFormat from 'react-number-format'
 import { Check } from '@material-ui/icons'
 import LoadingAndSuccess from './LoadingAndSuccess'
-
+import axios from 'axios';
+import { useHistory } from 'react-router';
 const useStyle = makeStyles((theme) => ({
     root: {
         // paddingTop : theme.spacing(12)
@@ -45,18 +46,55 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 
-function PayPage() {
+function PayPage(props) {
     const classes = useStyle()
-
+    const history = useHistory()
     const [Success, setSuccess] = useState(false)
 
 
     const SuccessHandle = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
+        
+        if(props.postId !== undefined){
+            let body = {
+                post: props.postId,
+                quantity: props.quantity,
+                size:props.size,
+                price: props.price,
+            }
 
-        setSuccess(true)
+            axios.post('/api/purchase/create',body)
+            .then(response => {
+                
+                if(response.data.status) {
+                    setSuccess(true)
+                    alert('구매에 성공하였습니다.');
+                    history.push('/order')
+                }
+            })
+        }
+        else if(props.ShoppingList !== undefined){ //일반 쇼핑카트 결제
+            
+            let body = {
+                shopList: props.ShoppingList
+            }
+            axios.post('/api/purchase/createMany', body)
+            
+            axios.delete('/api/cart/allCart')
+            .then(response => {
+                if(response.data.success) {
+                    setSuccess(true)
+                    alert('구매에 성공하였습니다.');
+                    history.push('/order')
+                }
+            })
+            
+
+        }
+       
     }
 
+    
 
     return (
         <Container component="body" className={classes.root}>
@@ -81,7 +119,7 @@ function PayPage() {
                                 <div>
                                 </div>
                                 {/* 버튼 부분 수정해야함 */}
-                                <Button onClick={SuccessHandle} className={classes.cardBtn} variant="contained" color="primary" type="submit" >결제</Button>
+                                <Button onClick={SuccessHandle} className={classes.cardBtn} variant="contained" color="primary">결제</Button>
                             </form>
                         </Paper>
                     </Grid>

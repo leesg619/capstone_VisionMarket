@@ -125,7 +125,32 @@ function Nav(props) {
         })
       }
   
+    //seokgeun 검색기능
+    const [kwd, setKwd] = useState("");
+    const handleChangeKwd = (event) => {
+        setKwd(event.currentTarget.value)
+    }
 
+    const SubmitHandler = (e) => {
+        e.preventDefault()
+        axios.post('/api/searchs/register', {keyword:kwd})
+        .then((response) => {
+            console.log('검색데이터 생성완료');
+        }).catch((err) => {
+            console.warn(err);
+        })
+
+        window.location.replace("/postsearchlist");
+
+        histroy.push({
+            pathname: '/postsearchlist',
+            state:{
+              category: "",
+              kwd: kwd
+            }
+        })
+
+    }
 
     return (
         <Container className={classes.appbarContainer} component='main' maxWidth='xl' >
@@ -165,7 +190,9 @@ function Nav(props) {
                                 <div className={classes.searchIcon}>
                                 <SearchIcon />
                                 </div>
+                                <form onSubmit={SubmitHandler}>
                                 <InputBase
+                                onChange={handleChangeKwd}
                                 placeholder=" 검색창..."
                                 classes={{
                                     root: classes.inputRoot,
@@ -173,6 +200,7 @@ function Nav(props) {
                                 }}
                                 inputProps={{ 'aria-label': '검색창' }}
                                 />
+                                </form>
                             </div>
                             </Box>
                         </Grid>

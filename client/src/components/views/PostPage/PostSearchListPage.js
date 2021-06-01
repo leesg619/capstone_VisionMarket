@@ -21,12 +21,12 @@ export default function PostSearchListPage(props) {
     const location = useLocation();
 
 
-     const [posts,setPosts] = useState([])
+    const [posts,setPosts] = useState([])
 
-const category = location.state.category
-     //sh url만 변경 server post.js에서 상품 카테고리에 맞는거 조회에 해당.
+    const category = 'kwd' in location.state ? location.state.kwd :location.state.category
+
     useEffect(() => {
-
+      if(!('kwd' in location.state)){
         axios.post(`/api/post/posts_by_category`,category)
         .then(response => {
          console.log("실행")
@@ -35,6 +35,20 @@ const category = location.state.category
               setPosts(response.data.post)
             }
         })
+      } else{
+          axios.post('/api/searchs/searchList', {body:category})
+            .then(response => {
+                if(response.data.success) {
+                  console.log(response.data.searchList);
+                  setPosts(response.data.searchList);
+                } else{console.log(response.data.result)}
+            })
+          
+      }
+        
+
+        
+
     }, [])
 
     const [page, setPage] = React.useState(1);
@@ -43,6 +57,10 @@ const category = location.state.category
       setPage(value);
     };
 
+
+    
+
+        
     return (
       <div className={classes.root}>
         <Grid item container direction="column" style={{margin : "auto"}} spacing={1}>

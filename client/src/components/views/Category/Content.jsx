@@ -26,6 +26,7 @@ const [categories,setCategories] = useState();
         })
     }, [])
 
+    console.log(categories)
 
     const [NextPage, setNextPage] = useState(1);
 
@@ -139,6 +140,10 @@ const [categories,setCategories] = useState();
                     variant="contained" 
                     color="primary" 
                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                    onClick={() => {history.push({
+                        pathname: '/postsearchlist',
+                         state:{category:categories.categories[0]}
+                      })}}
                     >
                     보조도구
                     </Button>
@@ -148,7 +153,11 @@ const [categories,setCategories] = useState();
                     fullWidth 
                     variant="contained" 
                     color="primary" 
-                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                    onClick={() => {history.push({
+                        pathname: '/postsearchlist',
+                         state:{category:categories.categories[1]}
+                      })}}>
                     생활용품
                     </Button>
                     </Grid>
@@ -179,6 +188,10 @@ const [categories,setCategories] = useState();
                             variant="contained" 
                             color="primary" 
                             style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[2]}
+                              })}}
                             >
                             티셔츠
                             </Button>
@@ -188,7 +201,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[3]}
+                              })}}
+                            >
                             맨투맨<br />
                             /후드티
                             </Button>
@@ -198,7 +216,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[4]}
+                              })}}
+                              >
                             셔츠
                             </Button>
                             </Grid>
@@ -207,7 +230,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[5]}
+                              })}}
+                            >
                             바지
                             </Button>
                             </Grid>
@@ -216,7 +244,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[6]}
+                              })}}
+                            >
                             운동복
                             </Button>
                             </Grid>
@@ -225,7 +258,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[7]}
+                              })}}
+                            >
                             니트류
                             </Button>
                             </Grid>
@@ -234,7 +272,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[8]}
+                              })}}
+                            >
                             아우터
                             </Button>
                             </Grid>
@@ -243,7 +286,12 @@ const [categories,setCategories] = useState();
                             fullWidth 
                             variant="contained" 
                             color="primary" 
-                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                            onClick={() => {history.push({
+                                pathname: '/postsearchlist',
+                                 state:{category:categories.categories[9]}
+                              })}}
+                            >
                             커플룩
                             </Button>
                             </Grid>
@@ -277,7 +325,7 @@ const [categories,setCategories] = useState();
                                     style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                     onClick={() => {history.push({
                                         pathname: '/postsearchlist',
-                                         state:{category:categories.categories[6]}
+                                         state:{category:categories.categories[10]}
                                       })}}
                                     >
                                     의류
@@ -288,7 +336,12 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                    onClick={() => {history.push({
+                                        pathname: '/postsearchlist',
+                                         state:{category:categories.categories[11]}
+                                      })}}
+                                    >
                                     속옷/잠옷
                                     </Button>
                                     </Grid>
@@ -297,7 +350,12 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                    onClick={() => {history.push({
+                                        pathname: '/postsearchlist',
+                                         state:{category:categories.categories[12]}
+                                      })}}
+                                    >
                                     신발
                                     </Button>
                                     </Grid>
@@ -306,7 +364,12 @@ const [categories,setCategories] = useState();
                                     fullWidth 
                                     variant="contained" 
                                     color="primary" 
-                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                                    style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                    onClick={() => {history.push({
+                                        pathname: '/postsearchlist',
+                                         state:{category:categories.categories[13]}
+                                      })}}
+                                    >
                                     잡화
                                     </Button>
                                     </Grid>
@@ -339,7 +402,7 @@ const [categories,setCategories] = useState();
                                             style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
                                             onClick={() => {history.push({
                                                 pathname: '/postsearchlist',
-                                                 state:{category:categories.categories[8]}
+                                                 state:{category:categories.categories[14]}
                                               })}}
                                             >
                                             의류
@@ -351,6 +414,10 @@ const [categories,setCategories] = useState();
                                             variant="contained" 
                                             color="primary" 
                                             style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                            onClick={() => {history.push({
+                                                pathname: '/postsearchlist',
+                                                 state:{category:categories.categories[15]}
+                                              })}}
                                             >
                                             속옷/잠옷
                                             </Button>
@@ -360,7 +427,12 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                            onClick={() => {history.push({
+                                                pathname: '/postsearchlist',
+                                                 state:{category:categories.categories[16]}
+                                              })}}
+                                            >
                                             신발
                                             </Button>
                                             </Grid>
@@ -369,7 +441,12 @@ const [categories,setCategories] = useState();
                                             fullWidth 
                                             variant="contained" 
                                             color="primary" 
-                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}>
+                                            style={{height:'80px', fontSize:'20px', backgroundColor: '#505050', color: 'white'}}
+                                            onClick={() => {history.push({
+                                                pathname: '/postsearchlist',
+                                                 state:{category:categories.categories[17]}
+                                              })}}
+                                            >
                                             가방/잡화
                                             </Button>
                                             </Grid>

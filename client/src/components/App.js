@@ -31,6 +31,7 @@ import PointPage from './views/MyPage/MyPageComponent/PointPage';
 import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
 import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
+import BuyPage from './views/BuyPage/BuyPage';
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
         <Route exact path="/MyCategory" component={Auth(MyCategory, true)} />
         <Route exact path="/postDetail/:postId" component={Auth(PostDetailPage, null)} />
         <Route exact path="/postsearchlist" component={Auth(PostSearchListPage, null)} />
+        <Route exact path="/buy/:postId" component={Auth(BuyPage, null)}/>
+        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
 
 
         <Route exact path="/shoppingBascket" component={Auth(ShoppingBascket,true)} />
@@ -76,7 +79,7 @@ function App() {
         <Route exact paht="/loading" component={LoadingAndSuccess} />
         <Route exact path="/reviewPage" component={ReviewPage} />
 
-        <Route exact path="/reviewVoiceWrite/:postId" component={ReviewVoiceWrite} />
+
       </Switch>
     </Suspense>
     </CssBaseline>

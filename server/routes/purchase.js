@@ -10,7 +10,8 @@ router.post('/create',auth, (req,res) => {
    
     const purchase =  new Purchase(req.body);
     purchase.user = req.user._id
-    purchase.total = req.body.quantity * req.body.price 
+    purchase.total = req.body.quantity * req.body.price
+    purchase.size = req.body.size 
     console.log(req.body.quantity * req.body.price )
 //유저를 가져와서 //유저의 point에 quantity * 1000을해준다. 왜냐하면 각 물품당 천원씩 적립해 줄거니까..
 User.findOneAndUpdate(
@@ -86,6 +87,39 @@ router.post('/qnaRequest', (req, res, next) => {
     .catch(err => next(err))
 
     return res.status(200).json({success: true})
+})
+
+
+router.post('/createMany',auth, (req,res) => {
+    // console.log(req.body.shopList.ShoppingList);
+    let quantities = 0;
+    for( var shop of req.body.shopList.ShoppingList){
+        quantities +=shop.quantity;
+        const purchase =  new Purchase({
+            post: shop.post._id,
+            quantity: shop.quantity,
+            user: req.user._id,
+            total: shop.quantity * shop.post.pprice,
+        });
+    
+        purchase.save((err) => {
+            if(err) {  
+                console.log(err);
+                res.status(200).json({ "status": false, "result": "Purchase Create Failed!" })
+            }  
+        })
+    }
+        User.findOneAndUpdate(
+        {"_id" : req.user._id},
+        {$inc :{"point": quantities * 1000}},
+        {new:true},
+        (err,user) => {
+            if(err) res.status(200).json({ "status": false, "result": "Purchase Create Failed!" })
+        }
+    )
+
+
+    res.status(200).json({ status: true, "result": 'Success!'})
 })
 
 
