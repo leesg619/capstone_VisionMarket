@@ -31,6 +31,9 @@ const purchaseSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    size: {
+        type:String,
+    },
     arriveDate: {
         type: Date,
         default: moment().add(3, 'days').format('YYYY-MM-DD') 

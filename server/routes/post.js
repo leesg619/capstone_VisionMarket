@@ -112,4 +112,20 @@ router.post("/getPost", (req, res) => {
     })
 });
 
+
+
+// 조회시 포스트 pview 1 올리기 , postDetail과 연결
+router.post('/plusView', async  (req,res) => {
+    Post.findOne({ "_id" : req.body.postId })
+    .exec((err, post) => {
+        post.pviews+=1
+        post.save((err) => {
+            if(err) {  
+                console.log(err);
+                res.status(200).json({ "status": false, "result": "Product Saving Failed!" })
+        }
+            res.status(200).json({ "status": true, "result": 'Success!'})
+        })
+    })
+})
 module.exports = router;

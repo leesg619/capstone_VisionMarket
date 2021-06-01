@@ -135,7 +135,7 @@ export default function ShoppingBascket(props) {
                              </Button>
                         </div>
                         {
-                            Paynow && <PayPage />
+                            Paynow && <PayPage ShoppingList={{ShoppingList}}/>
                         }
                     </Card>
 

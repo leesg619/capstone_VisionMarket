@@ -31,22 +31,22 @@ const searchSchema = mongoose.Schema({
     */
 })
 
-searchSchema.pre("save", function( next ) {
+// searchSchema.pre("save", function( next ) {
     
 
-    if(search.isModified("Keyword")) {
-        var search = this;
-        var upper = search.keyword.toUpperCase()
-        var lower = search.keyword.toLowerCase()
+//     if(search.isModified("Keyword")) {
+//         var search = this;
+//         var upper = search.keyword.toUpperCase()
+//         var lower = search.keyword.toLowerCase()
     
-        search.UpperKey = upper
-        search.LowerKey = lower
+//         search.UpperKey = upper
+//         search.LowerKey = lower
         
-        next()
-    } else {
-        next()
-    }
-})
+//         next()
+//     } else {
+//         next()
+//     }
+// })
 
 
 const Search = mongoose.model("Search", searchSchema);
