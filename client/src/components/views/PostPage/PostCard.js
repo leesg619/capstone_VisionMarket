@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -23,8 +23,20 @@ const useStyles = makeStyles({
 
 //sh -63 postSearchList에서 상세보기 버튼 클릭 시, 해당 상품의 페이지로 이동
 export default function MediaCard({post}) {
+
+  console.log(post.image[0])
   const history = useHistory()
   const classes = useStyles();
+
+  const [isUrl, setIsUrl] = useState(post.image[0])
+
+  useEffect(() => {
+    if(post.image[0].indexOf('http')) {
+      setIsUrl(`http://localhost:5000/${isUrl}`)
+    }
+  }, [post])
+
+  
 
   return (
     // F-36 Card borderColor 변경 및 가격 위치 변경하면서 사진 위치 가운데로 설정 200->250
@@ -41,11 +53,11 @@ export default function MediaCard({post}) {
           </Typography>
         </CardContent>
         <CardActions >
-          <CardMedia
-          style={{height:"250px", width: "250px", margin: 'auto'}}
-          image={post.image[0]}
-          title={post.title}
-        />
+           <CardMedia
+        style={{height:"250px", width: "250px", margin: 'auto'}}
+        image={isUrl}
+        title={post.title}
+      />
       </CardActions>
       <CardActions className={classes.button}>
         <Button style={{fontSize:'1.2rem'}} size="large" aria-label='상품상세보기'

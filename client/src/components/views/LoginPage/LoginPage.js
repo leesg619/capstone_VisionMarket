@@ -88,6 +88,7 @@ export default function Login(props) {
                             props.history.push('/')
                         }
                         else {
+                            console.log(response.payload)
                             setFormErrorMessage('ID 혹은 Password를 확인해주세요.')
                         }
                     }).catch(err => {
@@ -97,7 +98,7 @@ export default function Login(props) {
                         }, 3000);
                     });
                 setSubmitting(false)
-            }, 500);
+            }, 1000);
         })
     })
 
@@ -123,7 +124,7 @@ export default function Login(props) {
                         value={formik.values.id}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        className={formik.errors.id && formik.touched.ud ? 'input-text error' : 'input-text'}
+                        className={formik.errors.id && formik.touched.id ? 'input-text error' : 'input-text'}
                         autoFocus
                         alt="아이디입력창"
                     />

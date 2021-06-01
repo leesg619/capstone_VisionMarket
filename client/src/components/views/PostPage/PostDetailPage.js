@@ -60,61 +60,34 @@ function a11yProps(index) {
 
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop : theme.spacing(8),
-        display : 'flex',
-        flexDirection : 'column',
-        alignItems : 'center'
-    },
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        width: '100%',
-    },
-    container: {
-        padding: theme.spacing(10),
-        paddingTop : theme.spacing(10),
-        justifyContent: 'center',
-        alignContent: 'center'
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100vh',
-    },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-        textAlign:'right',
-    },
-//   paper: {
-//       marginTop : theme.spacing(8),
-//       display : 'flex',
-//       flexDirection : 'column',
-//       alignItems : 'center'
-//   },
+  paper: {
+      marginTop : theme.spacing(8),
+      display : 'flex',
+      flexDirection : 'column',
+      alignItems : 'center'
+  },
 
-//   root: {
-//       flexGrow: 1,
-//       backgroundColor: theme.palette.background.paper,
-//       width: '100%',
-//   },
-//   container: {
-//       padding: theme.spacing(10),
-//       paddingTop : theme.spacing(10),
-//       justifyContent: 'center',
-//       alignContent: 'center'
-//   },
-//   img: {
-//       margin: 'auto',
-//       display: 'block',
-//       maxWidth: '100%',
-//       maxHeight: '100vh',
-//   },
-//   formControl: {
-//       margin: theme.spacing(1),
-//       minWidth: 120,
+  root: {
+      flexGrow: 1,
+      backgroundColor: theme.palette.background.paper,
+      width: '100%',
+  },
+  container: {
+      padding: theme.spacing(10),
+      paddingTop : theme.spacing(10),
+      justifyContent: 'center',
+      alignContent: 'center'
+  },
+  img: {
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100vh',
+  },
+  formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+    },
   selectEmpty: {
       marginTop: theme.spacing(2),
   },
@@ -212,10 +185,10 @@ export default function PostDetailPage(props) {
     const handlePlusQuantityChange =(event) => {
       setQuantity(quantity+1)
     }
-    //F-182 포커스
-    const [size, setSize] = React.useState('S');
-    const handleSizeChange = (event, newSize) => {
-        setSize(newSize);
+
+    const [size, setSize] = React.useState('M');
+    const handleSizeChange = (event) => {
+        setSize(event.target.value);
     };
 
     const [value, setValue] = React.useState(1);
@@ -285,115 +258,58 @@ export default function PostDetailPage(props) {
 
     return (
       
-    <Container component='main' maxWidth="lg" className={classes.container}>
-        <CssBaseline />
-        <Typography component="div" style={{height: '100vh' }}>
-        <Grid container spacing={2}>
-            <Grid item xs={12} md={6}>
-              <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src= {image[0]} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Typography component="h1" variant ="h4" > 
-                 {post.title}
-                </Typography>
-                별점 4.5점 / 총 13개의 상품 리뷰가 있습니다.
-                <Divider />
-                <List component="nav" >
-                <ListItem>
-                <ListItemText style={{textAlign:'right'}} primary=
-                {post.pprice}/>원
-                </ListItem>
-                </List>
-                {/* F-217 버튼 오른쪽 정렬로 변경 */}
-                <div style={{textAlign:'right'}}>
-                <FormControl required className={classes.formControl}>
-                <Typography variant ="h6" > 
-                사이즈
-                </Typography>
-                <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
-                <ToggleButton variant="outlined" value = "S" style={{fontSize:'1rem', color:'black'}} aria-label="S사이즈">S</ToggleButton>
-                <ToggleButton variant="outlined" value = "M" style={{fontSize:'1rem', color:'black'}} aria-label="M사이즈">M</ToggleButton>
-                <ToggleButton variant="outlined" value = "L" style={{fontSize:'1rem', color:'black'}} aria-label="L사이즈">L</ToggleButton>
-                <ToggleButton variant="outlined" value = "XL" style={{fontSize:'1rem', color:'black'}} aria-label="XL사이즈">XL</ToggleButton>
-                <ToggleButton variant="outlined" value = "XXL" style={{fontSize:'1rem', color:'black'}} aria-label="XXL사이즈">XXL</ToggleButton>
-                </ToggleButtonGroup>
-                <br />
-                <Typography variant ="h6" > 
-                수량
-                </Typography>
-                {/* F-232 개수 먼저 나오고 더하기 빼기 버튼으로 수정 */}
-                <ButtonGroup style={{margin:'auto', marginLeft:'40%'}}>
-                <Button variant="outlined" style={{fontSize:'1rem'}}  aria-label="1개">{quantity}</Button>
-                <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handlePlusQuantityChange} aria-label="더하기">+</Button>
-                <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
-                </ButtonGroup>
-                <br />
-            </FormControl>
-            </div>
-            <ButtonGroup variant="text" fullWidth="true">
-                <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-                <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매">바로구매</Button>
-                </ButtonGroup>
-            </Grid>
-        </Grid> <br />
-        <Divider />
-        <br />
-        <div className={classes.root}>
+      <Container component='main' maxWidth="lg" className={classes.container}>
+      <CssBaseline />
+      <Typography component="div" style={{height: '100vh' }}>
+      <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <ButtonBase className={classes.image}>
+              <img className={classes.img} alt="complex" src= {image[0]} />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={12} md={6}>
+              <Typography component="h1" variant ="h4" > 
+               {post.title}
+              </Typography>
+              별점 4.5점 / 총 13개의 상품 리뷰가 있습니다.
+              <Divider />
+              <List component="nav" >
+              <ListItem><ListItemText primary=
+              {post.pprice}원 />
+              </ListItem>
+              </List>
 
-//       <Container component='main' maxWidth="lg" className={classes.container}>
-//       <CssBaseline />
-//       <Typography component="div" style={{height: '100vh' }}>
-//       <Grid container spacing={2}>
-//           <Grid item xs={12} md={6}>
-//             <ButtonBase className={classes.image}>
-//               <img className={classes.img} alt="complex" src= {image[0]} />
-//             </ButtonBase>
-//           </Grid>
-//           <Grid item xs={12} md={6}>
-//               <Typography component="h1" variant ="h4" > 
-//                {post.title}
-//               </Typography>
-//               별점 4.5점 / 총 13개의 상품 리뷰가 있습니다.
-//               <Divider />
-//               <List component="nav" >
-//               <ListItem><ListItemText primary=
-//               {post.pprice}원 />
-//               </ListItem>
-//               </List>
-
-//               <FormControl required className={classes.formControl}>
-//               <Typography variant ="h6" > 
-//               사이즈
-//               </Typography>
-//               <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
-//               <ToggleButton variant="outlined"  value = "S" style={{fontSize:'1rem'}} aria-label="S사이즈">S</ToggleButton>
-//               <ToggleButton variant="outlined"  value = "M" style={{fontSize:'1rem'}} aria-label="S사이즈">M</ToggleButton>
-//               <ToggleButton variant="outlined"  value = "L" style={{fontSize:'1rem'}} aria-label="L사이즈">L</ToggleButton>
-//               <ToggleButton variant="outlined"  value = "XL" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</ToggleButton>
-//               <ToggleButton variant="outlined"  value = "XXL" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</ToggleButton>
-//               </ToggleButtonGroup>
-//               <br />
-//               <Typography variant ="h6" > 
-//               수량
-//               </Typography>
-//               <ButtonGroup>
-//               <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handlePlusQuantityChange} aria-label="더하기">+</Button>
-//               <Button variant="outlined" style={{fontSize:'1rem'}}  aria-label="1개">{quantity}</Button>
-//               <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
-//               </ButtonGroup>
-//               <br />
-//           </FormControl>
-//           <ButtonGroup variant="text" fullWidth="true">
-//               <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
-//               <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" onClick = {buyHandler} >바로구매</Button>
-//               </ButtonGroup>
-//           </Grid>
-//       </Grid> <br />
-//       <Divider />
-//       <br />
-//       <div className={classes.root}>
+              <FormControl required className={classes.formControl}>
+              <Typography variant ="h6" > 
+              사이즈
+              </Typography>
+              <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
+              <ToggleButton variant="outlined"  value = "S" style={{fontSize:'1rem'}} aria-label="S사이즈">S</ToggleButton>
+              <ToggleButton variant="outlined"  value = "M" style={{fontSize:'1rem'}} aria-label="S사이즈">M</ToggleButton>
+              <ToggleButton variant="outlined"  value = "L" style={{fontSize:'1rem'}} aria-label="L사이즈">L</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XL" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XXL" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</ToggleButton>
+              </ToggleButtonGroup>
+              <br />
+              <Typography variant ="h6" > 
+              수량
+              </Typography>
+              <ButtonGroup>
+              <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handlePlusQuantityChange} aria-label="더하기">+</Button>
+              <Button variant="outlined" style={{fontSize:'1rem'}}  aria-label="1개">{quantity}</Button>
+              <Button variant="outlined" style={{fontSize:'1rem'}} onClick= {handleMinusQuantityChange} aria-label="빼기">-</Button>
+              </ButtonGroup>
+              <br />
+          </FormControl>
+          <ButtonGroup variant="text" fullWidth="true">
+              <Button variant="outlined" style={{fontSize:'1.2rem'}} aria-label="장바구니" onClick={clickCartHandler}>장바구니</Button>
+              <Button variant="outlined" style={{fontSize:'1.2rem'}}  aria-label="바로구매" onClick = {buyHandler} >바로구매</Button>
+              </ButtonGroup>
+          </Grid>
+      </Grid> <br />
+      <Divider />
+      <br />
+      <div className={classes.root}>
       <AppBar position="static" color="default">
           <Tabs
                 value={value}

@@ -1,24 +1,24 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from "react-router";
-import { Grid, makeStyles, Typography} from '@material-ui/core'
+import { Grid, makeStyles, Typography } from '@material-ui/core'
 import Pagination from '@material-ui/lab/Pagination';
 import PostCard from './PostCard';
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        paddingTop: theme.spacing(2),
-        justifyContent: 'center',
-        justifyItems: 'center',
-        align: 'center',
-        justify: "center",
-        alignItems: "center"
-    },
+  root: {
+    paddingTop: theme.spacing(2),
+    justifyContent: 'center',
+    justifyItems: 'center',
+    align: 'center',
+    justify: "center",
+    alignItems: "center"
+  },
 }))
 
 export default function PostSearchListPage(props) {
-    const classes = useStyles();
-    const location = useLocation();
+  const classes = useStyles();
+  const location = useLocation();
 
 
     const [posts,setPosts] = useState([])
@@ -50,12 +50,12 @@ export default function PostSearchListPage(props) {
         
 
     }, [])
+  const [page, setPage] = React.useState(1);
 
-    const [page, setPage] = React.useState(1);
-    
-    const handleChange = (event, value) => {
-      setPage(value);
-    };
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
 
     
@@ -75,16 +75,17 @@ export default function PostSearchListPage(props) {
                 </Grid>
                 ))}
             </Grid>
-          <Grid container spacing={2} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}}>
+        <Grid container spacing={2} style={{ margin: "auto", justifyContent: 'center', alignContent: "center" }}>
           <Typography>Page: {page}</Typography>
-          <Pagination 
-          shape="rounded"
-          count={10}
-          size="large"
-          page={page} 
-          onChange={handleChange}
-          /> 
-          </Grid>
+          <Pagination
+            shape="rounded"
+            count={10}
+            size="large"
+            page={page}
+            onChange={handleChange}
+          />
+        </Grid>
       </Grid>
-      </div>
-    )}
+    </div>
+  )
+}

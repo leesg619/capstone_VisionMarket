@@ -32,6 +32,7 @@ import ReviewPage from './views/MyPage/MyPageComponent/ReviewPage';
 import QnaPage from './views/MyPage/MyPageComponent/QnaPage';
 import ReviewVoiceWrite from './views/MyPage/MyPageComponent/ReviewVoiceWrite';
 import BuyPage from './views/BuyPage/BuyPage';
+import PostingPage from './views/PostPage/PostingPage';
 
 function App() {
   return (

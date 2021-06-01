@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors());
-
+const toStream = require('buffer-to-stream');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -33,6 +33,7 @@ const cartRoute = require('./routes/cart')
 const purchaseRoute = require('./routes/purchase')
 const categoryRoute = require('./routes/category')
 const reviewRoute = require('./routes/review')
+const ocrRoute = require('./routes/OCR')
 
 app.use(express.static('uploads/reviews'))
 // app use
@@ -48,6 +49,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => res.send("Hello World"))
 app.use('/api/users', userRoute);
@@ -63,5 +65,7 @@ app.use('/api/review',reviewRoute);
 
 const port = process.env.PORT || 5000;
 
-var server = app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
-server.timeout = 24000;
+app.use('/api/ocr', ocrRoute);
+
+
+app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
