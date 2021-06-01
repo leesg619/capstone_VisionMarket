@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
   export default function Dashboard(){
     const classes = useStyles();
     const messagesEndRef = useRef(null);
+    const timerRef = useRef(null);
     const musictest = useRef(new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'))
   
     // CTX store
@@ -81,7 +82,6 @@ const useStyles = makeStyles((theme) => ({
     const [isRemember, setIsRemember] =React.useState(false);
     const [token, setToken] = React.useState(Math.random().toString(36).substr(2,11));
     const [cookies, setCookie, removeCookie] = useCookies(['rememberChatToken']);
-    const [music, setMusic] = React.useState(new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'));
   
     const {
       interimTranscript,
@@ -119,12 +119,28 @@ const useStyles = makeStyles((theme) => ({
         }
         //mp3 섹션에 값이 들어왔을 때 플레이
         if(allChats.general[count-1].mp3 !== ""){
+          var url;
           musictest.current.pause();
-          musictest.current = new Audio(allChats.general[count-1].mp3);
-          musictest.current.play();
+          //내부 파일인지 외부 파일인지 체크하고 url을 붙임
+          if(allChats.general[count-1].mp3.indexOf('http') === -1){
+            var currentUrl = window.location.host;
+            currentUrl = currentUrl.split(':');
+            url='http://'+ currentUrl[0] +':5000/' + allChats.general[count-1].mp3; 
+          }
+          else{
+            url = allChats.general[count-1].mp3;
+          }
+
+          musictest.current = new Audio(url);
+          console.log(musictest.current)
+          timerRef.current = setTimeout(function(){
+            musictest.current.play();
+          }, 6500);
+          
         }
         //다시 다른 입력이 들어갔을 때 중지
         else{
+          clearTimeout(timerRef.current);
           musictest.current.pause();
         }
       }
@@ -158,12 +174,20 @@ const useStyles = makeStyles((theme) => ({
                         <Chip avatar={<Avatar alt="비전" src={dog}/>} variant="outlined" size="small" label={chat.from}/> 
                         <Linkify>
                           <Typography style={{fontSize:'20px', padding: '5px'}}>{chat.msg}<br/>
-                        
-                          {chat.img !== '' ? (
-                            <img src={chat.img} style={{width:'300px'}}/>
-                          ) : (
-                            <div/>
-                          )}
+                          {(() => {
+                            if (chat.img !== ''){
+                                if(chat.img.indexOf('http') === -1){
+                                  var url = 'http://' + window.location.host.split(':')[0] + ':5000/' + chat.img;
+                                  return <img src={url} style={{width:'300px'}}/>
+                                }
+                                else{
+                                  return (
+                                    <img src={chat.img} style={{width:'300px'}}/> 
+                                )
+                              }
+                            }
+                            return null;
+                          })()}
                          </Typography>
                          </Linkify>
                         </div>
@@ -189,9 +213,13 @@ const useStyles = makeStyles((theme) => ({
               }
             }}
           />
-          <MicIcon className={classes.micIcon}
+          {/* <MicIcon className={classes.micIcon}
           onClick={SpeechRecognition.startListening}
-          />
+          /> */}
+          <Button variant="contained" color="primary"
+          onClick={SpeechRecognition.startListening}>
+          음성
+          </Button>
           <Button variant="contained" color="primary"
           onClick={()=> {
             if(textValue!== ''){
