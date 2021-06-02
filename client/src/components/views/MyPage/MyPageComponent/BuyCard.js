@@ -61,6 +61,7 @@ export default function BuyCard(props){
                             </Typography>
                         }
                     />
+                    </Grid>
                     <Grid container>   
 
                     <Grid item xs={3} sm={3}>
@@ -82,11 +83,11 @@ export default function BuyCard(props){
                     orientation="vertical"
                     fullWidth
                 >
-//                     <Button aria-label='주문취소하기' style={{fontSize:'1rem'}} >주문취소</Button>
-//                     <Button aria-label='배송조회하기' style={{fontSize:'1rem'}}>배송조회</Button>
-//                     <Button aria-label='음성리뷰작성하기' style={{fontSize:'1rem'}}>음성리뷰작성</Button>
-//                     <Button aria-label='일반글자리뷰작성하기' style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
-//                     <Button aria-label='문의하기' style={{fontSize:'1rem'}}>문의하기</Button>
+                     {/* <Button aria-label='주문취소하기' style={{fontSize:'1rem'}} >주문취소</Button>
+                     <Button aria-label='배송조회하기' style={{fontSize:'1rem'}}>배송조회</Button>
+                     <Button aria-label='음성리뷰작성하기' style={{fontSize:'1rem'}}>음성리뷰작성</Button>
+                     <Button aria-label='일반글자리뷰작성하기' style={{fontSize:'1rem'}} href='reviewWrite'>일반리뷰작성</Button>
+                     <Button aria-label='문의하기' style={{fontSize:'1rem'}}>문의하기</Button> */}
 
                 <Button onClick = {deletePurchaseHandler}style={{fontSize:'1rem'}}>주문취소</Button>
                     <Button style={{fontSize:'1rem'}}>배송조회</Button>
@@ -98,6 +99,7 @@ export default function BuyCard(props){
                 </Grid>
                 </Grid>
             </CardContent>
+            
         </Card>
         </div>
     )

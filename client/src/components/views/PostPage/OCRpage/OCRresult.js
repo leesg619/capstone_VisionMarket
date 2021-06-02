@@ -19,9 +19,14 @@ function OCRresult(props) {
     const pictures = props.pictures
     const postID = props.postID
 
-    // if (!pictures) {
-    //     throw Error("OCR을 위한 사진을 제대로 받아오지 못했습니다.")
-    // }
+    console.log(pictures)
+
+    if (!pictures) {
+        throw Error("OCR을 위한 사진을 제대로 받아오지 못했습니다.")
+    }
+    if (!postID) {
+        throw Error("OCR을 위한 포스트가 제대로 받아오지 못했습니다")
+    }
 
     const [sumText, setSumText] = useState(['']);
 
@@ -32,7 +37,8 @@ function OCRresult(props) {
 
         var sumTexts = [];
 
-        pictures.map(function (picture) {
+        // eslint-disable-next-line array-callback-return
+        pictures.map(picture => {
             
             const variable = {
                 imageUrl: picture,
@@ -43,7 +49,7 @@ function OCRresult(props) {
                     .then(response => {
                         if (response.data.success) {
                             console.log(response.data.sumText)
-                            setSumText(sumText.concat(response.data.sumText))
+                            setSumText(response.data.sumText)
                         }
                         else {
                             alert('매치되는 이미지가 없습니다')
@@ -55,7 +61,7 @@ function OCRresult(props) {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.sumText)
-                            setSumText(sumText.concat(response.data.sumText))
+                            setSumText(response.data.sumText)
                 }
                 else {
                     alert('매치되는 이미지가 없습니다.')
@@ -93,7 +99,7 @@ function OCRresult(props) {
                     }
                 </Grid>
                 <Grid item sm={6}>
-                    <p aria-label="이미지 문장 설명란">
+                    <div aria-label="이미지 문장 설명란">
                         
                         { sumText &&
                             Array.from(Array(1), (e, i) => {
@@ -104,7 +110,7 @@ function OCRresult(props) {
                                 )
                             })
                         }
-                    </p>
+                    </div>
                 </Grid>
             </Grid>
         </Container>

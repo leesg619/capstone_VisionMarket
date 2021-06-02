@@ -35,7 +35,7 @@ const categoryRoute = require('./routes/category')
 const reviewRoute = require('./routes/review')
 const ocrRoute = require('./routes/OCR')
 
-app.use(express.static('uploads/reviews'))
+// app.use(express.static('uploads/reviews'))
 // app use
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
