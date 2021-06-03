@@ -244,7 +244,7 @@ export default function PostDetailPage(props) {
   const voiceCards = voices.map((voice, index) => {
     let baepo_index = window.location.href.indexOf('.com') + 4;
     let locationPath = window.location.href.slice(7, 16) == 'localhost' ? window.location.href.slice(0, 16) : window.location.href.slice(0, baepo_index)
-    let newFilePath = locationPath + ':' + window.localStorage.getItem('port') + '/' + voice.filepath;
+    let newFilePath = locationPath + ':' + window.localStorage.getItem('port') + '/uploads/reviews/' + voice.filepath;
     return (
       <Card variant="outlined">
         <CardContent>

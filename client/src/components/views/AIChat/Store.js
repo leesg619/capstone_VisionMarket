@@ -6,7 +6,7 @@ export const CTX = React.createContext();
 const initState = {
     general : [
         {from: '비전', msg: '안녕하세요. 저는 비전입니다.', img:'https://placeimg.com/200/200/any'},
-        {from: '비전', msg: '어떤 것을 도와드릴까요?', img:''},
+        {from: '비전', msg: '어떤 것을 도와드릴까요? 도움 혹은 추천 이라고 해주세요.', img:''},
     ],
 }
 

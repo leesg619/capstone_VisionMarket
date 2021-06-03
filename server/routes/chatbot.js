@@ -33,7 +33,7 @@ router.post('/send-msg', (req, res)=> {
  async function runSample(msg, customSession, projectId = 'shoprecommend-lofa') {
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient({
-    keyFilename:"./config/key/shoprecommend-lofa-7818f93caa18.json"
+    keyFilename:"./server/config/key/shoprecommend-lofa-7818f93caa18.json" //자신의 키 파일
   });
   
   const sessionPath = sessionClient.projectAgentSessionPath(projectId, customSession);
@@ -64,10 +64,6 @@ router.post('/send-msg', (req, res)=> {
     const result4 = await recommend.find({sessionId:customSession}, function(err, doc){
       if(err) return err;
     })
-    Review.find({}, function(err, doc){
-      console.log('리뷰: ', doc);
-    })
-    //console.log(result4);
     if(result4.length === 0){
       var instance = new recommend({
         'sessionId' : customSession,
@@ -75,7 +71,7 @@ router.post('/send-msg', (req, res)=> {
       });
       await instance.save();
     }
-    return '어떤 상품을 추천 해 드릴까요?'
+    return '어떤 상품을 추천 해 드릴까요? 예시) 남성패션 의류'
   }
   //추천해 줘 라고 했을 때 : 
   else if(result.intent.displayName === 'shopRecommendation - recommend'){
@@ -100,37 +96,37 @@ router.post('/send-msg', (req, res)=> {
       categoryType = 1;
       smallType = result.parameters.fields.otherSmallName.stringValue;
     }
-    else{
+    else {
       console.log("잘못된 컨택스트");
-      return "잘못된 분류 항목이에요."
+      return "잘못된 분류 항목이에요. 다시 추천 해 주실래요?"
     }
-
+    if(smallType === ''){
+      return "잘못된 분류 항목이에요. 다시 추천 해 주실래요?"
+    }
     let categoryId;
     let postId;
     const result2 = await Category.find({ctype:categoryType, smallName:smallType}, function(err, doc){
       if(err) console.log(err)
     })
+    console.log(result2[0]._id);
     categoryId = result2[0]._id
-    console.log(categoryId);
     
     const result3 = await Post.find({pcategory:categoryId, }, function(err, post){
       if(err) return err;
     })
+    //상품 없을 시
+    if(result3.length === 0){
+      return "현재 선택된 카테고리에 맞는 상품이 없어요. 다시 추천 해 주실래요?"
+    }
     let randomize = Math.floor(Math.random() * result3.length);
     postId = result3[randomize]._id
-    console.log('상품id : ', postId);
 
     const result4 = await recommend.find({sessionId:customSession}, function(err, doc){
       if(err) return err;
     })
-    console.log(result4);
 
     if(result4[0].productId !== postId.toString()){
-      console.log(result4[0].productId);
-      console.log(postId);
-      console.log('다르다/1');
       const updatepostId = await recommend.findOneAndUpdate({sessionId:customSession}, {productId: postId.toString()})
-      console.log(updatepostId);
     }
     
     if(result3.length === 0){
@@ -141,11 +137,10 @@ router.post('/send-msg', (req, res)=> {
       {
         imageurl = result3[randomize].image[0]
         console.log(imageurl);
-        return /*'http://localhost:3000/postDetail/'+ result3[randomize]._id + ' ' + */result3[randomize].title + '은 어떠신가요? 맘에 드신다면 예, 다시 추천 받으시려면 아니 라고 해주세요.' + ' | ' + imageurl
-        //자체 url 처리 방법 강구
+        return result3[randomize].title + '은 어떠신가요? 마음에 드신다면 네, 다시 추천 받으시려면 아니 혹은 카테고리를 불러주세요.' + ' |' + imageurl
       }
       else{
-        return result3[randomize].title + '은 어떠신가요? 맘에 드신다면 예, 다시 추천 받으시려면 아니 라고 해주세요.'
+        return result3[randomize].title + '은 어떠신가요? 마음에 드신다면 네, 다시 추천 받으시려면 아니 혹은 카테고리를 불러주세요.'
       }
     }
     
@@ -166,12 +161,25 @@ router.post('/send-msg', (req, res)=> {
       result3 = await Post.find({_id:postId}, function(err, doc){
         if(err) return err
       })
-      return result3[0].title + "상품에 대해 음성 리뷰를 듣고 싶으시다면 음성리뷰, 결제를 진행하시고 싶으시다면 네, 다시 추천 받고 싶으시다면 아니오 라고 해주세요."
+      return result3[0].title + " 상품에 대해 음성 리뷰를 듣고 싶으시다면 음성리뷰, 결제를 진행하시고 싶으시다면 네, 다시 추천 받고 싶으시다면 아니오 라고 해주세요."
+    }
+
+    else if(result.intent.displayName === 'shopVoiceReview - detail'){
+      const result2 = await recommend.find({sessionId:customSession});
+      var postResult = result2[0].productId;
+      const result3 = await Review.find({post:postResult, voice: true});
+      if(result3.length === 0){
+        return '음성 리뷰가 없습니다. 아니오라고 대답하여 다음으로 넘어가주세요';
+      }
+      console.log(result3);
+      let ReviewRandomize = Math.floor(Math.random() * result3.length);
+      console.log(ReviewRandomize);
+      mp3_ = result3[ReviewRandomize].filepath;
+      return '음성 리뷰가 재생됩니다. 다른 리뷰를 들으시려면 시작, 괜찮으시다면 아니오 라고 해주세요.'
     }
     
     //결제하시겠습니까? 네
     else if(result.intent.displayName=== 'shopPurchase - yes'){
-      console.log('결제하러이동')
       result2 = await recommend.find({sessionId:customSession}, function(err, doc){
         if(err) return err
       })
@@ -181,12 +189,12 @@ router.post('/send-msg', (req, res)=> {
       })
       link_ = '/postDetail/' + result3[0]._id;
     }
+
+    //음악 인텐트
     else if(result.intent.displayName === 'musicIntent'){
-      mp3_ = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+      mp3_ = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
     }
-    // recommend.find({}, function(err, doc){
-    //   console.log(doc)
-    // });
+
     console.log(`  Query: ${result.queryText}`);
     console.log(`  Response: ${result.fulfillmentText}`);
     if (result.intent) {
@@ -196,53 +204,6 @@ router.post('/send-msg', (req, res)=> {
     }
     return result.fulfillmentText;
   }
-  
-  
-  return 'asdf | https://cdn.pixabay.com/photo/2015/09/02/13/24/man-919045_960_720.jpg';
-
-  
-
-  
-  
-  //먼저 상품 추천받는 상품 id추출 
-  var productId_ = '1234';
-  //세션 아이디에 대한 추천된 기록이 없으면 만들기, 있다면 업데이트
-  // recommend.find({sessionId : customSession}, function(err, doc){
-  //   if(err){
-  //     var instance = new recommend();
-  //     instance.sessionId = customSession;
-  //     instance.productId = productId_;
-  //     instance.save(function(err){
-  //     })
-  //   }
-  //   else{
-  //     recommend.findOneAndUpdate(
-  //       {sessionId: customSession},
-  //       {productId: productId_},
-  //       function(err, result){
-  //       }
-  //     )
-  //   }
-  // })
-  // var instance = new recommend();
-  // instance.sessionId = customSession;
-  // instance.productId = productId_;
-  // instance.save();
-
-  //세션에 저장된 상품 id 조회
-  /*console.log(customSession)
-  recommend.find({sessionId : customSession}, function(err, doc){
-    console.log(doc[0].productId)
-  })*/
-  
-    //상품 추천 받았을 때
-    // recommend.find({sessionId : customSession}, function(err, doc){
-    //   if(err) return err;
-    //   doc.productId, id의 이미지
-    //   return 프로덕트 링크 이 제품은 어떠세요~ | 이미지 링크
-    // })
-
-    //상품 페이지로 이동할 때
 }
 
 module.exports = router
