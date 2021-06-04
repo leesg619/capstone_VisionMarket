@@ -69,3 +69,4 @@ app.use('/api/ocr', ocrRoute);
 
 
 app.listen(port, ()=>{console.log(`listen to http://127.0.0.1:${port}/`)});
+
