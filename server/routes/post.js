@@ -110,6 +110,16 @@ router.post('/get/allProducts',(req,res) => {
     })
 })
 
+router.post('/get/mainProducts',(req,res) => {
+    Post.find({})
+    .limit(4)
+    .populate('author')
+    .exec((err,products) => {
+        if(err) return res.status(200).json({ "status": false, "result": "Request Failed!" })
+        return res.status(200).json({success: true, "result": 'Success!',products})
+    })
+})
+
 
 //상품 정보 디테일한거 한 개
 router.get('/:id',  (req,res) => {
