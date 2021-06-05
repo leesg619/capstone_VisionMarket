@@ -264,7 +264,7 @@ export default function PostDetailPage(props) {
     )
   })
 
-
+    let title_price = `${post.title}${post.pprice}원`;
 
   return (
 
@@ -276,9 +276,9 @@ export default function PostDetailPage(props) {
             <ButtonBase className={classes.image}>
               {
                 titleimage ?
-                <img className={classes.img} alt="complex" src={image[0]} />
+                <img className={classes.img} aria-label={title_price} alt="complex" src={image[0]} />
                 :
-                <img className={classes.img} alt="complex" src={`http://localhost:5000/${image[0]}`} />
+                <img className={classes.img} aria-label={title_price} alt="complex" src={`http://localhost:5000/${image[0]}`} />
               }
               
             </ButtonBase>
@@ -300,11 +300,11 @@ export default function PostDetailPage(props) {
                 사이즈
               </Typography>
               <ToggleButtonGroup value={size} exclusive onChange={handleSizeChange}>
-                <ToggleButton variant="outlined" value="S" style={{ fontSize: '1rem' }} aria-label="S사이즈">S</ToggleButton>
-                <ToggleButton variant="outlined" value="M" style={{ fontSize: '1rem' }} aria-label="S사이즈">M</ToggleButton>
-                <ToggleButton variant="outlined" value="L" style={{ fontSize: '1rem' }} aria-label="L사이즈">L</ToggleButton>
-                <ToggleButton variant="outlined" value="XL" style={{ fontSize: '1rem' }} aria-label="XL사이즈">XL</ToggleButton>
-                <ToggleButton variant="outlined" value="XXL" style={{ fontSize: '1rem' }} aria-label="XXL사이즈">XXL</ToggleButton>
+              <ToggleButton variant="outlined"  value = "S" style={{fontSize:'1rem'}} aria-label="S사이즈">S</ToggleButton>
+              <ToggleButton variant="outlined"  value = "M" style={{fontSize:'1rem'}} aria-label="M사이즈">M</ToggleButton>
+              <ToggleButton variant="outlined"  value = "L" style={{fontSize:'1rem'}} aria-label="L사이즈">L</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XL" style={{fontSize:'1rem'}} aria-label="XL사이즈">XL</ToggleButton>
+              <ToggleButton variant="outlined"  value = "XXL" style={{fontSize:'1rem'}} aria-label="XXL사이즈">XXL</ToggleButton>
               </ToggleButtonGroup>
               <br />
               <Typography variant="h6" >
@@ -334,10 +334,10 @@ export default function PostDetailPage(props) {
               centered
               variant="fullWidth"
             >
-              <Tab style={{ fontSize: '0.9rem' }} label="상세보기" {...a11yProps(0)} />
-              <Tab style={{ fontSize: '0.9rem' }} label="음성리뷰" {...a11yProps(1)} />
-              <Tab style={{ fontSize: '0.9rem' }} label="일반리뷰" {...a11yProps(2)} />
-              <Tab style={{ fontSize: '0.9rem' }} label="OCR" {...a11yProps(3)} />
+              <Tab style={{ fontSize: '0.9rem' }} aria-label="상세보기"  label="상세보기" {...a11yProps(0)} />
+              <Tab style={{ fontSize: '0.9rem' }} aria-label="음성리뷰" label="음성리뷰" {...a11yProps(1)} />
+              <Tab style={{ fontSize: '0.9rem' }} aria-label="일반리뷰" label="일반리뷰" {...a11yProps(2)} />
+              <Tab style={{ fontSize: '0.9rem' }} aria-label="OCR" label="OCR" {...a11yProps(3)} />
             </Tabs>
           </AppBar>
           <SwipeableViews
@@ -369,7 +369,7 @@ export default function PostDetailPage(props) {
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               <Typography variant="h6" style={{ padding: '10px' }}>
-                리뷰는 추천순으로 노출됩니다. 총 1개의 리뷰가 있습니다. <br />
+                리뷰는 최신순으로 노출됩니다. 총 1개의 리뷰가 있습니다. <br />
               </Typography>
               <Card variant="outlined">
                 <CardContent>
@@ -378,9 +378,9 @@ export default function PostDetailPage(props) {
                   </Typography>
                   <Typography >
                     키 170 / 몸무게 65 <br />
-          옵션 : 라지 사이즈 [ 사이즈가 적당해요. ]<br />
-          소재가 얇아서 더운 여름에도 가볍게 입고 다닐 것 같아요.
-        </Typography>
+                    옵션 : 라지 사이즈 [ 사이즈가 적당해요. ]<br />
+                    소재가 얇아서 더운 여름에도 가볍게 입고 다닐 것 같아요.
+                </Typography>
                 </CardContent>
                 <CardActions>
                   <Button aria-label="리뷰추천하기" variant="outlined" style={{ fontSize: '1.1rem' }}>추천</Button>
