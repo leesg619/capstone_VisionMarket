@@ -5,6 +5,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import PostCard from './PostCard';
 import axios from 'axios'
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(2),
@@ -22,6 +23,9 @@ export default function PostSearchListPage(props) {
 
 
     const [posts,setPosts] = useState([])
+    const [currentPage, setCurrentPage]= useState(0);  //현재 페이지
+    const [postsPerPage] = useState(4);  //한 페이지에서 보여줄 post의 수
+    const[currentPosts,setCurrentPosts] = useState([]);
 
     const category = 'kwd' in location.state ? location.state.kwd :location.state.category
 
@@ -29,10 +33,10 @@ export default function PostSearchListPage(props) {
       if(!('kwd' in location.state)){
         axios.post(`/api/post/posts_by_category`,category)
         .then(response => {
-         console.log("실행")
             if(response.data.success){
               console.log(response)
               setPosts(response.data.post)
+              setCurrentPage(1);
             }
         })
       } else{
@@ -41,50 +45,52 @@ export default function PostSearchListPage(props) {
                 if(response.data.success) {
                   console.log(response.data.searchList);
                   setPosts(response.data.searchList);
+                  setCurrentPage(1);
                 } else{console.log(response.data.result)}
             })
       }
-        
+      
+    },[])
 
-        
+    useEffect(() => {
+      console.log('이팩트실행')
+      const indexOfLast = currentPage * postsPerPage; //5,10
+      const indexOfFirst = indexOfLast - postsPerPage; // 5-5,10-5
+      const currentPostss = posts.slice(indexOfFirst, indexOfLast);
+     setCurrentPosts(currentPostss);
 
-    }, [])
-  const [page, setPage] = React.useState(1);
-
-
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
-
-
-    
+    },[currentPage])
+  
+    const handleChange = (event, value) => {
+      setCurrentPage(value);
+    };
 
         
     return (
       <div className={classes.root}>
         <Grid item container direction="column" style={{margin : "auto"}} spacing={1}>
             <Grid container spacing={2} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}} >
-                {posts.map((post) => (
+                {currentPosts.map((currentPost) => (
                 <Grid
                     item
-                    key={post.id}
+                    key={currentPost.id}
                     lg={3}
                 >
-                <PostCard post={post} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}} />
+                <PostCard post={currentPost} style={{margin : "auto", justifyContent : 'center', alignContent : "center"}} />
                 </Grid>
                 ))}
             </Grid>
+     
         <Grid container spacing={2} style={{ margin: "auto", justifyContent: 'center', alignContent: "center" }}>
-          <Typography>Page: {page}</Typography>
           <Pagination
             shape="rounded"
             count={10}
             size="large"
-            page={page}
+            defaultPage={1}
             onChange={handleChange}
           />
         </Grid>
-      </Grid>
-    </div>
+       </Grid>
+</div>
   )
 }
