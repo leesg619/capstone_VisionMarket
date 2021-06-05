@@ -43,7 +43,6 @@ export default function PostSearchListPage(props) {
                   setPosts(response.data.searchList);
                 } else{console.log(response.data.result)}
             })
-          
       }
         
 

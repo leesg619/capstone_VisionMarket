@@ -144,7 +144,9 @@ const useStyles = makeStyles((theme) => ({
           musictest.current.pause();
         }
       }
-      scrollToBottom()
+      setTimeout(function(){
+        scrollToBottom()
+      }, 10);
     }, [sendChatAction]);
   
     useEffect(()=>{

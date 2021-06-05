@@ -33,7 +33,7 @@ router.post('/send-msg', (req, res)=> {
  async function runSample(msg, customSession, projectId = 'shoprecommend-lofa') {
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient({
-    keyFilename:"./server/config/key/shoprecommend-lofa-7818f93caa18.json" //자신의 키 파일
+    keyFilename:"./server/config/key/shoprecommend-lofa-a4efaef3c7bb.json" //자신의 키 파일
   });
   
   const sessionPath = sessionClient.projectAgentSessionPath(projectId, customSession);
