@@ -36,3 +36,6 @@
 1. 검색어 설정
 2. 검색어에 따른 각 테마와 url 경로 출력
 ```
+<img src="https://user-images.githubusercontent.com/52132929/122217528-770ce380-cee8-11eb-9b0d-add1ff7ac60a.jpg" width="550" height="550">
+
+<img src="https://user-images.githubusercontent.com/52132929/122217422-5cd30580-cee8-11eb-86be-e11b4dac4422.PNG" width="400" height="400">
